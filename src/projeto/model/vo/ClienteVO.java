@@ -2,8 +2,8 @@ package projeto.model.vo;
 
 public class ClienteVO {
 	private String nome;
-	private String CPF;
+	private String cpf;
 	private String endereço;
-	private String Complemento;
-	// teste
+	private String complemento;
+	
 }  
