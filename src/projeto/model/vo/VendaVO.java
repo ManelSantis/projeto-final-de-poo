@@ -1,10 +1,10 @@
 package projeto.model.vo;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public class VendaVO {
-	//adicionar Classe Cliente
-	//adicionar Classe Projeto
+	private ClienteVO c;
+	private ProdutoVO p;
 	private int quantidade;
-	private Date data;
+	private Calendar data;
 }
