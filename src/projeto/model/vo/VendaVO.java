@@ -12,15 +12,22 @@ public class VendaVO {
 		return cliente;
 	}
 	public void  setCliente(ClienteVO cliente){
-		this.cliente = cliente; // Atribui os valores ao metodo da classe cliente.
-		
+	      if (cliente != null){
+			this.cliente = cliente; // Atribui os valores ao metodo da classe cliente.
+	} else {
+	      System.out.println("Operação inválida");
 	}
+		}
 	public ProdutoVO getProduto(){
 		return produto;
 	}
 	public void  setProduto(ProdutoVO produto){
-		this.produto = produto; // Atribui os valores ao metodo da classe produto.
+	      if (produto != null){
+			this.produto = produto; // Atribui os valores ao metodo da classe produto.
+	} else {
+	      System.out.println("Operação inválida");
 	}
+		}
 	public int getQuantidade(){
 		return quantidade;
 	}
@@ -33,15 +40,15 @@ public class VendaVO {
 	public Calendar getData(){
 		return data;
 	}
-	public void setData(Calendar data){
+	public void setData(){
 		// Utilizando a classe calendar para gerar todas as informações referente a data da compra.
-		data = Calendar.getInstance(); 
+		Calendar data = Calendar.getInstance(); 
 		int ano = data.get(Calendar.YEAR);
 		int mes = data.get(Calendar.MONTH);
 		int dia = data.get(Calendar.DAY_OF_MONTH);
 		int hora = data.get(Calendar.HOUR_OF_DAY);
 		int minutos = data.get(Calendar.MINUTE);
 		int segundos = data.get(Calendar.SECOND);
-		
+                this.data = data;
 	}
 }
