@@ -13,7 +13,9 @@ public class ProdutoVO {
 	}
 
 	public void setNome(String nome) {
-		if ((nome.length() <= 100) && (!nome.isEmpty())) {
+		if (nome.equals(null)) {
+			System.out.print("Operação invalida");
+		} else if ((nome.length() <= 100) && (!nome.isEmpty())) {
 			this.nome = nome; // limitar o tamanho do nome do produto e se não está vazio
 		} else {
 			System.out.print("Operação inválida!");
@@ -25,8 +27,10 @@ public class ProdutoVO {
 	}
 
 	public void setDescricao(String descricao) {
-		if ((descricao.length() <= 500) && (!descricao.isEmpty())) {
-			this.descricao = descricao; //limitar o tamanho da descrição do produto e se não está vazia
+		if (descricao.equals(null)) {
+			System.out.print("Operação invalida");
+		} else if ((descricao.length() <= 500) && (!descricao.isEmpty())) {
+			this.descricao = descricao; // limitar o tamanho da descrição do produto e se não está vazia
 		} else {
 			System.out.print("Operação inválida!");
 		}
@@ -49,7 +53,9 @@ public class ProdutoVO {
 	}
 
 	public void setSerie(String serie) {
-		if (serie.length() == 13) {
+		if (serie.equals(null)) {
+			System.out.print("Operação invalida");
+		} else if (serie.length() == 13) {
 			this.serie = serie; // verificar se o tamanho do numero de serie está correto
 		} else {
 			System.out.println("Digite novamente!");
@@ -79,7 +85,9 @@ public class ProdutoVO {
 	}
 
 	public void setImg(String img) {
-		if (!img.isEmpty()) {
+		if (img.equals(null)) {
+			System.out.print("Operação invalida");
+		} else if (!img.isEmpty()) {
 			this.img = img; // se não estiver vazia, salva
 		} else {
 			System.out.println("Adicione uma imagem!");
