@@ -3,9 +3,12 @@ package projeto.model.vo;
 public class ProdutoVO {
 	private String nome;
 	private String descricao;
-	private double preco;
+	private float peso;
 	private String serie; // número de serie geralmente tem 13 caracteres
+	private double preco;
 	private int quantidade; // quantKanalence + quantToinho
+	//private Responsavel responsavel;
+	//private Local local;
 	private String img; // um endereço string
 
 	public String getNome() {
@@ -92,5 +95,13 @@ public class ProdutoVO {
 		} else {
 			System.out.println("Adicione uma imagem!");
 		}
+	}
+
+	public float getPeso() {
+		return peso;
+	}
+
+	public void setPeso(float peso) {
+		this.peso = peso;
 	}
 }
