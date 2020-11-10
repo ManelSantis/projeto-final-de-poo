@@ -5,8 +5,11 @@ import java.util.Calendar;
 public class VendaVO {
 	private ClienteVO cliente;
 	private ProdutoVO produto;
+	private ResponsavelVO responsavel;
 	private int quantidade;
 	private Calendar data;
+	private double valor;
+	private String codigo;
 
 	public ClienteVO getCliente() {
 		return cliente;
@@ -37,10 +40,12 @@ public class VendaVO {
 	}
 
 	public void setQuantidade(int quantidade) {
-		if (quantidade <= 0) { // Se a quantidade inseria for menor que 0 ele vai informar que está invalido, se não irá armazenar o valor.
+		if (quantidade <= 0) { // Se a quantidade inseria for menor que 0 ele vai informar que está invalido,
+								// se não irá armazenar o valor.
 			System.out.print("Quantidade de produtos invalida");
-		} else
+		} else {
 			this.quantidade = quantidade;
+		}
 	}
 
 	public Calendar getData() {
@@ -48,14 +53,55 @@ public class VendaVO {
 	}
 
 	public void setData() {
-		// Utilizando a classe calendar para gerar todas as informações referente a data da compra.
+		// Utilizando a classe calendar para gerar todas as informações referente a data
+		// da compra.
 		Calendar data = Calendar.getInstance();
-		int ano = data.get(Calendar.YEAR);
-		int mes = data.get(Calendar.MONTH);
-		int dia = data.get(Calendar.DAY_OF_MONTH);
-		int hora = data.get(Calendar.HOUR_OF_DAY);
-		int minutos = data.get(Calendar.MINUTE);
-		int segundos = data.get(Calendar.SECOND);
+		data.get(Calendar.YEAR);
+		data.get(Calendar.MONTH);
+		data.get(Calendar.DAY_OF_MONTH);
+		data.get(Calendar.HOUR_OF_DAY);
+		data.get(Calendar.MINUTE);
+		data.get(Calendar.SECOND);
 		this.data = data;
 	}
+
+	public ResponsavelVO getResponsavel() {
+		return responsavel;
+	}
+
+	public void setResponsavel(ResponsavelVO responsavel) {
+		if (responsavel != null) {
+			this.responsavel = responsavel;
+		} else {
+			System.out.println("Operação inválida");
+		}
+	}
+
+	public double getValor() {
+		return valor;
+	}
+
+	public void setValor(double valor) {
+		if (valor > 0) {
+			this.valor = valor;
+		} else {
+			System.out.println("Operação inválida");
+		}
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		if (codigo != null) {
+			if ((codigo.length() == 15) && (!codigo.isEmpty())) {
+				this.codigo = codigo;
+			}
+		} else {
+			System.out.println("Operação inválida");
+		}
+
+	}
+
 }

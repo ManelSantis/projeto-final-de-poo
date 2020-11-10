@@ -7,8 +7,8 @@ public class ProdutoVO {
 	private String serie; // número de serie geralmente tem 13 caracteres
 	private double preco;
 	private int quantidade; // quantKanalence + quantToinho
-	//private Responsavel responsavel;
-	//private Local local;
+	private ResponsavelVO responsavel;
+	private LocalVO local;
 	private String img; // um endereço string
 
 	public String getNome() {
@@ -16,12 +16,14 @@ public class ProdutoVO {
 	}
 
 	public void setNome(String nome) {
-		if (nome.equals(null)) {
-			System.out.print("Operação invalida");
-		} else if ((nome.length() <= 100) && (!nome.isEmpty())) {
-			this.nome = nome; // limitar o tamanho do nome do produto e se não está vazio
+		if (nome != null) {
+			if ((nome.length() <= 100) && (!nome.isEmpty())) {
+				this.nome = nome; // limitar o tamanho do nome do produto e se não está vazio
+			} else {
+				System.out.print("Operação invalida");
+			}
 		} else {
-			System.out.print("Operação inválida!");
+			System.out.print("Operação invalida");
 		}
 	}
 
@@ -30,10 +32,12 @@ public class ProdutoVO {
 	}
 
 	public void setDescricao(String descricao) {
-		if (descricao.equals(null)) {
-			System.out.print("Operação invalida");
-		} else if ((descricao.length() <= 500) && (!descricao.isEmpty())) {
-			this.descricao = descricao; // limitar o tamanho da descrição do produto e se não está vazia
+		if (descricao != null) {
+			if ((descricao.length() <= 500) && (!descricao.isEmpty())) {
+				this.descricao = descricao; // limitar o tamanho da descrição do produto e se não está vazia
+			} else {
+				System.out.print("Operação inválida!");
+			}
 		} else {
 			System.out.print("Operação inválida!");
 		}
@@ -56,10 +60,12 @@ public class ProdutoVO {
 	}
 
 	public void setSerie(String serie) {
-		if (serie.equals(null)) {
-			System.out.print("Operação invalida");
-		} else if (serie.length() == 13) {
-			this.serie = serie; // verificar se o tamanho do numero de serie está correto
+		if (serie != null) {
+			if (serie.length() == 13) {
+				this.serie = serie; // verificar se o tamanho do numero de serie está correto
+			} else {
+				System.out.println("Digite novamente!");
+			}
 		} else {
 			System.out.println("Digite novamente!");
 		}
@@ -88,10 +94,12 @@ public class ProdutoVO {
 	}
 
 	public void setImg(String img) {
-		if (img.equals(null)) {
-			System.out.print("Operação invalida");
-		} else if (!img.isEmpty()) {
-			this.img = img; // se não estiver vazia, salva
+		if (img != null) {
+			if (!img.isEmpty()) {
+				this.img = img; // se não estiver vazia, salva
+			} else {
+				System.out.println("Adicione uma imagem!");
+			}
 		} else {
 			System.out.println("Adicione uma imagem!");
 		}
@@ -102,6 +110,34 @@ public class ProdutoVO {
 	}
 
 	public void setPeso(float peso) {
-		this.peso = peso;
+		if (peso > 0) {
+			this.peso = peso; // verificar se o preço está sendo um valor positivo e maior que zero
+		} else {
+			System.out.print("Quantidade inválida!");
+		}
+	}
+
+	public ResponsavelVO getResponsavel() {
+		return responsavel;
+	}
+
+	public void setResponsavel(ResponsavelVO responsavel) {
+		if (responsavel != null) {
+			this.responsavel = responsavel; // Atribui os valores ao metodo da classe cliente.
+		} else {
+			System.out.println("Operação inválida");
+		}
+	}
+
+	public LocalVO getLocal() {
+		return local;
+	}
+
+	public void setLocal(LocalVO local) {
+		if (local != null) {
+			this.local = local; // Atribui os valores ao metodo da classe cliente.
+		} else {
+			System.out.println("Operação inválida");
+		}
 	}
 }
