@@ -1,19 +1,20 @@
-package projeto.model.bo;
+package projeto.mode.bo;
 
 public class ClienteBO {
-	void cadastrar(){
-		
+	void cadastrar() {
+
 	}
-	void adcionar(){
-		
+
+	void editar() {
+
 	}
-	void excluir(){
-		
+
+	void excluir() {
+
 	}
-	void editar(){
-		
-	
+
+	void historicoDeCompras() {
+
 	}
-	//teste
+
 }
-			

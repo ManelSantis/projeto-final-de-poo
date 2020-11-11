@@ -1,11 +1,11 @@
 package projeto.model.bo;
 
-public class ProdutoBO {
+public class LocalBO {
 	void cadastrar() {
 
 	}
 
-	void pesquisar() {
+	void adcionar() {
 
 	}
 
