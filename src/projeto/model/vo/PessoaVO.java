@@ -61,10 +61,9 @@ public class PessoaVO {
 	
 	public void setTelefone(String telefone) {
 		if (telefone != null) {
-			if ((telefone.length() != 9) && (!telefone.isEmpty())){
+			if ((telefone.length() == 11) && (!telefone.isEmpty())){
 				this.telefone = telefone;
-			}
-		} 	else {
+			} else {
 				System.out.println("Não foi possivel salvar o telefone!");
 			}
 		} else {
