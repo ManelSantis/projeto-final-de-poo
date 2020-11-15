@@ -25,7 +25,7 @@ public class VendaBO {
 		Notafiscal(venda);
 	}
 	
-	public void CancelarVenda(String código) {
+	public void CancelarVenda(String codigo) {
 		// Irá fazer o inverso da confirmação da venda.
 		// Irá receber o código da venda por parametro
 		// pesquisará no banco de dados, e reverterá tudo que ocorreu em confirmar venda
