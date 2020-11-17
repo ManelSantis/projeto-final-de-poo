@@ -2,7 +2,7 @@ package projeto.model.vo;
 
 public class LocalVO {
 	private String localizacao;
-	private String numCompartimento;
+	private String compartimento;
 
 	public String getLocalizacao() {
 		return localizacao;
@@ -19,14 +19,14 @@ public class LocalVO {
 
 	}
 
-	public String getNumCompartimento() {
-		return numCompartimento;
+	public String getCompartimento() {
+		return compartimento;
 	}
 
-	public void setNumCompartimento(String numCompartimento) {
-		if (numCompartimento != null) {
-			if (!numCompartimento.isEmpty()) {
-				this.numCompartimento = numCompartimento;
+	public void setCompartimento(String compartimento) {
+		if (compartimento != null) {
+			if (!compartimento.isEmpty()) {
+				this.compartimento = compartimento;
 			} else {
 				System.out.println("Informação incorreta"); // cadastro não aceito
 			}
@@ -35,4 +35,5 @@ public class LocalVO {
 		}
 		
 	}
+
 }
