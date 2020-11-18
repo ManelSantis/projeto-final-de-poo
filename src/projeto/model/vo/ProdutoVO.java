@@ -3,10 +3,11 @@ package projeto.model.vo;
 public class ProdutoVO {
 	private String nome;
 	private String descricao;
-	private float peso;
+	private double peso;
 	private String serie; // número de serie geralmente tem 13 caracteres
 	private double preco;
 	private int quantidade; // quantKanalence + quantToinho
+	private int quantiPedido;
 	private ResponsavelVO responsavel;
 	private LocalVO local;
 	private String img; // um endereço string
@@ -88,6 +89,20 @@ public class ProdutoVO {
 			System.out.println("Quantidade total inválida!");
 		}
 	}
+	
+	public int getQuantiPedido() {
+		return quantiPedido;
+	}
+
+	public boolean setQuantiPedido(int quantiPedido) {
+		if (quantiPedido > 0) {
+			if (quantiPedido <= quantidade) {
+				this.quantiPedido = quantiPedido;
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public String getImg() {
 		return img;
@@ -105,11 +120,11 @@ public class ProdutoVO {
 		}
 	}
 
-	public float getPeso() {
+	public double getPeso() {
 		return peso;
 	}
 
-	public void setPeso(float peso) {
+	public void setPeso(double peso) {
 		if (peso > 0) {
 			this.peso = peso; // verificar se o preço está sendo um valor positivo e maior que zero
 		} else {
@@ -140,4 +155,6 @@ public class ProdutoVO {
 			System.out.println("Operação inválida");
 		}
 	}
+
+	
 }
