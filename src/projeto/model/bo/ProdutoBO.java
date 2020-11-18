@@ -1,49 +1,34 @@
 package projeto.model.bo;
 
-import projeto.model.vo.LocalVO;
+import java.util.ArrayList;
 import projeto.model.vo.ProdutoVO;
-import projeto.model.vo.ResponsavelVO;
 
 public class ProdutoBO {
-	public void cadastrar(String nome, String descricao, float peso,
-			String serie, double preco, int quantK, int quantT,
-			ResponsavelVO responsavel, LocalVO local, String img) {
-		// Irá receber os dados dos parametros
-		// Repassando para um objeto produto e então encaminhar para ser salvo
-		// no banco de dados.
-		ProdutoVO pro = new ProdutoVO();
-		pro.setNome(nome);
-		pro.setDescricao(descricao);
-		pro.setPeso(peso);
-		pro.setSerie(serie);
-		pro.setQuantidade(quantK, quantT);
-		pro.setResponsavel(responsavel);
-		pro.setLocal(local);
-		pro.setImg(img);
+	public void cadastrar(ProdutoVO produto) {
+		// Irá receber o produto parametrizado
+		// Repassando para o banco de dados em ProdutoDAO
+		// Verificando se já existe ou não o produto cadastrado
+		// E só então vendo se adiciona ou não;
 	}
 
-	public ProdutoVO[] pesquisar(String pesquisa) {
-		// Irá identificar o produto no banco de dados a partir de qual atributo
+	public ArrayList<ProdutoVO> pesquisar(String pesquisa) {
+		// Irá identificar o produto no banco de dados em ProdutoDAO a partir de qual atributo
 		// o usuário selecionou, ou a partir do quão parecido é a String, e irá
-		// adiciona-los em um vetor de ProdutoVO para então ser mostrado
-		int quantProd = 0;
-		ProdutoVO produtos[] = new ProdutoVO[quantProd];
+		// adiciona-los em uma ArrayList para então serem exibidas aqui
+		ArrayList<ProdutoVO> produtos = new ArrayList<ProdutoVO>();
 		return produtos;
 	}
 
-	public void excluir(String serie) {
-		// Irá localizar no banco de dados o produto a partir do número de série
-		// do mesmo para realizar a exclusão.
+	public void excluir(ProdutoVO produto) {
+		// Irá localizar no banco de dados o ProdutoVO parametrizado
+		// utilizando ProdutoDAO para então poder realizar a exclusão
 	}
 
-	public void editar (String serie) {
-		// Irá localizar o produto no banco de dados a partir do
-		// número de serie para realizar a edição.
-		// Sendo passado os dados encontrados para um objeto
-		// e então esses podendo ser alterados para
-		// ser realizado o update no banco de dados
-		ProdutoVO update = new ProdutoVO();
-
+	public void editar (ProdutoVO produto) {
+		// Irá localizar o ProdutoVO usando ProdutoDAO
+		// mandando os dados para a pagina de edição
+		// lá podendo serem editados antes de serem mandados
+		// de volta para ProdutoDAO para o update
 	}
 	
 }

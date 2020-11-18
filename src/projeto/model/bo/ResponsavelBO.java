@@ -3,40 +3,37 @@ package projeto.model.bo;
 import projeto.model.vo.ResponsavelVO;
 import projeto.model.vo.VendaVO;
 import projeto.model.vo.ProdutoVO;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ResponsavelBO {
-	public ProdutoVO[] estoque(ResponsavelVO resp) {
-		// Irá procurar no banco de dados todos os produtos
-		// que tiverem o responsavel igual ao do parametro
-		// serão passados para um array para então serem
-		// mostrados
-		int quantProd = 0;
-		ProdutoVO produtos[] = new ProdutoVO[quantProd];
+	public ArrayList<ProdutoVO> estoque(ResponsavelVO resp) {
+		// Irá procurar no banco de dados (em ProdutoDAO) todos os produtos
+		// que tiverem o responsavel igual ao que está sendo apresentado
+		// lá será posto em um ArrayList, para então ser passado todos os valores para 
+		// a ArrayList desse método e mandados para a exebição
+		ArrayList<ProdutoVO> produtos = new ArrayList<ProdutoVO>();
 		return produtos;
 	}
 
-	public ProdutoVO[] pesquisar(String pesquisa, ResponsavelVO resp) {
-		// Irá chamar o médodo estoque para que seja pesquisado apenas os produtos
-		// do responsavel que esteja logado
-		ProdutoVO esto[] = estoque(resp);
-		// e então será feita uma busca para saber quais produtos tem algo
-		// parecido com a String parametrizada, para serem postos em outro
-		// vetor, que exibirá os dados
-		int quantProd = 0;
-		ProdutoVO produtos[] = new ProdutoVO[quantProd];
-		return produtos;
+	public ArrayList<VendaVO> historicoDeVendas(ResponsavelVO resp) {
+		// Irá procurar no banco de dados (em VendaDAO) todas as vendas
+		// que tiverem o responsavel igual ao que está sendo apresentado
+		// lá será posto em um ArrayList, para então ser passado todos os valores para 
+		// a ArrayList desse método e mandados para a exebição
+		ArrayList<VendaVO> vendas = new ArrayList<VendaVO>();
+		return vendas;
 	}
-
-	public VendaVO[] HistoricoDeVendas(ResponsavelVO resp) {
-		// Irá exibir as vendas que foram feitas com o responsavel
-		// indicado no parametro, para então serem postas em um
-		// vetor e então serem exibidas
-		int quantVen = 0;
-		VendaVO vendas[] = new VendaVO[quantVen];
+	
+	public ArrayList<VendaVO> relatorio(Calendar inicio, Calendar fim) {
+		// Irá pesquisar no banco de dados em VendasDAO as vendas que possuirem a data 
+		// entre o periodo posto, para então adiciona-las em uma ArrayList 
+		// e enviadas para esse método para serem exibidas
+		ArrayList<VendaVO> vendas = new ArrayList<VendaVO>();
 		return vendas;
 	}
 
-	public void Login(String usuario, String senha) {
+	public void login(String usuario, String senha) {
 		// Será receber o nome de login e a senha
 		// e conferir se bate com o cadastrado.
 		// Caso coincidir, irá permitir o acesso.

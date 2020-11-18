@@ -1,26 +1,28 @@
 package projeto.model.bo;
 
 import projeto.model.vo.LocalVO;
-import projeto.model.vo.ProdutoVO;
 
 public class LocalBO {
 	
-	public void cadastrar(String sala, String estante, String compartimento) {
-		// Serão pegos os parâmetros dos metodos para que eles possão então ser utilizados com LocalVO
-		LocalVO l = new LocalVO();
-		l.setLocalizacao(sala, estante);
-		l.setCompartimento(compartimento);
-		// E então salvos no banco de dados
+	public void cadastrar(LocalVO local) {
+		// Será pego o LocalVO parametrizado
+		// verificará se ele já existe no LocalDAO
+		// E então salvos no banco de dados em LocalDAO
 	}
 	
-	public void editar(String compartimento) {
-		// Irá receber o compartimento do local e irá pesquisar no banco
-		// de dados o local para poder editar os componentes
+	public void editar(LocalVO local) {
+		// Irá receber um LocalVO parametrizado
+		// pesquisará ele com o auxilio de LocalDAO
+		// e então mandara eles para a pagina de edição
+		// lá os dados podendo ser alterados
+		// e então mandados novamente para o banco de dados
+		// atrásves de um update
 	}
 	
-	public void excluir(String compartimento) {
-		// Irá pesquisar no banco de dados a partir do compartimento pára verificar
-		// se existe e então irá deletar do banco de dados
+	public void excluir(LocalVO local) {
+		// Irá pesquisar no banco de dados o local parametrizado
+		// com o auxilio de LocalDAO,
+		// se existir irá deletar do banco de dados
 	}
 
 	

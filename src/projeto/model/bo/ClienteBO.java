@@ -1,46 +1,33 @@
 package projeto.model.bo;
 
+import java.util.ArrayList;
 import projeto.model.vo.ClienteVO;
 import projeto.model.vo.VendaVO;
 
 public class ClienteBO {
-	public void cadastrar(String nome, String cpf, String telefone, String estado, String cidade, String bairro, String rua, String numero) {
-		// Esse metodo irá receber todos os dados que são salvos em um clienteVO
-		// a aprtir de parametros
-		// então será criado um objeto clientevo, para poder salvar os dados
-		// dentro do banco de dados
-		ClienteVO c = new ClienteVO();
-		c.setCpf(cpf);
-		c.setEndereco(estado, cidade, bairro, rua, numero);
-		c.setNome(nome);
-		c.setTelefone(telefone);
-		//então será salvado no banco de dados
+	public void cadastrar(ClienteVO cliente) {
+		// Esse metodo irá receber um clienteVO
+		// vai verificar se ele já existe no Banco de dados
+		// em ClienteDAO, caso não exista, irá salvar 
 	}
 
-	public void editar(String id) {
-		// Será pesquisado no bd o cliente que tenha o id indicado para editar
-		// o que está sendo salvo está assim apenas como demonstração, 
-		// depois será alterado
-		ClienteVO c = new ClienteVO();
-		c.setCpf("cpf");
-		c.setEndereco("estado", "cidade", "bairro", "rua", "numero");
-		c.setNome("nome");
-		c.setTelefone("telefone");
-		// e então salvo no banco de dados
+	public void editar(ClienteVO cliente) {
+		// Será pesquisado no bd o ClienteVO parametrizado
+		// usando ClienteDAO, então irá abrir a pagina de edição
+		// para depois ser dado um update no banco de dados
 	}
 
-	public void excluir(String id) {
-		// Será pesquisado no banco de dados o cpf do cliente
-		// para então deleta-lo
+	public void excluir(ClienteVO cliente) {
+		// Será pesquisado no banco de dados o ClienteVO parametrizado
+		// usando o ClienteDAO para então poder ser excluido do banco de dados
 	}
 
-	public VendaVO[] historicoDeCompras(ClienteVO cli) {
+	public ArrayList<VendaVO> historicoDeCompras(ClienteVO cliente) {
 		// Nesse metodo terá que ser primeiro feita uma consulta 
-		// no banco de dados para saber
-		// quantas vendas foram feitas com o id (no caso o cpf) do cliente
-		int quantVendas =  0;
-		// então elas serão guardadas em um array para depois serem listadas
-		VendaVO vendas[] = new VendaVO[quantVendas];
+		// no banco de dados em VendaDAO para saber as vendas que foram feitas
+		// pelo cliente parametrizado então elas serão guardadas em uma ArrayList 
+		// para depois serem listadas
+		ArrayList<VendaVO> vendas = new ArrayList<VendaVO>();
 		return vendas;
 	}
 
