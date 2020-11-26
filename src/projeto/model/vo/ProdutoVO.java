@@ -6,10 +6,8 @@ public class ProdutoVO {
 	private double peso;
 	private String serie; // número de serie geralmente tem 13 caracteres
 	private double preco;
-	private int quantidade; // quantKanalence + quantToinho
-	private int quantiPedido;
-	private ResponsavelVO responsavel;
-	private LocalVO local;
+	private int quantidade = 0; // quantKanalence + quantToinho
+	private int quantiPedido = 0;
 	private String img; // um endereço string
 
 	public String getNome() {
@@ -19,7 +17,8 @@ public class ProdutoVO {
 	public void setNome(String nome) {
 		if (nome != null) {
 			if ((nome.length() <= 100) && (!nome.isEmpty())) {
-				this.nome = nome; // limitar o tamanho do nome do produto e se não está vazio
+				this.nome = nome; 
+				// limitar o tamanho do nome do produto e se não está vazio
 			} else {
 				System.out.print("Operação invalida");
 			}
@@ -35,7 +34,8 @@ public class ProdutoVO {
 	public void setDescricao(String descricao) {
 		if (descricao != null) {
 			if ((descricao.length() <= 500) && (!descricao.isEmpty())) {
-				this.descricao = descricao; // limitar o tamanho da descrição do produto e se não está vazia
+				this.descricao = descricao; 
+				// limitar o tamanho da descrição do produto e se não está vazia
 			} else {
 				System.out.print("Operação inválida!");
 			}
@@ -50,7 +50,8 @@ public class ProdutoVO {
 
 	public void setPreco(double preco) {
 		if (preco > 0) {
-			this.preco = preco; // verificar se o preço está sendo um valor positivo e maior que zero
+			this.preco = preco; 
+			// verificar se o preço está sendo um valor positivo e maior que zero
 		} else {
 			System.out.print("Quantidade inválida!");
 		}
@@ -63,7 +64,8 @@ public class ProdutoVO {
 	public void setSerie(String serie) {
 		if (serie != null) {
 			if (serie.length() == 13) {
-				this.serie = serie; // verificar se o tamanho do numero de serie está correto
+				this.serie = serie; 
+				// verificar se o tamanho do numero de serie está correto
 			} else {
 				System.out.println("Digite novamente!");
 			}
@@ -76,18 +78,11 @@ public class ProdutoVO {
 		return quantidade;
 	}
 
-	public void setQuantidade(int quantKanalence, int quantToinho) { // pegar as duas quantidades e depois soma-las
-		if (quantKanalence < 0) {
-			System.out.println("Quantidade inválida!");
-		}
-		if (quantToinho < 0) {
-			System.out.println("Quantidade inválida!");
-		}
-		if ((quantKanalence + quantToinho) > 0) {
-			this.quantidade = quantKanalence + quantToinho;
-		} else {
-			System.out.println("Quantidade total inválida!");
-		}
+	public void setQuantidade(int quantidade) { 
+		// esse método é usado em estoqueVO para aumentar
+		// ou diminuir a quantidade, e lá mesmo
+		// verifica se a quantidade é valida ou não
+		this.quantidade += quantidade;
 	}
 	
 	public int getQuantiPedido() {
@@ -95,6 +90,8 @@ public class ProdutoVO {
 	}
 
 	public boolean setQuantiPedido(int quantiPedido) {
+		// médodo usado em vendaVO para vericar se a quantidade
+		// pedida é aceita
 		if (quantiPedido > 0) {
 			if (quantiPedido <= quantidade) {
 				this.quantiPedido = quantiPedido;
@@ -111,7 +108,8 @@ public class ProdutoVO {
 	public void setImg(String img) {
 		if (img != null) {
 			if (!img.isEmpty()) {
-				this.img = img; // se não estiver vazia, salva
+				this.img = img; 
+				// se não estiver vazia, salva
 			} else {
 				System.out.println("Adicione uma imagem!");
 			}
@@ -126,35 +124,11 @@ public class ProdutoVO {
 
 	public void setPeso(double peso) {
 		if (peso > 0) {
-			this.peso = peso; // verificar se o preço está sendo um valor positivo e maior que zero
+			this.peso = peso; 
+			// verificar se o preço está sendo um valor positivo e maior que zero
 		} else {
 			System.out.print("Quantidade inválida!");
 		}
 	}
-
-	public ResponsavelVO getResponsavel() {
-		return responsavel;
-	}
-
-	public void setResponsavel(ResponsavelVO responsavel) {
-		if (responsavel != null) {
-			this.responsavel = responsavel; // Atribui os valores ao metodo da classe cliente.
-		} else {
-			System.out.println("Operação inválida");
-		}
-	}
-
-	public LocalVO getLocal() {
-		return local;
-	}
-
-	public void setLocal(LocalVO local) {
-		if (local != null) {
-			this.local = local; // Atribui os valores ao metodo da classe cliente.
-		} else {
-			System.out.println("Operação inválida");
-		}
-	}
-
 	
 }

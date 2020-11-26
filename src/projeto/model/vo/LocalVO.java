@@ -3,6 +3,7 @@ package projeto.model.vo;
 public class LocalVO {
 	private String localizacao;
 	private String compartimento;
+	private ResponsavelVO responsavel;
 
 	public String getLocalizacao() {
 		return localizacao;
@@ -34,6 +35,18 @@ public class LocalVO {
 			System.out.println("Informação incorreta"); // Informado invalizes caso esteja vazio.
 		}
 		
+	}
+
+	public ResponsavelVO getResponsavel() {
+		return responsavel;
+	}
+
+	public void setResponsavel(ResponsavelVO responsavel) {
+		if (responsavel != null) {
+			this.responsavel = responsavel;	
+		} else {
+			System.out.println("Não foi possivel adicionar responsavel");
+		}
 	}
 
 }

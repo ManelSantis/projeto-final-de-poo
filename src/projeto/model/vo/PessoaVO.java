@@ -1,6 +1,6 @@
 package projeto.model.vo;
 
-public class PessoaVO {
+public abstract class PessoaVO {
 	private String nome;
 	private String cpf;
 	private String endereco;
