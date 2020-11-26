@@ -8,9 +8,10 @@ import java.util.Calendar;
 
 public class ResponsavelBO {
 	public ArrayList<ProdutoVO> estoque(ResponsavelVO resp) {
-		// Irá procurar no banco de dados (em ProdutoDAO) todos os produtos
-		// que tiverem o responsavel igual ao que está sendo apresentado
-		// lá será posto em um ArrayList, para então ser passado todos os valores para 
+		// Irá procurar no banco de dados (em EstoqueDAO) todos os produtos
+		// que estiverem guardados no local que tenha como responsavel
+		// igual ao que está sendo apresentado lá será posto em um ArrayList, 
+		// para então ser passado todos os valores para 
 		// a ArrayList desse método e mandados para a exebição
 		ArrayList<ProdutoVO> produtos = new ArrayList<ProdutoVO>();
 		return produtos;

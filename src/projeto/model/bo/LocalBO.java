@@ -1,6 +1,8 @@
 package projeto.model.bo;
 
+import java.util.ArrayList;
 import projeto.model.vo.LocalVO;
+import projeto.model.vo.ResponsavelVO;
 
 public class LocalBO {
 	
@@ -25,5 +27,13 @@ public class LocalBO {
 		// se existir irá deletar do banco de dados
 	}
 
-	
+	public ArrayList<LocalVO> listar(ResponsavelVO responsavel) {
+		// Irá pesquisar no banco de dados uma lista de locai
+		// a partir do responsavel parametrizado
+		// com o auxilio de LocalDA
+		// e então irá passar tudo para uma ArrayList 
+		// para ser exibida
+		ArrayList<LocalVO> locais = new ArrayList<LocalVO>();
+		return locais;
+	}
 }
