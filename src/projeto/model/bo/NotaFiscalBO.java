@@ -2,7 +2,7 @@ package projeto.model.bo;
 
 import projeto.model.vo.NotaFiscalVO;
 
-public class NotaFiscalBO {
+public class NotaFiscalBO implements NotaFiscalBO{
 	public void imprimir (NotaFiscalVO nota) {
 		// Esse metodo irá imprimir a nota fiscal da
 		// Venda que está sendo posta como atributo

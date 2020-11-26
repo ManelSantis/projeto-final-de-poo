@@ -3,7 +3,7 @@ package projeto.model.bo;
 import java.util.ArrayList;
 import projeto.model.vo.ProdutoVO;
 
-public class ProdutoBO {
+public class ProdutoBO implements ProdutoInterBO{
 	public void cadastrar(ProdutoVO produto) {
 		// Irá receber o produto parametrizado
 		// Repassando para o banco de dados em ProdutoDAO

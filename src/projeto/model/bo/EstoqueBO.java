@@ -2,7 +2,7 @@ package projeto.model.bo;
 
 import projeto.model.vo.EstoqueVO;
 
-public class EstoqueBO {
+public class EstoqueBO implements EstoqueInterBO{
 	
 	public void cadastrar(EstoqueVO estoque) {
 		// Será pego o EstoqueVO parametrizado

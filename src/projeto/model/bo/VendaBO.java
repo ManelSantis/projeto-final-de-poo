@@ -2,7 +2,7 @@ package projeto.model.bo;
 
 import projeto.model.vo.VendaVO;
 
-public class VendaBO {
+public class VendaBO implements VendaInterBO{
 	public void confirmarVenda(VendaVO venda) {
 		// Irá receber a venda parametrizada e então adiconará ela no banco de dados 
 		// caso não exista ainda a partir do VendaDAO para poder confirmar a venda

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import projeto.model.vo.LocalVO;
 import projeto.model.vo.ResponsavelVO;
 
-public class LocalBO {
+public class LocalBO implements LocalInterBO {
 	
 	public void cadastrar(LocalVO local) {
 		// Será pego o LocalVO parametrizado

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import projeto.model.vo.ClienteVO;
 import projeto.model.vo.VendaVO;
 
-public class ClienteBO {
+public class ClienteBO implements ClienteInterBO {
 	public void cadastrar(ClienteVO cliente) {
 		// Esse metodo irá receber um clienteVO
 		// vai verificar se ele já existe no Banco de dados
