@@ -6,7 +6,7 @@ import projeto.model.vo.ProdutoVO;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class ResponsavelBO implements ResponsavelBO {
+public class ResponsavelBO implements ResponsavelInterBO {
 	public ArrayList<ProdutoVO> estoque(ResponsavelVO resp) {
 		// Irá procurar no banco de dados (em EstoqueDAO) todos os produtos
 		// que estiverem guardados no local que tenha como responsavel
