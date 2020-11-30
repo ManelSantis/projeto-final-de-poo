@@ -50,7 +50,8 @@ public abstract class PessoaVO {
 		// alguma coisa escrita para então ser aceito
 		if ((estado != null) && (cidade != null) && (bairro != null) && (rua != null) && (numero != null)) {
 			if ((!estado.isEmpty()) && (!cidade.isEmpty()) && (!bairro.isEmpty()) && (!rua.isEmpty()) && (!numero.isEmpty())) {
-				this.endereco = estado + "\n" + cidade + "\n" + bairro + "\n" + rua + "\n" + numero; // salvar tudo separado por \n para ficar mais facil de verificar depois
+				this.endereco = bairro + ", " + rua + ", " + numero + ", " + cidade + ", " + estado; 
+				// salvar tudo separado por , para ficar mais facil de verificar depois
 			} else {
 				System.out.println("Não foi possivel salvar o seu endereço!");
 			}
@@ -59,6 +60,21 @@ public abstract class PessoaVO {
 		}
 	}
 
+	public void setEndereco(String endereco) {
+		// Construtor set usado como auxiliar para o bd
+		if (endereco != null) {
+			if (!endereco.isEmpty()) {
+				this.endereco = endereco; 
+				// salvar tudo separado por , para ficar mais facil de verificar depois
+			} else {
+				System.out.println("Não foi possivel salvar o seu endereço!");
+			}
+		} else {
+			System.out.println("Não foi possivel salvar o seu endereço!");
+		}
+	}
+
+	
 	public String getTelefone() {
 		return telefone;
 	}
@@ -67,7 +83,7 @@ public abstract class PessoaVO {
 	public void setTelefone(String telefone) {
 		// Ainda vendo como fazer uma validação melhor
 		if (telefone != null) {
-			if ((telefone.length() == 11) && (!telefone.isEmpty())){
+			if ((telefone.length() > 10) && (!telefone.isEmpty())){
 				this.telefone = telefone;
 			} else {
 				System.out.println("Não foi possivel salvar o telefone!");

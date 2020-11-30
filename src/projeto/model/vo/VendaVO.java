@@ -91,7 +91,20 @@ public class VendaVO {
 	public String getCodigo() {
 		return codigo;
 	}
-
+	
+	public void setCodigo(String codigo) {
+		//metodo usado para ajudar no dao
+		if (codigo != null) {
+			if (!codigo.isBlank()) {
+				this.codigo = codigo;
+			} else {
+				System.out.println("Código invalido");
+			}
+		} else {
+			System.out.println("Codigo invalido");
+		}
+	}
+	
 	public void setCodigo() {
 		// esse código está gerando automaticamente um código para a venda
 		// só que antes de adicionar, tera que ser feita uma consulta no
