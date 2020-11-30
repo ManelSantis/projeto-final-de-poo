@@ -8,7 +8,7 @@ public class BaseDAO {
 	Connection conn = null;
 	String url = "jdbc:postgresql://localhost:5432/ProjetoFinal";
 	String user = "postgres";
-	String senha = "99725005";
+	String senha = "";
 	public Connection getConnection() {
 		if (conn == null) {
 			try {

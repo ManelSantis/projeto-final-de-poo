@@ -1,5 +1,5 @@
 package projeto.model.dao;
 
-public class ResponsavelDAO {
+public class ResponsavelDAO extends BaseDAO{
 
 }

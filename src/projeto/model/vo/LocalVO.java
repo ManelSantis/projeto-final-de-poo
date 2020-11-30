@@ -2,7 +2,7 @@ package projeto.model.vo;
 
 public class LocalVO {
 	private String localizacao;
-	private String compartimento;
+	private int compartimento;
 	private ResponsavelVO responsavel;
 
 	public String getLocalizacao() {
@@ -20,21 +20,12 @@ public class LocalVO {
 
 	}
 
-	public String getCompartimento() {
+	public int getCompartimento() {
 		return compartimento;
 	}
 
-	public void setCompartimento(String compartimento) {
-		if (compartimento != null) {
-			if (!compartimento.isEmpty()) {
-				this.compartimento = compartimento;
-			} else {
-				System.out.println("Informação incorreta"); // cadastro não aceito
-			}
-		} else {
-			System.out.println("Informação incorreta"); // Informado invalizes caso esteja vazio.
-		}
-		
+	public void setCompartimento(int compartimento) {
+		this.compartimento = compartimento;		
 	}
 
 	public ResponsavelVO getResponsavel() {
