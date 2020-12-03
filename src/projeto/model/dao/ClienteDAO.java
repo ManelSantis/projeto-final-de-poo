@@ -82,41 +82,41 @@ public class ClienteDAO extends BaseDAO<ClienteVO> {
 		}
 	}
 
-	public ClienteVO findById(ClienteVO cliente) {
+	public ResultSet findById(ClienteVO cliente) {
 		ClienteVO aux = new ClienteVO();
 		String sql = "select * from Cliente where idCliente = ?";
 		PreparedStatement ptst;
-		ResultSet rs;
+		ResultSet rs = null;
 		try {
 			ptst = getConnection().prepareStatement(sql);
 			ptst.setLong(1, cliente.getId());
 			rs = ptst.executeQuery();
-			while (rs.next()) {
+			/*while (rs.next()) {
 				aux.setNome(rs.getString("nome"));
 				aux.setCpf(rs.getString("cpf"));
 				aux.setEndereco(rs.getString("endereco"));
 				aux.setTelefone(rs.getString("telefone"));
 				aux.setId(rs.getLong("idCliente"));
-			}
+			}*/
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return aux;
+		return rs;
 	}
 	
-	public ArrayList<ClienteVO> findByName(ClienteVO cliente) {
+	public ResultSet findByName(ClienteVO cliente) {
 		// esse método retornba uma arraylist com os clientes
 		// que tiverem o nome parecido com o que foi digitado
 		String sql = "select * from Cliente where nome like ?";
 		PreparedStatement ptst;
-		ResultSet rs;
-		ArrayList<ClienteVO> clientes = new ArrayList<ClienteVO>();
+		ResultSet rs = null;
+		//ArrayList<ClienteVO> clientes = new ArrayList<ClienteVO>();
 		try {
 			ptst = getConnection().prepareStatement(sql);
 			ptst.setString(1, "%" + cliente.getNome() + "%");
 			rs = ptst.executeQuery();
-			while (rs.next()) {
+			/*while (rs.next()) {
 				ClienteVO aux = new ClienteVO();
 				aux.setNome(rs.getString("nome"));
 				aux.setCpf(rs.getString("cpf"));
@@ -124,23 +124,23 @@ public class ClienteDAO extends BaseDAO<ClienteVO> {
 				aux.setTelefone(rs.getString("telefone"));
 				aux.setId(rs.getLong("idCliente"));
 				clientes.add(aux);
-			}
+			}*/
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return clientes;
+		return rs;
 	}
 
-	public ArrayList<ClienteVO> listar() {
+	public ResultSet listar() {
 		String sql = "select * from Cliente";
 		Statement st;
-		ResultSet rs;
-		ArrayList<ClienteVO> clientes = new ArrayList<ClienteVO>();
+		ResultSet rs = null;
+		//ArrayList<ClienteVO> clientes = new ArrayList<ClienteVO>();
 		try {
 			st = getConnection().createStatement();
 			rs = st.executeQuery(sql);
-			while (rs.next()) {
+			/*while (rs.next()) {
 				ClienteVO aux = new ClienteVO();
 				aux.setNome(rs.getString("nome"));
 				aux.setCpf(rs.getString("cpf"));
@@ -148,13 +148,13 @@ public class ClienteDAO extends BaseDAO<ClienteVO> {
 				aux.setTelefone(rs.getString("telefone"));
 				aux.setId(rs.getLong("idCliente"));
 				clientes.add(aux);
-			}
+			}*/
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return clientes;
+		return rs;
 	}
 
 }

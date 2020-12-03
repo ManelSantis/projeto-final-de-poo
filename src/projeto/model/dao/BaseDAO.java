@@ -2,8 +2,8 @@ package projeto.model.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public abstract class BaseDAO<VO> implements BaseInterDAO<VO>{
 	private static Connection conn = null;
@@ -37,8 +37,8 @@ public abstract class BaseDAO<VO> implements BaseInterDAO<VO>{
 	public abstract void cadastrar(VO vo);
 	public abstract void editar(VO vo);
 	public abstract void excluir(VO vo);
-	public abstract VO findById(VO vo);
-	public abstract ArrayList<VO> listar();
-	public abstract ArrayList<VO> findByName(VO vo);
+	public abstract ResultSet findById(VO vo);
+	public abstract ResultSet listar();
+	public abstract ResultSet findByName(VO vo);
 	
 }

@@ -11,6 +11,7 @@ public class VendaVO {
 	private Calendar data;
 	private double valor;
 	private String codigo;
+	private long id;
 
 	public ClienteVO getCliente() {
 		return cliente;
@@ -75,6 +76,11 @@ public class VendaVO {
 		data.get(Calendar.SECOND);
 		this.data = data;
 	}
+	
+	public void setData(Calendar data) {
+		//para auxiliar no dao
+		this.data = data;
+	}
 
 	public double getValor() {
 		return valor;
@@ -118,6 +124,14 @@ public class VendaVO {
 			codigo = codigo + aux.charAt(r.nextInt(62));
 		}
 		this.codigo = codigo;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 }
