@@ -2,12 +2,12 @@ package projeto.model.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import projeto.model.vo.ProdutoVO;
 
-public class ProdutoDAO extends BaseDAO {
+public class ProdutoDAO extends BaseDAO<ProdutoVO> {
 	public void cadastrar(ProdutoVO prod) {
-		conn = getConnection();
 		String sql = "insert into produto (nome, serie, peso, preco, descricao, imagem) values (?,?,?,?,?,?)";
 		//a quantidade do produto só é alterada ao adicionar no estoque
 		//então ela por default é setada como 0 no banco de dados
@@ -16,7 +16,7 @@ public class ProdutoDAO extends BaseDAO {
 		//no banco de dados na hora de executar a venda
 		PreparedStatement ptst;
 		try {
-			ptst = conn.prepareStatement(sql);
+			ptst = getConnection().prepareStatement(sql);
 			ptst.setString(1, prod.getNome());
 			ptst.setString(2, prod.getSerie());
 			ptst.setDouble(3, prod.getPeso());
@@ -32,12 +32,11 @@ public class ProdutoDAO extends BaseDAO {
 	}
 
 	public void excluir(ProdutoVO prod) {
-		conn = getConnection();
 		String sql = "delete from produto where serie = ?";
 		//deletar do banco de dados a partir da serie do produto
 		PreparedStatement ptst;
 		try {
-			ptst = conn.prepareStatement(sql);
+			ptst = getConnection().prepareStatement(sql);
 			ptst.setString(1, prod.getSerie());
 			ptst.executeUpdate();
 		} catch (SQLException e) {
@@ -47,13 +46,12 @@ public class ProdutoDAO extends BaseDAO {
 	}
 
 	public void editar(ProdutoVO prod) {
-		conn = getConnection();
 		String sql =  "update produto set nome = ?, peso = ?, preco = ?, descricao = ?, imagem = ? where serie = ?";
 		//irá realizar o update de tudo menso do número de serie
 		//a partir do número de serie que está na consulta
 		PreparedStatement ptst;
 		try {
-			ptst = conn.prepareStatement(sql);
+			ptst = getConnection().prepareStatement(sql);
 			ptst.setString(1, prod.getNome());
 			ptst.setDouble(2, prod.getPeso());
 			ptst.setDouble(3, prod.getPreco());
@@ -65,5 +63,23 @@ public class ProdutoDAO extends BaseDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public ProdutoVO findById(ProdutoVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<ProdutoVO> listar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<ProdutoVO> findByName(ProdutoVO vo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
