@@ -4,6 +4,7 @@ public class EstoqueVO {
 	private ProdutoVO produto;
 	private LocalVO local;
 	private int quantidade = 0;
+	private long id;
 	
 	public ProdutoVO getProduto() {
 		return produto;
@@ -50,6 +51,14 @@ public class EstoqueVO {
 		} else {
 			System.out.println("Quantidade não aceita!");
 		}
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 	
 	

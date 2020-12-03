@@ -9,7 +9,8 @@ public class ProdutoVO {
 	private int quantidade = 0; // quantKanalence + quantToinho
 	private int quantiPedido = 0;
 	private String img; // um endereço string
-
+	private long id;
+	
 	public String getNome() {
 		return nome;
 	}
@@ -129,6 +130,14 @@ public class ProdutoVO {
 		} else {
 			System.out.print("Quantidade inválida!");
 		}
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 	
 }

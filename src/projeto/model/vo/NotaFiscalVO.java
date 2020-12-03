@@ -2,7 +2,8 @@ package projeto.model.vo;
 
 public class NotaFiscalVO {
 	private VendaVO venda;
-
+	private long id;
+	
 	public VendaVO getVenda() {
 		return venda;
 	}
@@ -15,6 +16,14 @@ public class NotaFiscalVO {
 			System.out.println("Venda não concluida");
 		}
 		
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 	
 }

@@ -5,6 +5,7 @@ public abstract class PessoaVO {
 	private String cpf;
 	private String endereco;
 	private String telefone;
+	private long id;
 
 	public String getNome() {
 		return nome;
@@ -92,6 +93,14 @@ public abstract class PessoaVO {
 			System.out.println("Não foi possivel salvar o telefone!");
 		}
 
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 }
