@@ -51,39 +51,98 @@ public class ResponsavelDAO extends BaseDAO<ResponsavelVO>{
 	}
 
 	@Override
-	public void cadastrar(ResponsavelVO vo) {
-		// TODO Auto-generated method stub
-		
+	public void cadastrar(ResponsavelVO Responsavel) {
+		String sql =  "insert into Responsavel ( login,senha,nome,cpf,endereço,telefone, idresponsavel) values (?,?,?,?,?)";
+		PreparedStatement ptst;
+		try {
+			ptst = conn.prepareStatement(sql);
+			ptst.setString(1, Responsavel.getUsuario());
+			ptst.setString(2, Responsavel.getSenha());
+			ptst.setString(3, Responsavel.getNome());
+			ptst.setString(4, Responsavel.getCpf());
+			ptst.setString(5, Responsavel.getEndereco());
+			ptst.setString(6, Responsavel.getTelefone());
+			ptst.setLong(6, Responsavel.getId());
+			ptst.execute();
+			int linhas = ptst.executeUpdate();
+			if (linhas == 0) {
+				throw new SQLException ("Nenhuma linha foi alterada.");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void editar(ResponsavelVO vo) {
-		// TODO Auto-generated method stub
+	public void editar(ResponsavelVO Responsavel) {
+		String sql = "update Responsavel set nome = ?, endereco = ?, telefone = ?, cpf = ? where idresponsavel = ?";
 		
+		PreparedStatement ptst;
+		try {
+			ptst = getConnection().prepareStatement(sql);
+			ptst.setString(1, Responsavel.getUsuario());
+			ptst.setString(2, Responsavel.getSenha());
+			ptst.setString(3, Responsavel.getNome());
+			ptst.setString(4, Responsavel.getEndereco());
+			ptst.setString(5, Responsavel.getTelefone());
+			ptst.setString(6, Responsavel.getCpf());
+			ptst.setLong(7, Responsavel.getId());
+			ptst.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+		
 
 	@Override
-	public void excluir(ResponsavelVO vo) {
-		// TODO Auto-generated method stub
-		
+	public void excluir(ResponsavelVO Responsavel) {
+		String sql = "delete from responsavel where id = ?";
+		PreparedStatement ptst;
+		try {
+			ptst = getConnection().prepareStatement(sql);
+			ptst.setLong(1, Responsavel.getId());
+			ptst.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+		
+
 
 	@Override
-	public ResponsavelVO findById(ResponsavelVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponsavelVO findById(ResponsavelVO responsavel) {
+		
 	}
-
 	@Override
 	public ArrayList<ResponsavelVO> listar() {
-		// TODO Auto-generated method stub
-		return null;
+		
 	}
-
 	@Override
-	public ArrayList<ResponsavelVO> findByName(ResponsavelVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<ResponsavelVO> findByName(ResponsavelVO responsavel) {
+		String sql = "select * from Cliente where nome like ?";
+		PreparedStatement ptst;
+		ResultSet rs;
+		ArrayList<ResponsavelVO> clientes = new ArrayList<ResponsavelVO>();
+		try {
+			ptst = getConnection().prepareStatement(sql);
+			ptst.setString(1, "%" + responsavel.getNome() + "%");
+			rs = ptst.executeQuery();
+			while (rs.next()) {
+				ResponsavelVO aux = new ResponsavelVO();
+				aux.setNome(rs.getString("nome"));
+				aux.setCpf(rs.getString("cpf"));
+				aux.setEndereco(rs.getString("endereco"));
+				aux.setTelefone(rs.getString("telefone"));
+				aux.setId(rs.getLong("idCliente"));
+				clientes.add(aux);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

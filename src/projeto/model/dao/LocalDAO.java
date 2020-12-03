@@ -96,9 +96,24 @@ public class LocalDAO extends BaseDAO<LocalVO> {
 		return locais;
 	}
 	
-	public LocalVO findById(LocalVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+	public LocalVO findById(LocalVO local) {
+		LocalVO aux = new LocalVO();
+		String sql = "select * from local where idlocal  = ?";
+		PreparedStatement ptst;
+		ResultSet rs;
+		try {
+			ptst = getConnection().prepareStatement(sql);
+			ptst.setLong(1, local.getId());
+			rs = ptst.executeQuery();
+			while (rs.next()) {
+				aux.setLocalizacao(rs.getString("localizacao"));
+				aux.setId(rs.getLong("idlocal"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return aux;
 	}
 
 	@Override
@@ -108,9 +123,26 @@ public class LocalDAO extends BaseDAO<LocalVO> {
 	}
 
 	@Override
-	public ArrayList<LocalVO> findByName(LocalVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<LocalVO> findByName(LocalVO local) {
+		String sql = "select * from Cliente where nome like ?";
+		PreparedStatement ptst;
+		ResultSet rs;
+		ArrayList<LocalVO> locais = new ArrayList<LocalVO>();
+		try {
+			ptst = getConnection().prepareStatement(sql);
+			ptst.setString(1, "%" + local.getNome() + "%");
+			rs = ptst.executeQuery();
+			while (rs.next()) {
+				LocalVO aux = new LocalVO();
+				aux.setLocalizacao(rs.getString("localizacao"));
+				aux.setId(rs.getLong("idlocal"));
+				locais.add(aux);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return locais;
 	}
 
 }
