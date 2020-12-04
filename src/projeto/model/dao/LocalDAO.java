@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import projeto.model.vo.LocalVO;
 import projeto.model.vo.ResponsavelVO;
 
-public class LocalDAO extends BaseDAO<LocalVO> {
+public class LocalDAO extends BaseDAO<LocalVO> implements LocalInterDAO{
 
 	public void cadastrar(LocalVO local) {
 		// esse método adiciona um novo local
