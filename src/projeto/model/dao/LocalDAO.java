@@ -3,6 +3,7 @@ package projeto.model.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import projeto.model.vo.LocalVO;
@@ -21,37 +22,39 @@ public class LocalDAO extends BaseDAO<LocalVO> {
 			ptst.setString(1, local.getLocalizacao());
 			ptst.setLong(2, local.getId());
 			ptst.setLong(3, local.getResponsavel().getId());
-			ptst.execute();
+			int linhas = ptst.executeUpdate();
+			
+			if (linhas == 0) {
+				throw new SQLException ("Nada foi adicionado");
+			}
+			
+			ResultSet rs = ptst.getGeneratedKeys();
+			if (rs.next()) {
+				local.setId(rs.getLong(1));
+			} else {
+				throw new SQLException ("Falhou");
+			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-	}
-
-	public void remover(LocalVO local) {
-		String sql = "select compartimento, localizacao from local where idresponsavel = ?";
-		// pesquisar todos os locals que possuem o o responsavel que está no select
-		PreparedStatement ptst;
-		try {
-			ptst = getConnection().prepareStatement(sql);
-			ptst.setLong(1, local.getResponsavel().getId());
-			ptst.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public void editar(LocalVO local) {
-		String sql = "update local set localizacao = ? where compartimento = ?";
+		String sql = "update local set localizacao = ? where idlocal = ?";
 		// será auterada apenas a localização, já que o responsavel não mudará
 		PreparedStatement ptst;
 		try {
 			ptst = getConnection().prepareStatement(sql);
 			ptst.setString(1, local.getLocalizacao());
 			ptst.setLong(2, local.getId());
-			ptst.executeUpdate();
+			int linhas = ptst.executeUpdate();
+			
+			if (linhas == 0) {
+				throw new SQLException ("Nada foi adicionado");
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,42 +68,47 @@ public class LocalDAO extends BaseDAO<LocalVO> {
 		try {
 			ptst = getConnection().prepareStatement(sql);
 			ptst.setLong(1, local.getId());
-			ptst.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public ArrayList<LocalVO> listar(ResponsavelVO responsavel) {
-		String sql = "select * from local where idResponsavel = ?";
-		PreparedStatement ptst;
-		ResultSet rs;
-		ArrayList<LocalVO> locais = new ArrayList<LocalVO>();
-		try {
-			ptst = getConnection().prepareStatement(sql);
-			ptst.setLong(1, responsavel.getId());
-			rs = ptst.executeQuery();
-			while (rs.next()) {
-				LocalVO aux = new LocalVO();
-				aux.setLocalizacao(rs.getString("localizacao"));
-				aux.setId(rs.getLong("idlocal"));
-				aux.setResponsavel(responsavel);
-				locais.add(aux);
+			int linhas = ptst.executeUpdate();
+			
+			if (linhas == 0) {
+				throw new SQLException ("Nada foi adicionado");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return locais;
 	}
 	
-	public LocalVO findById(LocalVO local) {
+	public ResultSet listarPorResponsavel(ResponsavelVO responsavel) {
+		//listar os locais a partir do responsavel
+		String sql = "select * from local where idResponsavel = ?";
+		PreparedStatement ptst;
+		ResultSet rs = null;
+		//ArrayList<LocalVO> locais = new ArrayList<LocalVO>();
+		try {
+			ptst = getConnection().prepareStatement(sql);
+			ptst.setLong(1, responsavel.getId());
+			rs = ptst.executeQuery();
+			/*while (rs.next()) {
+				LocalVO aux = new LocalVO();
+				aux.setLocalizacao(rs.getString("localizacao"));
+				aux.setId(rs.getLong("idlocal"));
+				aux.setResponsavel(responsavel);
+				locais.add(aux);
+			}*/
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return rs;
+	}
+	
+	public ResultSet findById(LocalVO local) {
 		LocalVO aux = new LocalVO();
 		String sql = "select * from local where idlocal  = ?";
 		PreparedStatement ptst;
-		ResultSet rs;
+		ResultSet rs = null;
 		try {
 			ptst = getConnection().prepareStatement(sql);
 			ptst.setLong(1, local.getId());
@@ -113,36 +121,18 @@ public class LocalDAO extends BaseDAO<LocalVO> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return aux;
+		return rs;
 	}
 
-	@Override
-	public ArrayList<LocalVO> listar() {
-		// TODO Auto-generated method stub
+	public ResultSet findByName(LocalVO local) {
+		
 		return null;
 	}
 
 	@Override
-	public ArrayList<LocalVO> findByName(LocalVO local) {
-		String sql = "select * from Cliente where nome like ?";
-		PreparedStatement ptst;
-		ResultSet rs;
-		ArrayList<LocalVO> locais = new ArrayList<LocalVO>();
-		try {
-			ptst = getConnection().prepareStatement(sql);
-			ptst.setString(1, "%" + local.getNome() + "%");
-			rs = ptst.executeQuery();
-			while (rs.next()) {
-				LocalVO aux = new LocalVO();
-				aux.setLocalizacao(rs.getString("localizacao"));
-				aux.setId(rs.getLong("idlocal"));
-				locais.add(aux);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return locais;
+	public ResultSet listar() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

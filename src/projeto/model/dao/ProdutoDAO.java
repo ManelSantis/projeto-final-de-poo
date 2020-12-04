@@ -3,12 +3,15 @@ package projeto.model.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import projeto.model.vo.ProdutoVO;
 
 public class ProdutoDAO extends BaseDAO<ProdutoVO> {
+	
 	public void cadastrar(ProdutoVO prod) {
-		String sql = "insert into produto (nome, serie, peso, preco, descricao, imagem) values (?,?,?,?,?,?)";
+		String sql = "insert into produto (nome, serie, peso, preco, descricao, imagem) "
+				+ "values (?,?,?,?,?,?);";
 		//a quantidade do produto só é alterada ao adicionar no estoque
 		//então ela por default é setada como 0 no banco de dados
 		//e  quantidade pedido só é utilizado na parte de java
@@ -16,14 +19,25 @@ public class ProdutoDAO extends BaseDAO<ProdutoVO> {
 		//no banco de dados na hora de executar a venda
 		PreparedStatement ptst;
 		try {
-			ptst = getConnection().prepareStatement(sql);
+			ptst = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ptst.setString(1, prod.getNome());
 			ptst.setString(2, prod.getSerie());
 			ptst.setDouble(3, prod.getPeso());
 			ptst.setDouble(4, prod.getPreco());
 			ptst.setString(5, prod.getDescricao());
 			ptst.setString(6, prod.getImg());
-			ptst.execute();
+			int linhas = ptst.executeUpdate();
+			
+			if (linhas == 0) {
+				throw new SQLException ("Nada foi adicionado.");
+			}
+			
+			ResultSet rs = ptst.getGeneratedKeys();
+			if (rs.next()) {
+				prod.setId(rs.getLong(1));
+			} else {
+				throw new SQLException ("Falhou");
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -38,7 +52,10 @@ public class ProdutoDAO extends BaseDAO<ProdutoVO> {
 		try {
 			ptst = getConnection().prepareStatement(sql);
 			ptst.setString(1, prod.getSerie());
-			ptst.executeUpdate();
+			int linhas = ptst.executeUpdate();
+			if (linhas == 0) {
+				throw new SQLException ("Nada foi excluido.");
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -46,7 +63,8 @@ public class ProdutoDAO extends BaseDAO<ProdutoVO> {
 	}
 
 	public void editar(ProdutoVO prod) {
-		String sql =  "update produto set nome = ?, peso = ?, preco = ?, descricao = ?, imagem = ? where serie = ?";
+		String sql =  "update produto set nome = ?, peso = ?, preco = ?, descricao = ?, "
+				+ "imagem = ? serie = ? where idproduto = ? ";
 		//irá realizar o update de tudo menso do número de serie
 		//a partir do número de serie que está na consulta
 		PreparedStatement ptst;
@@ -58,7 +76,11 @@ public class ProdutoDAO extends BaseDAO<ProdutoVO> {
 			ptst.setString(4, prod.getDescricao());
 			ptst.setString(5, prod.getImg());
 			ptst.setString(6, prod.getSerie());
-			ptst.executeUpdate();
+			ptst.setLong(7, prod.getId());
+			int linhas = ptst.executeUpdate();
+			if (linhas == 0) {
+				throw new SQLException("Nada foi editado.");
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,7 +88,7 @@ public class ProdutoDAO extends BaseDAO<ProdutoVO> {
 	}
 
 	public ResultSet findById(ProdutoVO prod) {
-		String sql = "select * from produto where idpedido = ?";
+		String sql = "select * from produto where idproduto = ?";
 		PreparedStatement ptst;
 		ResultSet rs = null;
 		//ProdutoVO produto = new ProdutoVO();
@@ -122,7 +144,7 @@ public class ProdutoDAO extends BaseDAO<ProdutoVO> {
 	}
 
 	public ResultSet findByName(ProdutoVO prod) {
-		String sql = "select * from produto where nome = ?";
+		String sql = "select * from produto where nome like ?";
 		PreparedStatement ptst;
 		ResultSet rs = null;
 		

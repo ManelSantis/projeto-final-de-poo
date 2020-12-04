@@ -1,15 +1,16 @@
 package projeto.model.dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 import projeto.model.vo.EstoqueVO;
 
 public class EstoqueDAO extends BaseDAO<EstoqueVO>{
+	
 	public void cadastrar(EstoqueVO estoque) {
-		String sql = "insert into estoque (idlocal, idproduto, quantidade) values (?,?,?)";
+		String sql = "insert into estoque (idlocal, idproduto, quantidade) values (?,?,?);";
 		//irá inserir o estoque usando o idlocal, o produto que está guardado no local, e a quantidade
 		//que está guardada, e como o idlocal tem um responsavel, já da para saber quanto
 		//esse responsavel tem em estoque produto
@@ -22,6 +23,13 @@ public class EstoqueDAO extends BaseDAO<EstoqueVO>{
 			int linhas = ptst.executeUpdate();
 			if (linhas == 0) {
 				throw new SQLException ("Nenhuma linha foi alterada.");
+			}
+			
+			ResultSet rs = ptst.getGeneratedKeys();
+			if (rs.next()) {
+				estoque.setId(rs.getLong(1));
+			} else {
+				throw new SQLException ("Falhou");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -38,7 +46,10 @@ public class EstoqueDAO extends BaseDAO<EstoqueVO>{
 			ptst = getConnection().prepareStatement(sql);
 			ptst.setLong(1, estoque.getProduto().getId());
 			ptst.setLong(2, estoque.getLocal().getId());
-			ptst.executeUpdate();
+			int linhas = ptst.executeUpdate();
+			if (linhas == 0) {
+				throw new SQLException ("Nada foi excluido.");
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -58,7 +69,10 @@ public class EstoqueDAO extends BaseDAO<EstoqueVO>{
 			ptst.setInt(1, estoque.getQuantidade());
 			ptst.setLong(2, estoque.getProduto().getId());
 			ptst.setLong(3, estoque.getLocal().getId());
-			ptst.executeUpdate();
+			int linhas = ptst.executeUpdate();
+			if (linhas == 0) {
+				throw new SQLException("Nada foi alterado.");
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,19 +80,19 @@ public class EstoqueDAO extends BaseDAO<EstoqueVO>{
 	}
 
 	@Override
-	public EstoqueVO findById(EstoqueVO vo) {
+	public ResultSet findById(EstoqueVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<EstoqueVO> listar() {
+	public ResultSet listar() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<EstoqueVO> findByName(EstoqueVO vo) {
+	public ResultSet findByName(EstoqueVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
