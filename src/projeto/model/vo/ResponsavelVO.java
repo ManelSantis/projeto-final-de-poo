@@ -3,7 +3,8 @@ package projeto.model.vo;
 public class ResponsavelVO extends PessoaVO {
 	private String usuario;
 	private String senha;
-
+	private long id;
+	
 	public String getUsuario() {
 		return usuario;
 	}
@@ -35,6 +36,14 @@ public class ResponsavelVO extends PessoaVO {
 		} else {
 			System.out.println("Inválido");
 		}
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 }

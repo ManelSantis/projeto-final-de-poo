@@ -5,7 +5,7 @@ public abstract class PessoaVO {
 	private String cpf;
 	private String endereco;
 	private String telefone;
-	private long id;
+	private long idPessoa;
 
 	public String getNome() {
 		return nome;
@@ -95,12 +95,12 @@ public abstract class PessoaVO {
 
 	}
 
-	public long getId() {
-		return id;
+	public long getIdPessoa() {
+		return idPessoa;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setIdPessoa(long idPessoa) {
+		this.idPessoa = idPessoa;
 	}
 
 }
