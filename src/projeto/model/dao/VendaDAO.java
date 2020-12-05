@@ -4,7 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
 
 import projeto.model.vo.VendaVO;
 
@@ -56,8 +56,8 @@ public class VendaDAO extends BaseDAO<VendaVO> {
 
 		try {
 			ptst = getConnection().prepareStatement(sql);
-			ptst.setDate(1, (java.sql.Date) new Date (inicio.getTimeInMillis()));
-			ptst.setDate(2, (java.sql.Date) new Date (fim.getTimeInMillis()));
+			ptst.setDate(1, new Date (inicio.getTimeInMillis()));
+			ptst.setDate(2, new Date (fim.getTimeInMillis()));
 			rs = ptst.executeQuery();
 			/*
 			 * while (rs.next()) { VendaVO aux = new VendaVO(); ClienteVO aux1 = new
