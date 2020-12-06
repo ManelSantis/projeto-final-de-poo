@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ConEstoque">
+   <children>
+      <Label layoutX="43.0" layoutY="80.0" text="Deseja mesmo excluir o seguinte produto?">
+         <font>
+            <Font name="Tahoma Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="250.0" layoutY="156.0" text="NomeProduto">
+         <font>
+            <Font name="Tahoma" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="254.0" layoutY="200.0" text="SerieProduto">
+         <font>
+            <Font name="Tahoma" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="confirmar" layoutX="367.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#estoque" style="-fx-background-radius: 10px;" text="Confirmar">
+         <font>
+            <Font name="Tahoma Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="cancelar" layoutX="484.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#estoque" prefHeight="32.0" prefWidth="102.0" style="-fx-background-radius: 10px;" text="Cancelar">
+         <font>
+            <Font name="Tahoma Bold" size="16.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="100.0" fitWidth="300.0" layoutX="-89.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true" rotate="45.0">
+         <image>
+            <Image url="@bar.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

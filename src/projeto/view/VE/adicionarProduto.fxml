@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="742.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ConEstoque">
+   <children>
+      <ImageView fitHeight="100.0" fitWidth="300.0" layoutX="-99.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" rotate="-45.0">
+         <image>
+            <Image url="@bar.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="263.0" layoutY="32.0" text="Adicionar Produto">
+         <font>
+            <Font name="Tahoma Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="cancelar" layoutX="626.0" layoutY="447.0" mnemonicParsing="false" onMouseClicked="#estoque" prefHeight="32.0" prefWidth="102.0" text="Cancelar">
+         <font>
+            <Font name="Tahoma Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="confirmar" layoutX="509.0" layoutY="447.0" mnemonicParsing="false" onMouseClicked="#estoque" text="Confirmar">
+         <font>
+            <Font name="Tahoma Bold" size="16.0" />
+         </font>
+      </Button>
+      <TextArea layoutX="309.0" layoutY="324.0" prefHeight="108.0" prefWidth="419.0" />
+      <Label layoutX="309.0" layoutY="196.0" prefHeight="17.0" prefWidth="43.0" text="Serie">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="309.0" layoutY="89.0" prefHeight="17.0" prefWidth="43.0" text="Nome">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="309.0" layoutY="143.0" prefHeight="17.0" prefWidth="43.0" text="Preço">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="311.0" layoutY="297.0" prefHeight="17.0" prefWidth="83.0" text="Descrição">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="309.0" layoutY="247.0" prefHeight="17.0" prefWidth="102.0" text="Imagem">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="309.0" layoutY="118.0" prefHeight="25.0" prefWidth="419.0" />
+      <TextField layoutX="309.0" layoutY="171.0" prefHeight="25.0" prefWidth="419.0" />
+      <TextField layoutX="309.0" layoutY="222.0" prefHeight="25.0" prefWidth="419.0" />
+      <TextField layoutX="309.0" layoutY="272.0" prefHeight="25.0" prefWidth="419.0" />
+   </children>
+</Pane>
