@@ -86,7 +86,7 @@
             <Font name="Tahoma" size="18.0" />
          </font>
       </TextField>
-      <Button fx:id="Avancar" layoutX="506.0" layoutY="382.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="262.0" style="-fx-background-radius: 10;" text="Avançar">
+      <Button fx:id="Avancarcompra" layoutX="506.0" layoutY="382.0" mnemonicParsing="false" onAction="#confirmarcliente" prefHeight="35.0" prefWidth="262.0" style="-fx-background-radius: 10;" text="Avançar">
          <font>
             <Font name="Tahoma Bold" size="12.0" />
          </font>
@@ -94,10 +94,10 @@
       <TableView layoutX="465.0" layoutY="161.0" prefHeight="200.0" prefWidth="338.0">
         <columns>
           <TableColumn prefWidth="173.0" text="Nome" />
-          <TableColumn prefWidth="179.0" text="CPF" />
+          <TableColumn fx:id="tabela2" prefWidth="179.0" text="CPF" />
         </columns>
       </TableView>
-      <Button fx:id="pesquisar" layoutX="830.0" layoutY="113.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" style="-fx-background-radius: 10;" text="Pesquisar">
+      <Button fx:id="pesquisarcliente" layoutX="830.0" layoutY="113.0" mnemonicParsing="false" onAction="#pesquisar" prefHeight="25.0" prefWidth="80.0" style="-fx-background-radius: 10;" text="Pesquisar">
          <font>
             <Font name="Tahoma Bold" size="12.0" />
          </font>

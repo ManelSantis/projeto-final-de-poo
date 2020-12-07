@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="742.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ConLocal">
+   <children>
+      <Label layoutX="335.0" layoutY="32.0" text="Editar">
+         <font>
+            <Font name="Tahoma Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="cancelar" layoutX="626.0" layoutY="447.0" mnemonicParsing="false" onAction="#cancelared" onMouseClicked="#estoque" prefHeight="32.0" prefWidth="102.0" style="-fx-background-radius: 10px;" text="Cancelar">
+         <font>
+            <Font name="Tahoma Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="confirmar" layoutX="510.0" layoutY="447.0" mnemonicParsing="false" onAction="#confirmared" onMouseClicked="#estoque" style="-fx-background-radius: 10px;" text="Confirmar">
+         <font>
+            <Font name="Tahoma Bold" size="16.0" />
+         </font>
+      </Button>
+      <Label layoutX="310.0" layoutY="91.0" prefHeight="18.0" prefWidth="95.0" text="Responsavel">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="314.0" layoutY="162.0" prefHeight="17.0" prefWidth="43.0" text="ID">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="309.0" layoutY="125.0" prefHeight="25.0" prefWidth="419.0" />
+      <TextField layoutX="309.0" layoutY="187.0" prefHeight="25.0" prefWidth="419.0" />
+      <Label layoutX="309.0" layoutY="229.0" text="Localização">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="309.0" layoutY="249.0" prefHeight="25.0" prefWidth="102.0" />
+      <ImageView fitHeight="100.0" fitWidth="300.0" layoutX="-99.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" rotate="-45.0">
+         <image>
+            <Image url="@bar.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

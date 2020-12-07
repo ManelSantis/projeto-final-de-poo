@@ -158,4 +158,29 @@ public class Telas extends Application {
 		Scene cena = new Scene(root);
 		primaryStage.setScene(cena);
 	}
+	public static void telaLocalCadastro() throws Exception{
+		Parent root = FXMLLoader.load(Telas.class.getResource("VE/telaLocalCadastro.fxml"));
+		Scene cena = new Scene(root);
+		primaryStage.setScene(cena);
+	}
+	public static void telaLocalEditar() throws Exception{
+		Parent root = FXMLLoader.load(Telas.class.getResource("VE/telaLocalEditar.fxml"));
+		Scene cena = new Scene(root);
+		primaryStage.setScene(cena);
+	}
+	public static void telaLocalInicio() throws Exception{
+		Parent root = FXMLLoader.load(Telas.class.getResource("VE/telaLocalInicio.fxml"));
+		Scene cena = new Scene(root);
+		primaryStage.setScene(cena);
+	}
+	public static void telaLocalListar() throws Exception{
+		Parent root = FXMLLoader.load(Telas.class.getResource("VE/telaLocalListar.fxml"));
+		Scene cena = new Scene(root);
+		primaryStage.setScene(cena);
+	}
+	public static void telaLocalExcluir() throws Exception{
+		Parent root = FXMLLoader.load(Telas.class.getResource("VE/telaLocalExcluir.fxml"));
+		Scene cena = new Scene(root);
+		primaryStage.setScene(cena);
+	}
 }
