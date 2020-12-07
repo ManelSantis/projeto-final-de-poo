@@ -16,13 +16,13 @@ public class ConMenu {
 	}
 	
 	public void vender (MouseEvent e) throws Exception{
-		Telas.telaVender();
+		Telas.telaVendaInicio();
 	}
 	public void relatorio (MouseEvent e) throws Exception{
 		Telas.telaRelatorio();
 	}
 	public void cadastro (MouseEvent e) throws Exception{
-		Telas.telaCadastro();
+		Telas.telaCadastroInicio();
 	}
 	public void sair (MouseEvent e) throws Exception{
 		Telas.telaLogin();

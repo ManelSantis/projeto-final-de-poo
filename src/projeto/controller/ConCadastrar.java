@@ -3,22 +3,17 @@ package projeto.controller;
 import javafx.scene.input.MouseEvent;//como os botões do menu são labels, tem que usar o MouseEvent
 import projeto.view.Telas;
 
-public class ConCadastrar {
+public class ConCadastrar extends ConMenu{
 	public void inicio (MouseEvent e) throws Exception{
 		Telas.telaInicio();
 	}
-	public void estoque (MouseEvent e) throws Exception{
-		
+	public void cliente (MouseEvent e) throws Exception{
+		Telas.telaClienteInicio();
 	}
-	public void vender (MouseEvent e) throws Exception{
-		
+	public void responsavel (MouseEvent e) throws Exception{
+		Telas.telaResponsavelInicio();
 	}
-	public void relatorio (MouseEvent e) throws Exception{
 	
-	}
-	public void cadastro (MouseEvent e) throws Exception{
-		
-	}
 	public void sair (MouseEvent e) throws Exception{
 		Telas.telaLogin();
 	}
