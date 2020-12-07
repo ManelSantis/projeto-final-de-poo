@@ -9,103 +9,104 @@
 
 <Pane style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ConCadastrar">
    <children>
-      <Pane style="-fx-background-color: white;">
-         <children>
-            <ImageView fitHeight="600.0" fitWidth="1000.0" pickOnBounds="true" smooth="false">
-               <image>
-                  <Image url="@bar_menu.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="usuario1" layoutX="100.0" layoutY="143.0" text="Label" visible="false" />
-            <Label fx:id="inicio" alignment="CENTER" layoutY="165.0" onMouseClicked="#inicio" prefHeight="37.0" prefWidth="227.0" style="-fx-background-color: B5D6DD;" text="Inicio">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font name="Tahoma Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label fx:id="relatorio" alignment="CENTER" layoutY="357.0" onMouseClicked="#relatorio" prefHeight="37.0" prefWidth="227.0" style="-fx-background-color: B5D6DD;" text="Relatorio">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font name="Tahoma Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label fx:id="cadastro" alignment="CENTER" layoutY="405.0" onMouseClicked="#cadastro" prefHeight="37.0" prefWidth="227.0" style="-fx-background-color: B5D6DD;" text="Cadastro">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font name="Tahoma Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label fx:id="sair" alignment="CENTER" layoutY="453.0" onMouseClicked="#sair" prefHeight="37.0" prefWidth="227.0" style="-fx-background-color: B5D6DD;" text="Sair">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font name="Tahoma Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label fx:id="vender" alignment="CENTER" layoutY="309.0" onMouseClicked="#vender" prefHeight="37.0" prefWidth="227.0" style="-fx-background-color: B5D6DD;" text="Vender">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font name="Tahoma Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label fx:id="local" alignment="CENTER" layoutY="261.0" onMouseClicked="#local" prefHeight="37.0" prefWidth="227.0" style="-fx-background-color: B5D6DD;" text="Local">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font name="Tahoma Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label fx:id="estoque" alignment="CENTER" layoutY="213.0" onMouseClicked="#estoque" prefHeight="37.0" prefWidth="227.0" style="-fx-background-color: B5D6DD;" text="Estoque">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font name="Tahoma Bold" size="12.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <Label fx:id="usuario" layoutX="100.0" layoutY="143.0" text="Label" visible="false" />
-      <Label layoutX="548.0" layoutY="32.0" text="Responsavel">
+      <ImageView fitHeight="600.0" fitWidth="1000.0" pickOnBounds="true" smooth="false">
+         <image>
+            <Image url="@bar_menu.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="usuario1" layoutX="100.0" layoutY="143.0" text="Label" visible="false" />
+      <Label fx:id="inicio" alignment="CENTER" layoutY="165.0" onMouseClicked="#inicio" prefHeight="37.0" prefWidth="227.0" style="-fx-background-color: B5D6DD;" text="Inicio">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Tahoma Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="relatorio" alignment="CENTER" layoutY="357.0" onMouseClicked="#relatorio" prefHeight="37.0" prefWidth="227.0" style="-fx-background-color: B5D6DD;" text="Relatorio">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Tahoma Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="cadastro" alignment="CENTER" layoutY="405.0" onMouseClicked="#cadastro" prefHeight="37.0" prefWidth="227.0" style="-fx-background-color: B5D6DD;" text="Cadastro">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Tahoma Bold" size="12.0" />
+         </font>
+         <graphic>
+            <Label fx:id="usuario" text="Label" visible="false" />
+         </graphic>
+      </Label>
+      <Label fx:id="sair" alignment="CENTER" layoutY="453.0" onMouseClicked="#sair" prefHeight="37.0" prefWidth="227.0" style="-fx-background-color: B5D6DD;" text="Sair">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Tahoma Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="vender" alignment="CENTER" layoutY="309.0" onMouseClicked="#vender" prefHeight="37.0" prefWidth="227.0" style="-fx-background-color: B5D6DD;" text="Vender">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Tahoma Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="local" alignment="CENTER" layoutY="261.0" onMouseClicked="#local" prefHeight="37.0" prefWidth="227.0" style="-fx-background-color: B5D6DD;" text="Local">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Tahoma Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="estoque" alignment="CENTER" layoutY="213.0" onMouseClicked="#estoque" prefHeight="37.0" prefWidth="227.0" style="-fx-background-color: B5D6DD;" text="Estoque">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Tahoma Bold" size="12.0" />
+         </font>
+      </Label>
+      <Button fx:id="Cadastrar" layoutX="677.0" layoutY="459.0" mnemonicParsing="false" onAction="#cadastroResponsavel" prefHeight="25.0" prefWidth="91.0" style="-fx-background-radius: 10;" text="Cadastrar">
+         <font>
+            <Font name="Tahoma Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="Editar1" layoutX="895.0" layoutY="460.0" mnemonicParsing="false" onAction="#excluirResponsavel" prefHeight="25.0" prefWidth="91.0" style="-fx-background-radius: 10;" text="Excluir">
+         <font>
+            <Font name="Tahoma Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="Editar" layoutX="787.0" layoutY="460.0" mnemonicParsing="false" onAction="#editarResponsavel" prefHeight="25.0" prefWidth="91.0" style="-fx-background-radius: 10;" text="Editar">
+         <font>
+            <Font name="Tahoma Bold" size="12.0" />
+         </font>
+      </Button>
+      <TableView layoutX="377.0" layoutY="185.0" prefHeight="249.0" prefWidth="601.0">
+         <columns>
+            <TableColumn prefWidth="247.0" text="Nome" />
+            <TableColumn prefWidth="178.0" text="CPF" />
+            <TableColumn prefWidth="174.0" text="Telefone" />
+         </columns>
+      </TableView>
+      <Button fx:id="Pesquisar" layoutX="895.0" layoutY="143.0" mnemonicParsing="false" onAction="#pesquisa" prefHeight="25.0" prefWidth="80.0" text="Pesquisar">
+         <font>
+            <Font name="Tahoma Bold" size="12.0" />
+         </font>
+      </Button>
+      <TextField layoutX="377.0" layoutY="143.0" prefHeight="25.0" prefWidth="340.0" promptText="Pesquisar" />
+      <ComboBox layoutX="728.0" layoutY="143.0" prefWidth="150.0" />
+      <Label layoutX="564.0" layoutY="55.0" text="Responsavel">
          <font>
             <Font name="Tahoma Bold" size="36.0" />
          </font>
       </Label>
-      <TextField fx:id="CPF" layoutX="465.0" layoutY="108.0" prefHeight="17.0" prefWidth="338.0" promptText="CPF">
-         <font>
-            <Font name="Tahoma" size="18.0" />
-         </font>
-      </TextField>
-      <Button fx:id="Cadastrar" layoutX="677.0" layoutY="382.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" style="-fx-background-radius: 10;" text="Cadastrar">
-         <font>
-            <Font name="Tahoma Bold" size="12.0" />
-         </font>
-      </Button>
-      <TableView layoutX="465.0" layoutY="161.0" prefHeight="200.0" prefWidth="338.0">
-        <columns>
-          <TableColumn prefWidth="173.0" text="Nome" />
-          <TableColumn prefWidth="179.0" text="CPF" />
-        </columns>
-      </TableView>
-      <Button fx:id="Editar" layoutX="509.0" layoutY="382.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" style="-fx-background-radius: 10;" text="Editar">
-         <font>
-            <Font name="Tahoma Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button layoutX="830.0" layoutY="113.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Pesquisar">
-         <font>
-            <Font name="Tahoma Bold" size="12.0" />
-         </font>
-      </Button>
    </children>
 </Pane>

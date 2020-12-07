@@ -13,62 +13,68 @@
             <Font name="Tahoma Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="cancelar" layoutX="626.0" layoutY="447.0" mnemonicParsing="false" onMouseClicked="#estoque" prefHeight="32.0" prefWidth="102.0" style="-fx-background-radius: 10px;" text="Cancelar">
+      <Button fx:id="cancelar" layoutX="626.0" layoutY="447.0" mnemonicParsing="false" onAction="#cliente" onMouseClicked="#estoque" prefHeight="32.0" prefWidth="102.0" style="-fx-background-radius: 10px;" text="Cancelar">
          <font>
             <Font name="Tahoma Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="confirmar" layoutX="510.0" layoutY="447.0" mnemonicParsing="false" onMouseClicked="#estoque" style="-fx-background-radius: 10px;" text="Confirmar">
+      <Button fx:id="confirmar" layoutX="510.0" layoutY="447.0" mnemonicParsing="false" onAction="#cliente" onMouseClicked="#estoque" style="-fx-background-radius: 10px;" text="Confirmar">
          <font>
             <Font name="Tahoma Bold" size="16.0" />
          </font>
       </Button>
-      <Label layoutX="309.0" layoutY="175.0" prefHeight="17.0" prefWidth="43.0" text="Rua">
+      <Label layoutX="184.0" layoutY="214.0" prefHeight="17.0" prefWidth="43.0" text="Rua">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="309.0" layoutY="68.0" prefHeight="17.0" prefWidth="43.0" text="Nome">
+      <Label layoutX="184.0" layoutY="107.0" prefHeight="17.0" prefWidth="43.0" text="Nome">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="309.0" layoutY="126.0" prefHeight="17.0" prefWidth="43.0" text="CPF">
+      <Label layoutX="184.0" layoutY="165.0" prefHeight="17.0" prefWidth="43.0" text="CPF">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="309.0" layoutY="274.0" prefHeight="17.0" prefWidth="102.0" text="Bairro">
+      <Label layoutX="184.0" layoutY="267.0" prefHeight="17.0" prefWidth="102.0" text="Bairro">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="309.0" layoutY="97.0" prefHeight="25.0" prefWidth="419.0" />
-      <TextField layoutX="309.0" layoutY="150.0" prefHeight="25.0" prefWidth="419.0" />
-      <TextField layoutX="309.0" layoutY="201.0" prefHeight="25.0" prefWidth="419.0" />
-      <TextField layoutX="309.0" layoutY="292.0" prefHeight="25.0" prefWidth="160.0" />
-      <Label layoutX="309.0" layoutY="228.0" text="Número">
+      <TextField layoutX="184.0" layoutY="136.0" prefHeight="25.0" prefWidth="419.0" />
+      <TextField layoutX="184.0" layoutY="189.0" prefHeight="25.0" prefWidth="199.0" />
+      <TextField layoutX="184.0" layoutY="240.0" prefHeight="25.0" prefWidth="316.0" />
+      <TextField layoutX="184.0" layoutY="288.0" prefHeight="25.0" prefWidth="128.0" />
+      <Label layoutX="519.0" layoutY="214.0" text="Número">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="309.0" layoutY="249.0" prefHeight="25.0" prefWidth="102.0" />
-      <Label layoutX="309.0" layoutY="325.0" text="Cidade">
+      <TextField layoutX="519.0" layoutY="240.0" prefHeight="25.0" prefWidth="85.0" />
+      <Label layoutX="330.0" layoutY="267.0" text="Cidade">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="309.0" layoutY="345.0" prefHeight="25.0" prefWidth="150.0" />
-      <Label layoutX="309.0" layoutY="377.0" text="Complemento">
-         <font>
-            <Font name="Tahoma" size="14.0" />
-         </font>
-      </Label>
-      <TextField layoutX="310.0" layoutY="401.0" prefHeight="25.0" prefWidth="278.0" />
+      <TextField layoutX="330.0" layoutY="288.0" prefHeight="25.0" prefWidth="128.0" />
       <ImageView fitHeight="100.0" fitWidth="300.0" layoutX="-99.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" rotate="-45.0">
          <image>
             <Image url="@bar.png" />
          </image>
       </ImageView>
+      <Label layoutX="401.0" layoutY="165.0" prefHeight="18.0" prefWidth="63.0" text="Telefone">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="401.0" layoutY="189.0" prefHeight="25.0" prefWidth="205.0" />
+      <TextField layoutX="475.0" layoutY="288.0" prefHeight="25.0" prefWidth="128.0" />
+      <Label layoutX="475.0" layoutY="267.0" text="Estado">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
