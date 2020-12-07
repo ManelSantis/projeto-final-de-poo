@@ -12,11 +12,11 @@ public class ConMenu {
 	}
 	
 	public void local (MouseEvent e) throws Exception{
-		Telas.telaLocalInicio();
+		Telas.telaLocal();
 	}
 	
 	public void vender (MouseEvent e) throws Exception{
-		Telas.telaVendaInicio();
+		Telas.telaVenda();
 	}
 	public void relatorio (MouseEvent e) throws Exception{
 		Telas.telaRelatorio();
