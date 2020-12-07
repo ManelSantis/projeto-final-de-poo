@@ -72,7 +72,7 @@
             <TableColumn fx:id="tabela" minWidth="0.0" prefWidth="86.0" text="Preço" />
         </columns>
       </TableView>
-      <TextField layoutX="389.0" layoutY="86.0" prefHeight="25.0" prefWidth="341.0" promptText="Pesquisar" />
+      <TextField layoutX="389.0" layoutY="86.0" prefHeight="25.0" prefWidth="319.0" promptText="Pesquisar" />
       <Button fx:id="OK" layoutX="909.0" layoutY="86.0" mnemonicParsing="false" onAction="#pesquisar" prefHeight="25.0" prefWidth="52.0" style="-fx-background-radius: 10px;" text="Ok">
          <font>
             <Font name="Tahoma Bold" size="11.0" />
@@ -81,7 +81,7 @@
             <Cursor fx:constant="HAND" />
          </cursor></Button>
       <ComboBox layoutX="747.0" layoutY="86.0" prefWidth="150.0" />
-      <Button fx:id="Avançar" layoutX="800.0" layoutY="459.0" mnemonicParsing="false" onAction="#telaVendaCliente" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10px;" text="Avançar">
+      <Button fx:id="confirmar" layoutX="811.0" layoutY="459.0" mnemonicParsing="false" onAction="#confirmar" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10px;" text="Confirmar">
          <font>
             <Font name="Tahoma Bold" size="11.0" />
          </font>
@@ -89,7 +89,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label layoutX="608.0" layoutY="28.0" text="Venda">
+      <Label layoutX="618.0" layoutY="29.0" text="Venda">
          <font>
             <Font name="Tahoma Bold" size="36.0" />
          </font>
@@ -102,5 +102,21 @@
             <Font name="Tahoma Bold" size="12.0" />
          </font>
       </Label>
+      <Button fx:id="carrinho" layoutX="388.0" layoutY="459.0" mnemonicParsing="false" onAction="#verCarrinho" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10px;" text="Carrinho">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Tahoma Bold" size="11.0" />
+         </font>
+      </Button>
+      <Button fx:id="adicionar" layoutX="560.0" layoutY="459.0" mnemonicParsing="false" onAction="#adicionarCarrinho" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10px;" text="Adicionar no Carrinho">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Tahoma Bold" size="11.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

@@ -8,73 +8,67 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="742.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ConVender">
    <children>
-      <Label layoutX="307.0" layoutY="32.0" text="Compra Nº">
-         <font>
-            <Font name="Tahoma" size="14.0" />
-         </font>
-      </Label>
-      <Button fx:id="cancelarpedido" layoutX="626.0" layoutY="447.0" mnemonicParsing="false" onAction="#cancelarpedido" onMouseClicked="#estoque" prefHeight="32.0" prefWidth="102.0" style="-fx-background-radius: 10px;" text="Cancelar">
+      <Button fx:id="cancelarpedido" layoutX="626.0" layoutY="447.0" mnemonicParsing="false" onAction="#cancelarVenda" onMouseClicked="#estoque" prefHeight="32.0" prefWidth="102.0" style="-fx-background-radius: 10px;" text="Cancelar">
          <font>
             <Font name="Tahoma Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="confirmarpedido" layoutX="510.0" layoutY="447.0" mnemonicParsing="false" onAction="#confirmarpedido" onMouseClicked="#estoque" style="-fx-background-radius: 10px;" text="Confirmar">
+      <Button fx:id="confirmarpedido" layoutX="510.0" layoutY="447.0" mnemonicParsing="false" onAction="#confirmarVenda" onMouseClicked="#estoque" style="-fx-background-radius: 10px;" text="Confirmar">
          <font>
             <Font name="Tahoma Bold" size="16.0" />
          </font>
       </Button>
-      <Label layoutX="309.0" layoutY="175.0" prefHeight="17.0" prefWidth="43.0" text="Rua">
+      <Label layoutX="93.0" layoutY="105.0" prefHeight="18.0" prefWidth="85.0" text="NomeCliente">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="309.0" layoutY="68.0" prefHeight="17.0" prefWidth="43.0" text="Nome">
+      <Label layoutX="92.0" layoutY="138.0" prefHeight="17.0" prefWidth="43.0" text="CPF">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="309.0" layoutY="126.0" prefHeight="17.0" prefWidth="43.0" text="CPF">
+      <Label layoutX="92.0" layoutY="171.0" text="Endereco">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="309.0" layoutY="274.0" prefHeight="17.0" prefWidth="102.0" text="Bairro">
-         <font>
-            <Font name="Tahoma" size="14.0" />
-         </font>
-      </Label>
-      <TextField layoutX="309.0" layoutY="97.0" prefHeight="25.0" prefWidth="419.0" />
-      <TextField layoutX="309.0" layoutY="150.0" prefHeight="25.0" prefWidth="419.0" />
-      <TextField layoutX="309.0" layoutY="201.0" prefHeight="25.0" prefWidth="419.0" />
-      <TextField layoutX="309.0" layoutY="292.0" prefHeight="25.0" prefWidth="160.0" />
-      <Label layoutX="309.0" layoutY="228.0" text="Número">
-         <font>
-            <Font name="Tahoma" size="14.0" />
-         </font>
-      </Label>
-      <TextField layoutX="309.0" layoutY="249.0" prefHeight="25.0" prefWidth="102.0" />
-      <Label layoutX="309.0" layoutY="325.0" text="Cidade">
-         <font>
-            <Font name="Tahoma" size="14.0" />
-         </font>
-      </Label>
-      <TextField layoutX="309.0" layoutY="345.0" prefHeight="25.0" prefWidth="150.0" />
-      <Label layoutX="309.0" layoutY="377.0" text="Complemento">
-         <font>
-            <Font name="Tahoma" size="14.0" />
-         </font>
-      </Label>
-      <TextField layoutX="310.0" layoutY="401.0" prefHeight="25.0" prefWidth="278.0" />
       <ImageView fitHeight="100.0" fitWidth="300.0" layoutX="-99.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" rotate="-45.0">
          <image>
             <Image url="@bar.png" />
          </image>
       </ImageView>
-      <TextField layoutX="390.0" layoutY="29.0" prefHeight="25.0" prefWidth="119.0" />
-      <TextField layoutX="384.0" layoutY="435.0" prefHeight="25.0" prefWidth="102.0" />
-      <Label layoutX="309.0" layoutY="439.0" text="Quantidade:">
+      <Label layoutX="266.0" layoutY="36.0" prefHeight="52.0" prefWidth="211.0" text="Confirmar Venda">
          <font>
-            <Font name="Tahoma" size="12.0" />
+            <Font name="Tahoma Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="411.0" layoutY="138.0" prefHeight="17.0" prefWidth="43.0" text="CPF">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="411.0" layoutY="105.0" prefHeight="18.0" prefWidth="132.0" text="NomeResponsavel">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Label>
+      <TableView layoutX="92.0" layoutY="202.0" prefHeight="199.0" prefWidth="559.0">
+         <columns>
+            <TableColumn prefWidth="75.0" text="Nº" />
+            <TableColumn prefWidth="184.0" text="Nome" />
+            <TableColumn prefWidth="197.0" text="Quantidade" />
+            <TableColumn fx:id="tabela" minWidth="0.0" prefWidth="102.0" text="Preço" />
+         </columns>
+      </TableView>
+      <Label layoutX="411.0" layoutY="171.0" text="Endereco">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="459.0" layoutY="409.0" prefHeight="18.0" prefWidth="102.0" text="Valor final">
+         <font>
+            <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
    </children>

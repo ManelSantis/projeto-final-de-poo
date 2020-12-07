@@ -73,34 +73,33 @@
                   <Font name="Tahoma Bold" size="12.0" />
                </font>
             </Label>
+            <Button fx:id="Avancarcompra" layoutX="567.0" layoutY="424.0" mnemonicParsing="false" onAction="#avancar" prefHeight="25.0" prefWidth="227.0" style="-fx-background-radius: 10;" text="Avançar">
+               <font>
+                  <Font name="Tahoma Bold" size="12.0" />
+               </font>
+            </Button>
+            <TableView layoutX="511.0" layoutY="167.0" prefHeight="242.0" prefWidth="338.0">
+              <columns>
+                <TableColumn prefWidth="173.0" text="Nome" />
+                <TableColumn fx:id="tabela2" prefWidth="179.0" text="CPF" />
+              </columns>
+            </TableView>
+            <Label layoutX="639.0" layoutY="56.0" text="Vender">
+               <font>
+                  <Font name="Tahoma Bold" size="36.0" />
+               </font>
+            </Label>
+            <TextField layoutX="511.0" layoutY="131.0" prefHeight="25.0" prefWidth="238.0" promptText="CPF" />
+            <Button fx:id="pesquisa" layoutX="770.0" layoutY="131.0" mnemonicParsing="false" onAction="#pesquisar" prefHeight="25.0" prefWidth="82.0" style="-fx-background-radius: 10px;" text="Pesquisar">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="Tahoma Bold" size="11.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Label fx:id="usuario" layoutX="100.0" layoutY="143.0" text="Label" visible="false" />
-      <Label layoutX="548.0" layoutY="32.0" text="Vender">
-         <font>
-            <Font name="Tahoma Bold" size="36.0" />
-         </font>
-      </Label>
-      <TextField fx:id="CPF" layoutX="465.0" layoutY="108.0" prefHeight="17.0" prefWidth="338.0" promptText="CPF">
-         <font>
-            <Font name="Tahoma" size="18.0" />
-         </font>
-      </TextField>
-      <Button fx:id="Avancarcompra" layoutX="506.0" layoutY="382.0" mnemonicParsing="false" onAction="#confirmarcliente" prefHeight="35.0" prefWidth="262.0" style="-fx-background-radius: 10;" text="Avançar">
-         <font>
-            <Font name="Tahoma Bold" size="12.0" />
-         </font>
-      </Button>
-      <TableView layoutX="465.0" layoutY="161.0" prefHeight="200.0" prefWidth="338.0">
-        <columns>
-          <TableColumn prefWidth="173.0" text="Nome" />
-          <TableColumn fx:id="tabela2" prefWidth="179.0" text="CPF" />
-        </columns>
-      </TableView>
-      <Button fx:id="pesquisarcliente" layoutX="830.0" layoutY="113.0" mnemonicParsing="false" onAction="#pesquisar" prefHeight="25.0" prefWidth="80.0" style="-fx-background-radius: 10;" text="Pesquisar">
-         <font>
-            <Font name="Tahoma Bold" size="12.0" />
-         </font>
-      </Button>
    </children>
 </Pane>
