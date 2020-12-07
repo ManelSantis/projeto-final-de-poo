@@ -11,7 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.input.MouseEvent;
 import projeto.view.Telas;
 
 public class ConEstoque extends ConMenu implements Initializable{
