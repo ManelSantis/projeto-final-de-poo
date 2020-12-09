@@ -5,9 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import projeto.model.vo.ResponsavelVO;
 
 public class Telas extends Application {
 	private static Stage primaryStage;
+	private static ResponsavelVO usuario;
 	
 	public static Stage getPrimaryStage() {
 		return primaryStage;
@@ -15,6 +17,14 @@ public class Telas extends Application {
 
 	public static void setPrimaryStage(Stage primaryStage) {
 		Telas.primaryStage = primaryStage;
+	}
+	
+	public static ResponsavelVO getUsuario() {
+		return usuario;
+	}
+
+	public static void setUsuario(ResponsavelVO usuario) {
+		Telas.usuario = usuario;
 	}
 	
 	public static void main(String ... args) {
@@ -34,6 +44,7 @@ public class Telas extends Application {
 		Parent root = FXMLLoader.load(Telas.class.getResource("VE/telaLogin.fxml"));
 		Scene cena = new Scene(root);
 		primaryStage.setScene(cena);
+		primaryStage.centerOnScreen();
 	}
 	////////////////////////////////////////////////////////////////////////////
 	
@@ -42,6 +53,7 @@ public class Telas extends Application {
 		Parent root = FXMLLoader.load(Telas.class.getResource("VE/telaInicio.fxml"));
 		Scene cena = new Scene(root);
 		primaryStage.setScene(cena);
+		primaryStage.centerOnScreen();
 	}	
 	////////////////////////////////////////////////////////////////////////////
 	
@@ -51,14 +63,19 @@ public class Telas extends Application {
 		Parent root = FXMLLoader.load(Telas.class.getResource("VE/telaEstoque.fxml"));
 		Scene cena = new Scene(root);
 		primaryStage.setScene(cena);
+		primaryStage.centerOnScreen();
 	}
 	////////////////////////////////////////////////////////////////////////////
 	
 	//TELAS DE PRODUTO//
 	public static void adicionarProduto() throws Exception{
+		Stage tela = new Stage();
 		Parent root = FXMLLoader.load(Telas.class.getResource("VE/adicionarProduto.fxml"));
 		Scene cena = new Scene(root);
-		primaryStage.setScene(cena);
+		tela.centerOnScreen();
+		tela.setResizable(false);
+		tela.setScene(cena);
+		tela.show();
 	}
 	
 	public static void editarProduto() throws Exception{
@@ -78,12 +95,14 @@ public class Telas extends Application {
 		Parent root = FXMLLoader.load(Telas.class.getResource("VE/telaVenda.fxml"));
 		Scene cena = new Scene(root);
 		primaryStage.setScene(cena);
+		primaryStage.centerOnScreen();
 	}
 	
 	public static void telaVendaCarrinho() throws Exception{
 		Parent root = FXMLLoader.load(Telas.class.getResource("VE/telaVendaCarrinho.fxml"));
 		Scene cena = new Scene(root);
 		primaryStage.setScene(cena);
+		primaryStage.centerOnScreen();
 	}
 	
 	public static void telaCarrinho() throws Exception{
@@ -99,10 +118,11 @@ public class Telas extends Application {
 	}
 	///////////////////////////////////////////////////////////////////////////
 	//TELA INICIAL DE CADASTRO//
-	public static void telaCadastroInicio() throws Exception{
-		Parent root = FXMLLoader.load(Telas.class.getResource("VE/telaCadastroInicio.fxml"));
+	public static void telaPessoaInicio() throws Exception{
+		Parent root = FXMLLoader.load(Telas.class.getResource("VE/telaPessoaInicio.fxml"));
 		Scene cena = new Scene(root);
 		primaryStage.setScene(cena);
+		primaryStage.centerOnScreen();
 	}
 	////////////////////////////////////////////////////////////////////////////
 	//TELAS DE CLIENTE//
@@ -110,6 +130,7 @@ public class Telas extends Application {
 		Parent root = FXMLLoader.load(Telas.class.getResource("VE/telaClienteInicio.fxml"));
 		Scene cena = new Scene(root);
 		primaryStage.setScene(cena);
+		primaryStage.centerOnScreen();
 	}
 	
 	public static void telaClienteCadastrar() throws Exception{
@@ -136,6 +157,7 @@ public class Telas extends Application {
 		Parent root = FXMLLoader.load(Telas.class.getResource("VE/telaResponsavelInicio.fxml"));
 		Scene cena = new Scene(root);
 		primaryStage.setScene(cena);
+		primaryStage.centerOnScreen();
 	}
 	
 	public static void telaResponsavelCadastrar() throws Exception{
@@ -161,6 +183,7 @@ public class Telas extends Application {
 		Parent root = FXMLLoader.load(Telas.class.getResource("VE/telaRelatorio.fxml"));
 		Scene cena = new Scene(root);
 		primaryStage.setScene(cena);
+		primaryStage.centerOnScreen();
 	}
 	////////////////////////////////////////////////////////////////////////////
 	//TELAS DE LOCAL//
@@ -188,4 +211,5 @@ public class Telas extends Application {
 		primaryStage.setScene(cena);
 	}
 	////////////////////////////////////////////////////////////////////////////
+
 }

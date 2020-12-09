@@ -43,28 +43,28 @@
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="184.0" layoutY="136.0" prefHeight="25.0" prefWidth="419.0" />
-      <TextField layoutX="184.0" layoutY="189.0" prefHeight="25.0" prefWidth="199.0" />
-      <TextField layoutX="184.0" layoutY="240.0" prefHeight="25.0" prefWidth="316.0" />
-      <TextField layoutX="184.0" layoutY="288.0" prefHeight="25.0" prefWidth="128.0" />
+      <TextField fx:id="nome" layoutX="184.0" layoutY="136.0" prefHeight="25.0" prefWidth="419.0" />
+      <TextField fx:id="cpf" layoutX="184.0" layoutY="189.0" prefHeight="25.0" prefWidth="199.0" />
+      <TextField fx:id="rua" layoutX="184.0" layoutY="240.0" prefHeight="25.0" prefWidth="316.0" />
+      <TextField fx:id="bairro" layoutX="184.0" layoutY="288.0" prefHeight="25.0" prefWidth="128.0" />
       <Label layoutX="519.0" layoutY="214.0" text="Número">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="519.0" layoutY="240.0" prefHeight="25.0" prefWidth="85.0" />
+      <TextField fx:id="numero" layoutX="519.0" layoutY="240.0" prefHeight="25.0" prefWidth="85.0" />
       <Label layoutX="330.0" layoutY="267.0" text="Cidade">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="330.0" layoutY="288.0" prefHeight="25.0" prefWidth="128.0" />
+      <TextField fx:id="cidade" layoutX="330.0" layoutY="288.0" prefHeight="25.0" prefWidth="128.0" />
       <Label layoutX="184.0" layoutY="319.0" text="Usuário">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="183.0" layoutY="343.0" prefHeight="25.0" prefWidth="205.0" />
+      <TextField fx:id="usuario" layoutX="183.0" layoutY="343.0" prefHeight="25.0" prefWidth="205.0" />
       <ImageView fitHeight="100.0" fitWidth="300.0" layoutX="-99.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" rotate="-45.0">
          <image>
             <Image url="@bar.png" />
@@ -75,14 +75,14 @@
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="401.0" layoutY="189.0" prefHeight="25.0" prefWidth="205.0" />
-      <TextField layoutX="475.0" layoutY="288.0" prefHeight="25.0" prefWidth="128.0" />
+      <TextField fx:id="telefone" layoutX="401.0" layoutY="189.0" prefHeight="25.0" prefWidth="205.0" />
+      <TextField fx:id="estado" layoutX="475.0" layoutY="288.0" prefHeight="25.0" prefWidth="128.0" />
       <Label layoutX="475.0" layoutY="267.0" text="Estado">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="400.0" layoutY="343.0" prefHeight="25.0" prefWidth="205.0" />
+      <TextField fx:id="senha" layoutX="400.0" layoutY="343.0" prefHeight="25.0" prefWidth="205.0" />
       <Label layoutX="401.0" layoutY="319.0" text="Senha">
          <font>
             <Font name="Tahoma" size="14.0" />

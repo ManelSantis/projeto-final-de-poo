@@ -33,7 +33,7 @@
                   <Font name="Tahoma Bold" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="cadastro" alignment="CENTER" layoutY="405.0" onMouseClicked="#cadastro" prefHeight="37.0" prefWidth="227.0" style="-fx-background-color: B5D6DD;" text="Cadastro">
+            <Label fx:id="cadastro" alignment="CENTER" layoutY="405.0" onMouseClicked="#pessoa" prefHeight="37.0" prefWidth="227.0" style="-fx-background-color: B5D6DD;" text="Pessoa">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
