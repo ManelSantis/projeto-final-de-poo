@@ -7,4 +7,5 @@ public interface ClienteInterDAO {
 	public ResultSet historicoCompras(ClienteVO cliente);
 	public ResultSet listar();
 	public ResultSet findByIdPessoa(ClienteVO cliente);
+	public ResultSet findByCpf(String cpf);
 }

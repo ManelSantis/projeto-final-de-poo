@@ -16,14 +16,11 @@ public class ClienteBO implements ClienteInterBO {
 	}
 
 	public void editar(ClienteVO cliente) {
-		// Será pesquisado no bd o ClienteVO parametrizado
-		// usando ClienteDAO, então irá abrir a pagina de edição
-		// para depois ser dado um update no banco de dados
+		cli.editar(cliente);
 	}
 
 	public void excluir(ClienteVO cliente) {
-		// Será pesquisado no banco de dados o ClienteVO parametrizado
-		// usando o ClienteDAO para então poder ser excluido do banco de dados
+		cli.excluir(cliente);
 	}
 
 	
@@ -46,6 +43,50 @@ public class ClienteBO implements ClienteInterBO {
 			e.printStackTrace();
 		}
 		
+		return clientes;
+	}
+	
+	public ArrayList<ClienteVO> nomes(ClienteVO cliente){
+		ResultSet rs = cli.findByName(cliente);
+		ArrayList<ClienteVO> clientes = new ArrayList<ClienteVO>();
+		
+		try {
+			while (rs.next()) {
+				ClienteVO aux = new ClienteVO();
+				aux.setNome(rs.getString("nome"));
+				aux.setCpf(rs.getString("cpf"));
+				aux.setTelefone(rs.getString("telefone"));
+				aux.setId(rs.getLong("idcliente"));
+				aux.setIdPessoa(rs.getLong("idpessoa"));
+				clientes.add(aux);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return clientes;
+	}
+	
+	public ArrayList<ClienteVO> cpfs(String cpf){
+		// Como tem uma verificação ao adicionar o cpf em um objeto
+		// então achamos melhor por variavel aqui
+		ResultSet rs = cli.findByCpf(cpf);
+		ArrayList<ClienteVO> clientes = new ArrayList<ClienteVO>();
+		
+		try {
+			while (rs.next()) {
+				ClienteVO aux = new ClienteVO();
+				aux.setNome(rs.getString("nome"));
+				aux.setCpf(rs.getString("cpf"));
+				aux.setTelefone(rs.getString("telefone"));
+				aux.setId(rs.getLong("idcliente"));
+				aux.setIdPessoa(rs.getLong("idpessoa"));
+				clientes.add(aux);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return clientes;
 	}
 	

@@ -7,19 +7,21 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import projeto.model.bo.ClienteBO;
 import projeto.model.bo.ResponsavelBO;
 import projeto.model.vo.ClienteVO;
-import projeto.model.vo.PessoaVO;
 import projeto.model.vo.ResponsavelVO;
 import projeto.view.Telas;
 
 public class ConCadastrar extends ConMenu implements Initializable {
 	private static ResponsavelVO respEditavel; //objeto responsavel que será usado para editar
 	private static boolean editarResp; //se for true, irá editar responsavel
+	private static boolean deletarResp;
 	private static ClienteVO cliEditavel; //objeto cliente que será usado para editar
 	private static boolean editarCli; //se for true, irá editar cliente
+	private static boolean deletarCli;
 	
 	@FXML
 	private TextField senha;
@@ -45,18 +47,18 @@ public class ConCadastrar extends ConMenu implements Initializable {
 	private TextField usuario;
 	@FXML
 	private TextField rua;
+	@FXML
+	private Label NOME;
+	@FXML
+	private Label CPF;
 	
 
 	public void cliente(ActionEvent e) throws Exception {
 		Telas.telaClienteInicio();
-		setEditarCli(false);
-		setEditarResp(false);
 	}
 
 	public void responsavel(ActionEvent e) throws Exception {
 		Telas.telaResponsavelInicio();
-		setEditarCli(false);
-		setEditarResp(false);
 	}
 
 	public void cadastrarResp() throws Exception {
@@ -112,20 +114,101 @@ public class ConCadastrar extends ConMenu implements Initializable {
 		estado.setText(enderecoCompleto[4]);
 	}
 	
-	public void editar(PessoaVO pessoa) {
+	public void editar() {
 		if (usuario != null) {
+			ResponsavelBO aux = new ResponsavelBO();
+			respEditavel.setNome(nome.getText());
+			respEditavel.setCpf(cpf.getText());
+			respEditavel.setEndereco(estado.getText(), cidade.getText(), bairro.getText(), rua.getText(), numero.getText());
+			respEditavel.setTelefone(telefone.getText());
+			respEditavel.setUsuario(usuario.getText());
+			respEditavel.setSenha(senha.getText());
+			aux.editar(respEditavel);
 			
+			setEditarCli(false);
+			setEditarResp(false);
+			
+			try {
+				Telas.telaResponsavelInicio();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			ClienteBO aux = new ClienteBO();
+			cliEditavel.setNome(nome.getText());
+			cliEditavel.setCpf(cpf.getText());
+			cliEditavel.setEndereco(estado.getText(), cidade.getText(), bairro.getText(), rua.getText(), numero.getText());
+			cliEditavel.setTelefone(telefone.getText());
+			aux.editar(cliEditavel);
+			
+			setEditarCli(false);
+			setEditarResp(false);
+			
+			try {
+				Telas.telaClienteInicio();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
+	public void deletarResp() {
+		NOME.setText(respEditavel.getNome());
+		CPF.setText(respEditavel.getCpf());
+	}
+	
+	public void deletarCli() {
+		NOME.setText(cliEditavel.getNome());
+		CPF.setText(cliEditavel.getCpf());
+	}
+	
+	public void excluir() {
+		if (deletarResp) {
+			ResponsavelBO aux = new ResponsavelBO();
+			aux.excluir(respEditavel);
+			setDeletarResp(false);
+			setDeletarCli(false);
+			
+			try {
+				Telas.telaResponsavelInicio();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(deletarCli) {
+			ClienteBO aux = new ClienteBO();
+			aux.excluir(cliEditavel);
+			setDeletarResp(false);
+			setDeletarCli(false);
+			
+			try {
+				Telas.telaClienteInicio();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		//ao iniciar o controllador, verifica se o que está ocorrendo é uma edição de cliente ou responsavel
+		//ao iniciar o controllador, verifica se o que está ocorrendo é uma edição ou deleção de cliente ou responsavel
 		if (editarResp) {
 			editarResp();
 		}
 		if(editarCli) {
 			editarCli();
+		}
+		
+		if(deletarResp) {
+			deletarResp();
+		}
+		
+		if(deletarCli) {
+			deletarCli();
 		}
 	}
 
@@ -161,5 +244,21 @@ public class ConCadastrar extends ConMenu implements Initializable {
 
 	public static void setEditarCli(boolean editarCli) {
 		ConCadastrar.editarCli = editarCli;
+	}
+
+	public static boolean isDeletarResp() {
+		return deletarResp;
+	}
+
+	public static void setDeletarResp(boolean deletarResp) {
+		ConCadastrar.deletarResp = deletarResp;
+	}
+
+	public static boolean isDeletarCli() {
+		return deletarCli;
+	}
+
+	public static void setDeletarCli(boolean deletarCli) {
+		ConCadastrar.deletarCli = deletarCli;
 	}
 }

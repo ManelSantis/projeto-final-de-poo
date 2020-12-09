@@ -86,13 +86,13 @@
             <Font name="Tahoma Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="Pesquisar" layoutX="895.0" layoutY="143.0" mnemonicParsing="false" onAction="#pesquisa" prefHeight="25.0" prefWidth="80.0" text="Pesquisar">
+      <Button fx:id="pesquisar" layoutX="895.0" layoutY="143.0" mnemonicParsing="false" onAction="#pesquisa" prefHeight="25.0" prefWidth="80.0" text="Pesquisar">
          <font>
             <Font name="Tahoma Bold" size="12.0" />
          </font>
       </Button>
-      <TextField layoutX="377.0" layoutY="143.0" prefHeight="25.0" prefWidth="340.0" promptText="Pesquisar" />
-      <ComboBox layoutX="728.0" layoutY="143.0" prefWidth="150.0" />
+      <TextField fx:id="pesquisa" layoutX="377.0" layoutY="143.0" prefHeight="25.0" prefWidth="340.0" promptText="Pesquisar" />
+      <ComboBox fx:id="escolha" layoutX="728.0" layoutY="143.0" prefWidth="150.0" />
       <Label fx:id="tipo" layoutX="614.0" layoutY="50.0" text="Cliente">
          <font>
             <Font name="Tahoma Bold" size="36.0" />
@@ -110,5 +110,15 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </TableView>
+      <Button fx:id="voltar" layoutX="377.0" layoutY="459.0" mnemonicParsing="false" onAction="#voltar" prefHeight="25.0" prefWidth="91.0" style="-fx-background-radius: 10;" text="Voltar">
+         <font>
+            <Font name="Tahoma Bold" size="12.0" />
+         </font>
+      </Button>
+      <Label fx:id="mensagem" alignment="CENTER" contentDisplay="CENTER" layoutX="377.0" layoutY="168.0" prefHeight="14.0" prefWidth="601.0" text="Label" visible="false">
+         <font>
+            <Font name="Tahoma Bold" size="11.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

@@ -37,7 +37,7 @@ public class ClienteDAO extends PessoaDAO<ClienteVO> implements ClienteInterDAO{
 
 	public void excluir(ClienteVO cliente) {
 		//excluir um cliente por id
-		String sql = "delete from cliente where idresponsavel = ?";
+		String sql = "delete from cliente where idcliente = ?";
 		PreparedStatement ptst;
 		try {
 			ptst = getConnection().prepareStatement(sql);
@@ -91,14 +91,32 @@ public class ClienteDAO extends PessoaDAO<ClienteVO> implements ClienteInterDAO{
 	}
 
 	public ResultSet findByName(ClienteVO cliente) {
-		String sql = "select p.nome, p.cpf, p.telefone, p.endereco "
+		String sql = "select p.nome, p.cpf, p.telefone, p.endereco, c.idcliente, p.idpessoa "
 				+ "from pessoa as p, cliente as c "
-				+ "where p.idpessoa = c.idpessoa and nome like ?";
+				+ "where p.idpessoa = c.idpessoa and p.nome like ?";
 		PreparedStatement ptst;
 		ResultSet rs = null;
 		try {
 			ptst = getConnection().prepareStatement(sql);
 			ptst.setString(1, "%" + cliente.getNome() + "%");
+			rs = ptst.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return rs;
+	}
+	
+	public ResultSet findByCpf(String cpf) {
+		String sql = "select p.nome, p.cpf, p.telefone, p.endereco, c.idcliente, p.idpessoa "
+				+ "from pessoa as p, cliente as c "
+				+ "where p.idpessoa = c.idpessoa and p.cpf like ?";
+		PreparedStatement ptst;
+		ResultSet rs = null;
+		try {
+			ptst = getConnection().prepareStatement(sql);
+			ptst.setString(1, cpf + "%");
 			rs = ptst.executeQuery();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

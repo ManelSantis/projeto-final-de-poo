@@ -10,4 +10,5 @@ public interface ResponsavelInterDAO {
 	public ResultSet listar();
 	public ResultSet verEstoque(ResponsavelVO responsavel);
 	public boolean logar(ResponsavelVO responsavel);
+	public ResultSet findByCpf(String cpf);
 }

@@ -8,22 +8,22 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ConCadastrar">
    <children>
-      <Label layoutX="43.0" layoutY="80.0" text="Deseja mesmo excluir o seguinte cliente?">
+      <Label layoutX="54.0" layoutY="81.0" text="Deseja mesmo excluir o seguinte cliente?">
          <font>
             <Font name="Tahoma Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="254.0" layoutY="157.0" text="NomeCliente">
+      <Label fx:id="NOME" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" layoutY="158.0" text="NomeCliente">
          <font>
             <Font name="Tahoma" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="285.0" layoutY="200.0" text="CPF">
+      <Label fx:id="CPF" alignment="CENTER" contentDisplay="CENTER" layoutX="285.0" layoutY="200.0" text="CPF" textOverrun="CLIP">
          <font>
             <Font name="Tahoma" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="confirmar" layoutX="367.0" layoutY="353.0" mnemonicParsing="false" onAction="#cliente" style="-fx-background-radius: 10px;" text="Confirmar">
+      <Button fx:id="confirmar" layoutX="367.0" layoutY="353.0" mnemonicParsing="false" onAction="#excluir" style="-fx-background-radius: 10px;" text="Confirmar">
          <font>
             <Font name="Tahoma Bold" size="16.0" />
          </font>

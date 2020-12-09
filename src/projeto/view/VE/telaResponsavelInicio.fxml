@@ -31,16 +31,13 @@
             <Font name="Tahoma Bold" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="pessoa" alignment="CENTER" contentDisplay="CENTER" layoutY="405.0" onMouseClicked="#pessoa" prefHeight="37.0" prefWidth="227.0" style="-fx-background-color: B5D6DD;" text="Pessoa">
+      <Label fx:id="cadastro" alignment="CENTER" layoutY="405.0" onMouseClicked="#pessoa" prefHeight="37.0" prefWidth="227.0" style="-fx-background-color: B5D6DD;" text="Pessoa">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <font>
             <Font name="Tahoma Bold" size="12.0" />
          </font>
-         <graphic>
-            <Label fx:id="usuario" text="Label" visible="false" />
-         </graphic>
       </Label>
       <Label fx:id="sair" alignment="CENTER" layoutY="453.0" onMouseClicked="#sair" prefHeight="37.0" prefWidth="227.0" style="-fx-background-color: B5D6DD;" text="Sair">
          <cursor>
@@ -74,7 +71,7 @@
             <Font name="Tahoma Bold" size="12.0" />
          </font>
       </Label>
-      <Button fx:id="cadastrar" layoutX="677.0" layoutY="459.0" mnemonicParsing="false" onAction="#cadastro" prefHeight="25.0" prefWidth="91.0" style="-fx-background-radius: 10;" text="Cadastrar">
+      <Button fx:id="Cadastrar" layoutX="677.0" layoutY="459.0" mnemonicParsing="false" onAction="#cadastro" prefHeight="25.0" prefWidth="91.0" style="-fx-background-radius: 10;" text="Cadastrar">
          <font>
             <Font name="Tahoma Bold" size="12.0" />
          </font>
@@ -84,11 +81,24 @@
             <Font name="Tahoma Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="editar" layoutX="787.0" layoutY="460.0" mnemonicParsing="false" onAction="#editar" prefHeight="25.0" prefWidth="91.0" style="-fx-background-radius: 10;" text="Editar">
+      <Button fx:id="Editar" layoutX="787.0" layoutY="460.0" mnemonicParsing="false" onAction="#editar" prefHeight="25.0" prefWidth="91.0" style="-fx-background-radius: 10;" text="Editar">
          <font>
             <Font name="Tahoma Bold" size="12.0" />
          </font>
       </Button>
+      <Button fx:id="pesquisar" layoutX="895.0" layoutY="143.0" mnemonicParsing="false" onAction="#pesquisa" prefHeight="25.0" prefWidth="80.0" text="Pesquisar">
+         <font>
+            <Font name="Tahoma Bold" size="12.0" />
+         </font>
+      </Button>
+      <TextField fx:id="pesquisa" layoutX="377.0" layoutY="143.0" prefHeight="25.0" prefWidth="340.0" promptText="Pesquisar" />
+      <ComboBox fx:id="escolha" layoutX="728.0" layoutY="143.0" prefWidth="150.0" />
+      <Label fx:id="tipo" layoutX="564.0" layoutY="50.0" text="Responsavel">
+         <font>
+            <Font name="Tahoma Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="usuario" text="Label" visible="false" />
       <TableView fx:id="lista" layoutX="377.0" layoutY="185.0" prefHeight="249.0" prefWidth="601.0">
          <columns>
             <TableColumn fx:id="id" prefWidth="48.0" text="ID" />
@@ -100,16 +110,14 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </TableView>
-      <Button fx:id="Pesquisar" layoutX="895.0" layoutY="143.0" mnemonicParsing="false" onAction="#pesquisa" prefHeight="25.0" prefWidth="80.0" text="Pesquisar">
+      <Button fx:id="voltar" layoutX="377.0" layoutY="459.0" mnemonicParsing="false" onAction="#voltar" prefHeight="25.0" prefWidth="91.0" style="-fx-background-radius: 10;" text="Voltar">
          <font>
             <Font name="Tahoma Bold" size="12.0" />
          </font>
       </Button>
-      <TextField layoutX="377.0" layoutY="143.0" prefHeight="25.0" prefWidth="340.0" promptText="Pesquisar" />
-      <ComboBox layoutX="728.0" layoutY="143.0" prefWidth="150.0" />
-      <Label fx:id="tipo" layoutX="564.0" layoutY="55.0" text="Responsavel">
+      <Label fx:id="mensagem" alignment="CENTER" contentDisplay="CENTER" layoutX="377.0" layoutY="168.0" prefHeight="14.0" prefWidth="601.0" text="Label" visible="false">
          <font>
-            <Font name="Tahoma Bold" size="36.0" />
+            <Font name="Tahoma Bold" size="11.0" />
          </font>
       </Label>
    </children>

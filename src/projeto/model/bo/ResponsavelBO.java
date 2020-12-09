@@ -76,6 +76,52 @@ public class ResponsavelBO implements ResponsavelInterBO {
 		return responsaveis;
 	}
 	
+	public ArrayList<ResponsavelVO> nomes(ResponsavelVO resp) {
+		//lista todos os funcionarios disponiveis
+		ResultSet rs = responsavel.findByName(resp);
+		ArrayList<ResponsavelVO> responsaveis = new ArrayList<ResponsavelVO>();
+		
+		try {
+			while (rs.next()) {
+				ResponsavelVO aux = new ResponsavelVO();
+				aux.setNome(rs.getString("nome"));
+				aux.setCpf(rs.getString("cpf"));
+				aux.setTelefone(rs.getString("telefone"));
+				aux.setId(rs.getLong("idresponsavel"));
+				aux.setIdPessoa(rs.getLong("idpessoa"));
+				responsaveis.add(aux);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return responsaveis;
+	}
+	
+	public ArrayList<ResponsavelVO> cpfs(String cpf) {
+		//lista todos os funcionarios disponiveis
+		ResultSet rs = responsavel.findByCpf(cpf);
+		ArrayList<ResponsavelVO> responsaveis = new ArrayList<ResponsavelVO>();
+		
+		try {
+			while (rs.next()) {
+				ResponsavelVO aux = new ResponsavelVO();
+				aux.setNome(rs.getString("nome"));
+				aux.setCpf(rs.getString("cpf"));
+				aux.setTelefone(rs.getString("telefone"));
+				aux.setId(rs.getLong("idresponsavel"));
+				aux.setIdPessoa(rs.getLong("idpessoa"));
+				responsaveis.add(aux);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return responsaveis;
+	}
+	
 	public void cadastrar(ResponsavelVO resp) {
 		responsavel.cadastrar(resp);
 	}
@@ -108,6 +154,8 @@ public class ResponsavelBO implements ResponsavelInterBO {
 		}
 		return resp;
 	}
+	
+	
 	
 	public ResponsavelVO findByIdPessoa(ResponsavelVO resp) {
 		//está pesquisando pelo id pessoa do responsavel cadastrado

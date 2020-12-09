@@ -235,13 +235,32 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 	}
 
 	public ResultSet findByName(ResponsavelVO responsavel) {
-		String sql = "select p.nome, p.cpf, p.telefone " + "from pessoa as p, responsavel as r "
-				+ "where p.idpessoa = r.idpessoa and nome like ?";
+		String sql = "select p.nome, p.cpf, p.telefone, p.endereco, p.idpessoa, r.idresponsavel, r.usuario, r.senha "
+				+ "from pessoa as p, responsavel as r "
+				+ "where p.idpessoa = r.idpessoa and p.nome like ?";
 		PreparedStatement ptst;
 		ResultSet rs = null;
 		try {
 			ptst = getConnection().prepareStatement(sql);
 			ptst.setString(1, "%" + responsavel.getNome() + "%");
+			rs = ptst.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return rs;
+	}
+	
+	public ResultSet findByCpf(String cpf) {
+		String sql = "select p.nome, p.cpf, p.telefone, p.endereco, p.idpessoa, r.idresponsavel, r.usuario, r.senha "
+				+ "from pessoa as p, responsavel as r "
+				+ "where p.idpessoa = r.idpessoa and p.cpf like ?";
+		PreparedStatement ptst;
+		ResultSet rs = null;
+		try {
+			ptst = getConnection().prepareStatement(sql);
+			ptst.setString(1, cpf + "%");
 			rs = ptst.executeQuery();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
