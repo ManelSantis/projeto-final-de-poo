@@ -9,5 +9,5 @@ public interface ResponsavelInterDAO {
 	public ResultSet historicoVendas(ResponsavelVO responsavel);
 	public ResultSet listar();
 	public ResultSet verEstoque(ResponsavelVO responsavel);
-	public void logar(ResponsavelVO responsavel);
+	public boolean logar(ResponsavelVO responsavel);
 }

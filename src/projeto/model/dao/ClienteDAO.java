@@ -57,8 +57,36 @@ public class ClienteDAO extends PessoaDAO<ClienteVO> implements ClienteInterDAO{
 	}
 
 	public ResultSet findById(ClienteVO cliente) {
-		// procurar por id um cliente
-		ResultSet rs = super.findById(cliente);
+		String sql = "select p.nome, p.cpf, p.telefone, p.endereco, p.idpessoa, c.idcliente " 
+				+ "from pessoa as p, cliente as c "
+				+ "where p.idpessoa = c.idpessoa and c.idcliente = ?";
+		PreparedStatement ptst;
+		ResultSet rs = null;
+		try {
+			ptst = getConnection().prepareStatement(sql);
+			ptst.setLong(1, cliente.getId());
+			rs = ptst.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
+	public ResultSet findByIdPessoa(ClienteVO cliente) {
+		String sql = "select p.nome, p.cpf, p.telefone, p.endereco, p.idpessoa, c.idcliente " 
+				+ "from pessoa as p, cliente as c "
+				+ "where p.idpessoa = ?";
+		PreparedStatement ptst;
+		ResultSet rs = null;
+		try {
+			ptst = getConnection().prepareStatement(sql);
+			ptst.setLong(1, cliente.getIdPessoa());
+			rs = ptst.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return rs;
 	}
 
@@ -81,22 +109,14 @@ public class ClienteDAO extends PessoaDAO<ClienteVO> implements ClienteInterDAO{
 	}
 
 	public ResultSet listar() {
-		String sql = "select p.nome, p.cpf, p.endereco, p.telefone "
+		String sql = "select p.nome, p.cpf, p.endereco, p.telefone, c.idcliente, p.idpessoa "
 				+ "from Pessoa as p, cliente as c "
-				+ "where p.idpessoa = c.idcliente";
-		Statement st;
+				+ "where p.idpessoa = c.idpessoa;";
+		PreparedStatement ptst;
 		ResultSet rs = null;
-		// ArrayList<ClienteVO> clientes = new ArrayList<ClienteVO>();
 		try {
-			st = getConnection().createStatement();
-			rs = st.executeQuery(sql);
-			/*
-			 * while (rs.next()) { ClienteVO aux = new ClienteVO();
-			 * aux.setNome(rs.getString("nome")); aux.setCpf(rs.getString("cpf"));
-			 * aux.setEndereco(rs.getString("endereco"));
-			 * aux.setTelefone(rs.getString("telefone"));
-			 * aux.setId(rs.getLong("idCliente")); clientes.add(aux); }
-			 */
+			ptst = getConnection().prepareStatement(sql);
+			rs = ptst.executeQuery();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -9,4 +9,5 @@ public interface ClienteInterBO {
 	public void editar(ClienteVO cliente);
 	public void excluir(ClienteVO cliente);
 	public ArrayList<VendaVO> historicoDeCompras(ClienteVO cliente);	
+	public ArrayList<ClienteVO> listar();
 }

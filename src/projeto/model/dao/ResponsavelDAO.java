@@ -60,7 +60,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 		return rs;
 	}
 
-	public void logar (ResponsavelVO responsavel) {
+	public boolean logar (ResponsavelVO responsavel) {
 		if(buscarLogin(responsavel)) {
 			String sql = "select * from responsavel where usuario = ?";
 			PreparedStatement ptst;
@@ -72,6 +72,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 				rs = ptst.executeQuery();
 				if (rs.next()) {
 					aux = rs.getString("senha");
+					responsavel.setId(rs.getLong("idResponsavel"));
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -79,12 +80,15 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 			}
 			if((!responsavel.getSenha().isEmpty()) &&(responsavel.getSenha().equals(aux))) {
 				System.out.println("Login efetuado");
+				return true;
 			} else {
 				System.out.println("Senha incorreta");
+				return false;
 			}
 			
 		} else {
 			System.out.println("Usuario não existe");
+			return false;
 		}
 	}
 	
@@ -179,14 +183,44 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 	}
 
 	public ResultSet findById(ResponsavelVO responsavel) {
-		// pesquisar a partir do id
-		ResultSet rs = super.findById(responsavel);
+		String sql = "select p.nome, p.cpf, p.telefone, p.endereco, p.idpessoa, r.idresponsavel, r.usuario, r.senha " 
+				+ "from pessoa as p, responsavel as r "
+				+ "where p.idpessoa = r.idpessoa and r.idresponsavel = ?";
+		PreparedStatement ptst;
+		ResultSet rs = null;
+		try {
+			ptst = getConnection().prepareStatement(sql);
+			ptst.setLong(1, responsavel.getId());
+			rs = ptst.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return rs;
+	}
+	
+	public ResultSet findByIdPessoa(ResponsavelVO responsavel) {
+		String sql = "select p.nome, p.cpf, p.telefone, p.endereco, p.idpessoa, r.idresponsavel, r.usuario, r.senha " 
+				+ "from pessoa as p, responsavel as r "
+				+ "where p.idpessoa = r.idpessoa and p.idpessoa = ?";
+		PreparedStatement ptst;
+		ResultSet rs = null;
+		try {
+			ptst = getConnection().prepareStatement(sql);
+			ptst.setLong(1, responsavel.getIdPessoa());
+			rs = ptst.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return rs;
 	}
 
 	public ResultSet listar() {
 		// listar todos os responsaveis cadastrados
-		String sql = "select p.nome, p.cpf, p.telefone, p.endereco " + "from pessoa as p, responsavel as r "
+		String sql = "select p.nome, p.cpf, p.telefone, p.endereco, p.idpessoa, r.idresponsavel, r.usuario, r.senha "
+				+ "from pessoa as p, responsavel as r "
 				+ "where p.idpessoa = r.idpessoa";
 		PreparedStatement ptst;
 		ResultSet rs = null;
@@ -201,22 +235,14 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 	}
 
 	public ResultSet findByName(ResponsavelVO responsavel) {
-		String sql = "select p.nome, p.cpf, p.telefone, p.endereco " + "from pessoa as p, responsavel as r "
+		String sql = "select p.nome, p.cpf, p.telefone " + "from pessoa as p, responsavel as r "
 				+ "where p.idpessoa = r.idpessoa and nome like ?";
 		PreparedStatement ptst;
 		ResultSet rs = null;
-		// ArrayList<ResponsavelVO> clientes = new ArrayList<ResponsavelVO>();
 		try {
 			ptst = getConnection().prepareStatement(sql);
 			ptst.setString(1, "%" + responsavel.getNome() + "%");
 			rs = ptst.executeQuery();
-			/*
-			 * while (rs.next()) { ResponsavelVO aux = new ResponsavelVO();
-			 * aux.setNome(rs.getString("nome")); aux.setCpf(rs.getString("cpf"));
-			 * aux.setEndereco(rs.getString("endereco"));
-			 * aux.setTelefone(rs.getString("telefone"));
-			 * aux.setId(rs.getLong("idCliente")); clientes.add(aux); }
-			 */
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
