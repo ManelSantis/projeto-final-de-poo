@@ -22,15 +22,17 @@ public class ConEstoque extends ConMenu implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		//	escolhas();
+		escolhas();
 	}
 	
 	public void escolhas() {
+		if(escolha != null) {
 		categorias.add("Nome");
 		categorias.add("Preço");
 		categorias.add("Serie");
 		cb = FXCollections.observableArrayList(categorias);
 		escolha.setItems(cb);
+		}
 	}
 	
 	public void adicionar(ActionEvent e) throws Exception {

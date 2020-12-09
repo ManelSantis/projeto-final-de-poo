@@ -21,8 +21,10 @@ public class ConMenu {
 	public void relatorio (MouseEvent e) throws Exception{
 		Telas.telaRelatorio();
 	}
-	public void cadastro (MouseEvent e) throws Exception{
-		Telas.telaCadastroInicio();
+	
+	
+	public void pessoa (MouseEvent e) throws Exception{
+		Telas.telaPessoaInicio();
 	}
 	public void sair (MouseEvent e) throws Exception{
 		Telas.telaLogin();
