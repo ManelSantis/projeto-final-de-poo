@@ -2,6 +2,7 @@ package projeto.model.vo;
 
 public class LocalVO {
 	private String localizacao;
+	private String compartimento;
 	private long id;
 	private ResponsavelVO responsavel;
 
@@ -38,6 +39,16 @@ public class LocalVO {
 			this.responsavel = responsavel;	
 		} else {
 			System.out.println("Não foi possivel adicionar responsavel");
+		}
+	}
+
+	public String getCompartimento() {
+		return compartimento;
+	}
+
+	public void setCompartimento(String compartimento) {
+		if((compartimento != null) && (!compartimento.isEmpty())) {
+			this.compartimento = compartimento;	
 		}
 	}
 

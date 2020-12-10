@@ -13,14 +13,14 @@ public class LocalDAO extends BaseDAO<LocalVO> implements LocalInterDAO{
 
 	public void cadastrar(LocalVO local) {
 		// esse método adiciona um novo local
-		String sql = "insert into local (localizacao, idlocal, idresponsavel) values (?,?,?);";
+		String sql = "insert into local (localizacao, compartimento, idresponsavel) values (?,?,?);";
 		PreparedStatement ptst;
 		try {
 			// em local não será necessario uma implementação automatica no id
 			// o número será digitado pelo proprio responsavel
-			ptst = getConnection().prepareStatement(sql);
+			ptst = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ptst.setString(1, local.getLocalizacao());
-			ptst.setLong(2, local.getId());
+			ptst.setString(2, local.getCompartimento());
 			ptst.setLong(3, local.getResponsavel().getId());
 			int linhas = ptst.executeUpdate();
 			
@@ -43,13 +43,14 @@ public class LocalDAO extends BaseDAO<LocalVO> implements LocalInterDAO{
 	}
 
 	public void editar(LocalVO local) {
-		String sql = "update local set localizacao = ? where idlocal = ?";
+		String sql = "update local set localizacao = ?, compartimento = ? where idlocal = ?";
 		// será auterada apenas a localização, já que o responsavel não mudará
 		PreparedStatement ptst;
 		try {
 			ptst = getConnection().prepareStatement(sql);
 			ptst.setString(1, local.getLocalizacao());
-			ptst.setLong(2, local.getId());
+			ptst.setString(2, local.getCompartimento());
+			ptst.setLong(3, local.getId());
 			int linhas = ptst.executeUpdate();
 			
 			if (linhas == 0) {

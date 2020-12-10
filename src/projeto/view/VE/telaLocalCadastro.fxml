@@ -33,14 +33,14 @@
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="184.0" layoutY="220.0" prefHeight="25.0" prefWidth="419.0" />
-      <TextField layoutX="184.0" layoutY="282.0" prefHeight="25.0" prefWidth="196.0" />
+      <TextField fx:id="responsavel" disable="true" layoutX="184.0" layoutY="220.0" prefHeight="25.0" prefWidth="419.0" />
+      <TextField fx:id="compartimento" layoutX="184.0" layoutY="282.0" prefHeight="25.0" prefWidth="196.0" />
       <Label layoutX="407.0" layoutY="257.0" text="Localização">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="407.0" layoutY="282.0" prefHeight="25.0" prefWidth="196.0" />
+      <TextField fx:id="localizacao" layoutX="407.0" layoutY="282.0" prefHeight="25.0" prefWidth="196.0" />
       <ImageView fitHeight="100.0" fitWidth="300.0" layoutX="-99.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" rotate="-45.0">
          <image>
             <Image url="@bar.png" />
