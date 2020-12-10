@@ -133,7 +133,8 @@ public class ConPessoa extends ConMenu implements Initializable {
 				if (!pesquisa.getText().isEmpty()) {
 					mensagem.setVisible(false);
 					ResponsavelBO aux = new ResponsavelBO();
-					ObservableList<PessoaVO> responsaveis = FXCollections.observableArrayList(aux.cpfs(pesquisa.getText()));
+					ObservableList<PessoaVO> responsaveis = FXCollections
+							.observableArrayList(aux.cpfs(pesquisa.getText()));
 					nome.setCellValueFactory(new PropertyValueFactory<PessoaVO, String>("nome"));
 					cpf.setCellValueFactory(new PropertyValueFactory<PessoaVO, String>("cpf"));
 					telefone.setCellValueFactory(new PropertyValueFactory<PessoaVO, String>("telefone"));
@@ -201,48 +202,64 @@ public class ConPessoa extends ConMenu implements Initializable {
 	}
 
 	public void editar(ActionEvent e) throws Exception {
-
-		if (tipo.getText().equals("Responsavel")) {
-			PessoaVO aux = lista.getSelectionModel().getSelectedItem(); // pega a linha selecionada da tabela
-			ResponsavelBO aux2 = new ResponsavelBO();
-			ResponsavelVO resp = new ResponsavelVO();
-			resp.setIdPessoa(aux.getIdPessoa()); // salva o valor de idpessoa
-			resp = aux2.findByIdPessoa(resp); // encontra os dados do responsavel que está na linha e os adiciona
-			ConCadastrar.setRespEditavel(resp); // guarda eles no ojeto que ajudará na edição
-			ConCadastrar.setEditarResp(true); // diz que é para editar um resposval
-			Telas.telaResponsavelEditar(); // abre a tela de editar responsavel
+		PessoaVO aux = lista.getSelectionModel().getSelectedItem();
+		// pega a linha selecionada da tabela
+		if (aux != null) {
+			if (tipo.getText().equals("Responsavel")) {
+				mensagem.setVisible(false);
+				ResponsavelBO aux2 = new ResponsavelBO();
+				ResponsavelVO resp = new ResponsavelVO();
+				resp.setIdPessoa(aux.getIdPessoa()); // salva o valor de idpessoa
+				resp = aux2.findByIdPessoa(resp); // encontra os dados do responsavel que está na linha e os adiciona
+				ConCadastrar.setRespEditavel(resp); // guarda eles no ojeto que ajudará na edição
+				ConCadastrar.setEditarResp(true); // diz que é para editar um resposval
+				Telas.telaResponsavelEditar(); // abre a tela de editar responsavel
+			} else {
+				// mesma coisa antenrior mas com cliente
+				mensagem.setVisible(false);
+				ClienteBO aux2 = new ClienteBO();
+				ClienteVO cli = new ClienteVO();
+				cli.setIdPessoa(aux.getIdPessoa());
+				cli = aux2.findByIdPessoa(cli);
+				ConCadastrar.setCliEditavel(cli);
+				ConCadastrar.setEditarCli(true);
+				Telas.telaClienteEditar();
+			}
 		} else {
-			// mesma coisa antenrior mas com cliente
-			PessoaVO aux = lista.getSelectionModel().getSelectedItem();
-			ClienteBO aux2 = new ClienteBO();
-			ClienteVO cli = new ClienteVO();
-			cli.setIdPessoa(aux.getIdPessoa());
-			cli = aux2.findByIdPessoa(cli);
-			ConCadastrar.setCliEditavel(cli);
-			ConCadastrar.setEditarCli(true);
-			Telas.telaClienteEditar();
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText("Por favor, selecionar uma linha da tabela");
+			mensagem.setVisible(true);
 		}
+
 	}
 
 	public void excluir(ActionEvent e) throws Exception {
-		if (tipo.getText().equals("Responsavel")) {
-			PessoaVO aux = lista.getSelectionModel().getSelectedItem(); // pega a linha selecionada da tabela
-			ResponsavelBO aux2 = new ResponsavelBO();
-			ResponsavelVO resp = new ResponsavelVO();
-			resp.setIdPessoa(aux.getIdPessoa()); // salva o valor de idpessoa
-			resp = aux2.findByIdPessoa(resp); // encontra os dados do responsavel que está na linha e os adiciona
-			ConCadastrar.setRespEditavel(resp);
-			ConCadastrar.setDeletarResp(true);
-			Telas.telaResponsavelExcluir();
+
+		PessoaVO aux = lista.getSelectionModel().getSelectedItem(); // pega a linha selecionada da tabela
+		if (aux != null) {
+			if (tipo.getText().equals("Responsavel")) {
+				mensagem.setVisible(false);
+				ResponsavelBO aux2 = new ResponsavelBO();
+				ResponsavelVO resp = new ResponsavelVO();
+				resp.setIdPessoa(aux.getIdPessoa()); // salva o valor de idpessoa
+				resp = aux2.findByIdPessoa(resp); // encontra os dados do responsavel que está na linha e os adiciona
+				ConCadastrar.setRespEditavel(resp);
+				ConCadastrar.setDeletarResp(true);
+				Telas.telaResponsavelExcluir();
+			} else {
+				mensagem.setVisible(false);
+				ClienteBO aux2 = new ClienteBO();
+				ClienteVO cli = new ClienteVO();
+				cli.setIdPessoa(aux.getIdPessoa());
+				cli = aux2.findByIdPessoa(cli);
+				ConCadastrar.setCliEditavel(cli);
+				ConCadastrar.setDeletarCli(true);
+				Telas.telaClienteExcluir();
+			}
 		} else {
-			PessoaVO aux = lista.getSelectionModel().getSelectedItem();
-			ClienteBO aux2 = new ClienteBO();
-			ClienteVO cli = new ClienteVO();
-			cli.setIdPessoa(aux.getIdPessoa());
-			cli = aux2.findByIdPessoa(cli);
-			ConCadastrar.setCliEditavel(cli);
-			ConCadastrar.setDeletarCli(true);
-			Telas.telaClienteExcluir();
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText("Por favor, selecionar uma linha da tabela");
+			mensagem.setVisible(true);
 		}
 	}
 
