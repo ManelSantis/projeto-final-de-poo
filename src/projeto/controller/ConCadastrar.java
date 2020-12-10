@@ -79,8 +79,8 @@ public class ConCadastrar extends ConMenu implements Initializable {
 		ClienteBO salvar = new ClienteBO();
 		cli.setNome(nome.getText());
 		cli.setCpf(cpf.getText());
-		cli.setTelefone(telefone.getText());
 		cli.setEndereco(estado.getText(), cidade.getText(), bairro.getText(), rua.getText(), numero.getText());
+		cli.setTelefone(telefone.getText());
 		salvar.cadastrar(cli);
 		Telas.telaClienteInicio();
 	}

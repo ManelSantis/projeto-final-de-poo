@@ -1,14 +1,14 @@
 package projeto.model.bo;
 
 import java.util.ArrayList;
+
+import projeto.model.dao.ProdutoDAO;
 import projeto.model.vo.ProdutoVO;
 
 public class ProdutoBO implements ProdutoInterBO{
+	ProdutoDAO prod = new ProdutoDAO();
 	public void cadastrar(ProdutoVO produto) {
-		// Irá receber o produto parametrizado
-		// Repassando para o banco de dados em ProdutoDAO
-		// Verificando se já existe ou não o produto cadastrado
-		// E só então vendo se adiciona ou não;
+		prod.cadastrar(produto);
 	}
 
 	public ArrayList<ProdutoVO> pesquisar(String pesquisa) {
@@ -20,15 +20,11 @@ public class ProdutoBO implements ProdutoInterBO{
 	}
 
 	public void excluir(ProdutoVO produto) {
-		// Irá localizar no banco de dados o ProdutoVO parametrizado
-		// utilizando ProdutoDAO para então poder realizar a exclusão
+		prod.excluir(produto);
 	}
 
 	public void editar (ProdutoVO produto) {
-		// Irá localizar o ProdutoVO usando ProdutoDAO
-		// mandando os dados para a pagina de edição
-		// lá podendo serem editados antes de serem mandados
-		// de volta para ProdutoDAO para o update
+		prod.editar(produto);
 	}
 	
 }

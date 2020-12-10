@@ -84,7 +84,7 @@ public abstract class PessoaVO {
 	public void setTelefone(String telefone) {
 		// Ainda vendo como fazer uma validação melhor
 		if (telefone != null) {
-			if ((telefone.length() > 10) && (!telefone.isEmpty())){
+			if ((telefone.length() >= 10) && (!telefone.isEmpty())){
 				this.telefone = telefone;
 			} else {
 				System.out.println("Não foi possivel salvar o telefone!");

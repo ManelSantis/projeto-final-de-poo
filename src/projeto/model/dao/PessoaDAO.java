@@ -19,8 +19,8 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
 			ptst = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ptst.setString(1, vo.getNome());
 			ptst.setString(2, vo.getCpf());
-			ptst.setString(3, vo.getTelefone());
 			ptst.setString(4, vo.getEndereco());
+			ptst.setString(3, vo.getTelefone());
 			int linhas = ptst.executeUpdate();
 
 			if (linhas == 0) {

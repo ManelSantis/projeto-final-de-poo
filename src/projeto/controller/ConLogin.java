@@ -28,9 +28,10 @@ public class ConLogin {
 		resp.setSenha(senha.getText());
 		
 		ResponsavelBO respon = new ResponsavelBO();
-		if (respon.login(resp)) {
+		if ((respon != null )&& (respon.login(resp))) {
 			Telas.setUsuario(resp);
 			Telas.telaInicio();
+			
 		} else {
 			aviso.setVisible(true);
 		}

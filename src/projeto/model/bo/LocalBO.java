@@ -1,39 +1,44 @@
 package projeto.model.bo;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import projeto.model.vo.ClienteVO;
 import projeto.model.vo.LocalVO;
 import projeto.model.vo.ResponsavelVO;
-
+import projeto.model.dao.LocalDAO;
 public class LocalBO implements LocalInterBO {
-	
+	LocalDAO loca = new LocalDAO();
 	public void cadastrar(LocalVO local) {
-		// Será pego o LocalVO parametrizado
-		// verificará se ele já existe no LocalDAO
-		// E então salvos no banco de dados em LocalDAO
+		loca.cadastrar(local);
 	}
 	
 	public void editar(LocalVO local) {
-		// Irá receber um LocalVO parametrizado
-		// pesquisará ele com o auxilio de LocalDAO
-		// e então mandara eles para a pagina de edição
-		// lá os dados podendo ser alterados
-		// e então mandados novamente para o banco de dados
-		// atrásves de um update
+		loca.editar(local);
 	}
 	
 	public void excluir(LocalVO local) {
-		// Irá pesquisar no banco de dados o local parametrizado
-		// com o auxilio de LocalDAO,
-		// se existir irá deletar do banco de dados
+		loca.excluir(local);
 	}
 
 	public ArrayList<LocalVO> listar(ResponsavelVO responsavel) {
-		// Irá pesquisar no banco de dados uma lista de locai
-		// a partir do responsavel parametrizado
-		// com o auxilio de LocalDA
-		// e então irá passar tudo para uma ArrayList 
-		// para ser exibida
-		ArrayList<LocalVO> locais = new ArrayList<LocalVO>();
-		return locais;
-	}
+		ResultSet rs = loca.listarPorResponsavel(responsavel);
+		ArrayList<LocalVO> loc = new ArrayList<LocalVO>();
+		
+		try {
+			while (rs.next()) {
+				LocalVO aux = new LocalVO();
+				aux.setLocalizacao(rs.getString("localizacao"));
+				aux.setId(rs.getLong("idlocal"));
+				aux.setResponsavel().setId(rs.getLong("idresponsavel"));
+				loc.add(aux);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return loc;
+}
 }
