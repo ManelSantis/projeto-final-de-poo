@@ -17,7 +17,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import projeto.model.bo.LocalBO;
 import projeto.model.bo.ProdutoBO;
+import projeto.model.bo.ResponsavelBO;
+import projeto.model.vo.LocalVO;
 import projeto.model.vo.ProdutoVO;
 import projeto.view.Telas;
 
@@ -25,6 +28,7 @@ public class ConEstoque extends ConMenu implements Initializable{
 	private List<String> categorias = new ArrayList<String>();
 	private ObservableList<String> cb;
 	private static ProdutoVO editavel;
+	private static boolean estocar;
 	private static boolean editar;
 	private static boolean deletar;
 	
@@ -37,12 +41,13 @@ public class ConEstoque extends ConMenu implements Initializable{
 	@FXML
 	private TableColumn<ProdutoVO, Integer> quantTotal;
 	@FXML
-	private TableColumn<ProdutoVO, Integer> quantRespAtual;
-	@FXML
 	private TableColumn<ProdutoVO, Double> valor;
 	@FXML
 	private TableColumn<ProdutoVO, Long> id;
 	
+	
+	@FXML
+	private Label tipo;
 	@FXML
 	private TextField serie;
 	@FXML
@@ -53,9 +58,13 @@ public class ConEstoque extends ConMenu implements Initializable{
 	private TextField preco;
 	@FXML
 	private TextField peso;
+	@FXML
+	private TextField ID;
 	
 	@FXML
 	private ComboBox<String> escolha;
+	@FXML
+	private ComboBox<String> locais;
 	
 	@FXML
 	private Label nomeProduto;
@@ -66,9 +75,6 @@ public class ConEstoque extends ConMenu implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if(descricao != null) {
 			descricao.setWrapText(true);
-		}
-		if (lista != null) {
-			quantRespAtual.setText(Telas.getUsuario().getUsuario());
 		}
 		if(editar) {
 			nome.setText(editavel.getNome());
@@ -81,7 +87,14 @@ public class ConEstoque extends ConMenu implements Initializable{
 			nomeProduto.setText(editavel.getNome());
 			serieProduto.setText(editavel.getSerie());
 		}
-		
+		if (estocar) {
+			nome.setText(editavel.getNome());
+			serie.setText(editavel.getSerie());
+			preco.setText(""+editavel.getPreco());
+			peso.setText(""+editavel.getPeso());
+			ID.setText(""+editavel.getId());
+		}
+		locais();
 		escolhas();
 		preenxer();
 	}
@@ -96,16 +109,71 @@ public class ConEstoque extends ConMenu implements Initializable{
 		}
 	}
 	
+	public void locais() {
+		if(locais != null) {
+			LocalBO aux = new LocalBO();
+			ArrayList<LocalVO> aux2 = aux.listar();
+			ArrayList<String> aux3 = new ArrayList<String>();
+			
+			for (int i = 0; i< aux2.size(); i++) {
+				aux3.add(aux2.get(i).getId() + "/" + aux2.get(i).getCompartimento() + "/" + aux2.get(i).getLocalizacao());
+			}
+			
+    		ObservableList<String> locaisUser = FXCollections.observableArrayList(aux3);
+    		locais.setItems(locaisUser);
+		}
+	}
+	
+	public void estocar (ActionEvent e) throws Exception{
+		ProdutoVO prod = lista.getSelectionModel().getSelectedItem();
+		if (prod != null) {
+			ProdutoBO aux = new ProdutoBO();
+			prod = aux.findById(prod);
+			setEditavel(prod);
+			setEstocar(true);
+			Telas.estocar();
+		}
+	}
+	
+	public void estoq (ActionEvent e) throws Exception {
+		
+	}
+	
+	public void voltar (ActionEvent e) throws Exception{
+		Telas.telaEstoqueInicio();
+	}
+	
+	public void produtos (ActionEvent e) throws Exception{
+		Telas.telaProdutos();
+	}
+	
+	public void estoque (ActionEvent e) throws Exception{
+		Telas.telaEstoque();
+	}
+	
+	
 	public void preenxer() {
 		if (lista != null) {
-			ProdutoBO aux = new ProdutoBO();
-			ObservableList<ProdutoVO> produtos = FXCollections.observableArrayList(aux.listar());
-			nomeProd.setCellValueFactory(new PropertyValueFactory<ProdutoVO, String>("nome"));
-			numSerie.setCellValueFactory(new PropertyValueFactory<ProdutoVO, String>("serie"));
-			quantTotal.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Integer>("quantidade"));
-			valor.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Double>("preco"));
-			id.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("id"));
-			lista.setItems(produtos);
+			if(tipo.getText().equals("Produtos")){
+				ProdutoBO aux = new ProdutoBO();
+				ObservableList<ProdutoVO> produtos = FXCollections.observableArrayList(aux.listar());
+				nomeProd.setCellValueFactory(new PropertyValueFactory<ProdutoVO, String>("nome"));
+				numSerie.setCellValueFactory(new PropertyValueFactory<ProdutoVO, String>("serie"));
+				quantTotal.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Integer>("quantidade"));
+				valor.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Double>("preco"));
+				id.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("id"));
+				lista.setItems(produtos);
+			} else {
+				ResponsavelBO aux = new ResponsavelBO();
+				ObservableList<ProdutoVO> produtos = FXCollections.observableArrayList(aux.estoque());
+				nomeProd.setCellValueFactory(new PropertyValueFactory<ProdutoVO, String>("nome"));
+				numSerie.setCellValueFactory(new PropertyValueFactory<ProdutoVO, String>("serie"));
+				quantTotal.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Integer>("quantidade"));
+				valor.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Double>("preco"));
+				id.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("id"));
+				lista.setItems(produtos);
+			
+			}
 		}
 	}
 	
@@ -168,6 +236,18 @@ public class ConEstoque extends ConMenu implements Initializable{
 		Telas.telaEstoque();
 	}
 	
+	public void aumentar (ActionEvent e) throws Exception{
+		Telas.telaEstoque();
+	}
+	
+	public void diminuir (ActionEvent e) throws Exception{
+		Telas.telaEstoque();
+	}
+	
+	public void deletar (ActionEvent e) throws Exception{
+		Telas.telaEstoque();
+	}
+	
 	public void pesquisar (ActionEvent e) throws Exception{
 		Telas.telaEstoque();
 	}
@@ -200,6 +280,14 @@ public class ConEstoque extends ConMenu implements Initializable{
 
 	public static void setDeletar(boolean deletar) {
 		ConEstoque.deletar = deletar;
+	}
+
+	public static boolean isEstocar() {
+		return estocar;
+	}
+
+	public static void setEstocar(boolean estocar) {
+		ConEstoque.estocar = estocar;
 	}
 	
 }

@@ -10,8 +10,9 @@ import projeto.model.vo.ResponsavelVO;
 public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements ResponsavelInterDAO{
 
 	public ResultSet verEstoque(ResponsavelVO responsavel) {
-		String sql = "select e.idproduto, e.quantidade, e.idlocal " + "from estoque as e, local as l "
-				+ "where e.idlocal = l.idlocal and l.idresponsavel = ?";
+		String sql = "select e.idproduto, e.quantidade, p.nome, p.serie, p.preco " + 
+				  "from estoque as e, local as l, produto as p "
+				+ "where e.idlocal = l.idlocal and p.idproduto = e.idproduto and l.idresponsavel = ?";
 
 		PreparedStatement st;
 		ResultSet rs = null;

@@ -59,6 +59,13 @@ public class Telas extends Application {
 	
 	
 	//TELA DE ESTOQUE//
+	public static void telaEstoqueInicio() throws Exception{
+		Parent root = FXMLLoader.load(Telas.class.getResource("VE/telaEstoqueInicio.fxml"));
+		Scene cena = new Scene(root);
+		primaryStage.setScene(cena);
+		primaryStage.centerOnScreen();
+	}
+	
 	public static void telaEstoque() throws Exception{
 		Parent root = FXMLLoader.load(Telas.class.getResource("VE/telaEstoque.fxml"));
 		Scene cena = new Scene(root);
@@ -68,6 +75,20 @@ public class Telas extends Application {
 	////////////////////////////////////////////////////////////////////////////
 	
 	//TELAS DE PRODUTO//
+	public static void telaProdutos() throws Exception{
+		Parent root = FXMLLoader.load(Telas.class.getResource("VE/telaProdutos.fxml"));
+		Scene cena = new Scene(root);
+		primaryStage.setScene(cena);
+		primaryStage.centerOnScreen();
+	}
+	
+	public static void estocar() throws Exception{
+		Parent root = FXMLLoader.load(Telas.class.getResource("VE/estocar.fxml"));
+		Scene cena = new Scene(root);
+		primaryStage.setScene(cena);
+		primaryStage.centerOnScreen();
+	}
+	
 	public static void adicionarProduto() throws Exception{
 		Parent root = FXMLLoader.load(Telas.class.getResource("VE/adicionarProduto.fxml"));
 		Scene cena = new Scene(root);

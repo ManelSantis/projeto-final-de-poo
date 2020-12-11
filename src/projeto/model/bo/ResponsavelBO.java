@@ -2,6 +2,7 @@ package projeto.model.bo;
 
 import projeto.model.vo.ResponsavelVO;
 import projeto.model.vo.VendaVO;
+import projeto.view.Telas;
 import projeto.model.dao.ResponsavelDAO;
 import projeto.model.vo.ProdutoVO;
 
@@ -13,13 +14,31 @@ import java.util.Calendar;
 public class ResponsavelBO implements ResponsavelInterBO {
 	ResponsavelDAO responsavel = new ResponsavelDAO();
 	
-	public ArrayList<ProdutoVO> estoque(ResponsavelVO resp) {
+	public ArrayList<ProdutoVO> estoque() {
 		// Irá procurar no banco de dados (em EstoqueDAO) todos os produtos
 		// que estiverem guardados no local que tenha como responsavel
 		// igual ao que está sendo apresentado lá será posto em um ArrayList, 
 		// para então ser passado todos os valores para 
 		// a ArrayList desse método e mandados para a exebição
+		ResultSet rs = responsavel.verEstoque(Telas.getUsuario());
 		ArrayList<ProdutoVO> produtos = new ArrayList<ProdutoVO>();
+		if(rs != null) {
+			try {
+				while (rs.next()) {
+					ProdutoVO aux = new ProdutoVO();
+					aux.setNome(rs.getString("nome"));
+					aux.setPreco(rs.getDouble("preco"));
+					aux.setQuantidade(rs.getInt("quantidade"));
+					aux.setDescricao(rs.getString("descricao"));
+					aux.setId(rs.getLong("idproduto"));
+					aux.setSerie(rs.getString("serie"));
+					produtos.add(aux);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return produtos;
 	}
 

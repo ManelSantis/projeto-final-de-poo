@@ -8,7 +8,7 @@ public class ConMenu {
 		Telas.telaInicio();
 	}
 	public void estoque (MouseEvent e) throws Exception{
-		Telas.telaEstoque();
+		Telas.telaEstoqueInicio();
 	}
 	
 	public void local (MouseEvent e) throws Exception{
@@ -21,7 +21,6 @@ public class ConMenu {
 	public void relatorio (MouseEvent e) throws Exception{
 		Telas.telaRelatorio();
 	}
-	
 	
 	public void pessoa (MouseEvent e) throws Exception{
 		Telas.telaPessoaInicio();
