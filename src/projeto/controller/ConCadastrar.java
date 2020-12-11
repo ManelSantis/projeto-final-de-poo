@@ -171,7 +171,7 @@ public class ConCadastrar extends ConMenu implements Initializable {
 			setDeletarResp(false);
 			setDeletarCli(false);
 			
-			try {
+			try { 
 				Telas.telaResponsavelInicio();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

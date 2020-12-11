@@ -84,7 +84,7 @@
             <Font name="Tahoma Bold" size="11.0" />
          </font>
       </Button>
-      <Button fx:id="editar" layoutX="790.0" layoutY="470.0" mnemonicParsing="false" onAction="#editar" prefHeight="25.0" prefWidth="82.0" style="-fx-background-radius: 10px;" text="Editar">
+      <Button fx:id="editar" layoutX="790.0" layoutY="470.0" mnemonicParsing="false" onAction="#EditarLocal" prefHeight="25.0" prefWidth="82.0" style="-fx-background-radius: 10px;" text="Editar">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -92,7 +92,7 @@
             <Font name="Tahoma Bold" size="11.0" />
          </font>
       </Button>
-      <Button fx:id="excluir" layoutX="889.0" layoutY="470.0" mnemonicParsing="false" onAction="#excluir" prefHeight="25.0" prefWidth="82.0" style="-fx-background-radius: 10px;" text="Excluir">
+      <Button fx:id="excluir" layoutX="889.0" layoutY="470.0" mnemonicParsing="false" onAction="#excluirlocal" prefHeight="25.0" prefWidth="82.0" style="-fx-background-radius: 10px;" text="Excluir">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

@@ -8,11 +8,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import projeto.model.bo.LocalBO;
+import projeto.model.bo.ResponsavelBO;
 import projeto.model.vo.LocalVO;
+import projeto.model.vo.ResponsavelVO;
 import projeto.view.Telas;
 
 public class ConLocal extends ConMenu implements Initializable{
-
 
     @FXML
     private TextField localizacao;
@@ -32,15 +33,34 @@ public class ConLocal extends ConMenu implements Initializable{
 		Telas.telaLocalCadastro();
 		
 	}
-
-	public void editar (ActionEvent e) throws Exception{
-		Telas.telaLocalEditar();
+	public void excluirlocal (ActionEvent e) throws Exception{
+		Telas.telaLocalExcluir();
 		
 	}
 	
+	public void EditarLocal(ActionEvent e) throws Exception{
+		Telas.telaLocalEditar();
+	}
+	public void editar (ActionEvent e) throws Exception{
+
+		LocalBO salvar = new LocalBO();
+		LocalVO aux = new LocalVO();
+		aux.setResponsavel(Telas.getUsuario());
+		aux.setCompartimento(compartimento.getText());
+		aux.setLocalizacao(localizacao.getText());
+		salvar.editar(aux);
+		Telas.telaLocal();
+	}
+	
 	public void excluir (ActionEvent e) throws Exception{
-		Telas.telaLocalExcluir();
-		
+	
+		LocalBO salvar = new LocalBO();
+		LocalVO aux = new LocalVO();
+		aux.setResponsavel(Telas.getUsuario());
+		aux.setCompartimento(compartimento.getText());
+		aux.setLocalizacao(localizacao.getText());
+		salvar.excluir(aux);
+		Telas.telaLocal();
 	}
 	
 	public void pesquisar (ActionEvent e) throws Exception{
