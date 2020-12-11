@@ -10,8 +10,8 @@ import projeto.model.vo.ProdutoVO;
 public class ProdutoDAO extends BaseDAO<ProdutoVO> {
 	
 	public void cadastrar(ProdutoVO prod) {
-		String sql = "insert into produto (nome, serie, peso, preco, descricao, imagem) "
-				+ "values (?,?,?,?,?,?);";
+		String sql = "insert into produto (nome, serie, peso, preco, descricao) "
+				+ "values (?,?,?,?,?);";
 		//a quantidade do produto só é alterada ao adicionar no estoque
 		//então ela por default é setada como 0 no banco de dados
 		//e  quantidade pedido só é utilizado na parte de java
@@ -25,7 +25,6 @@ public class ProdutoDAO extends BaseDAO<ProdutoVO> {
 			ptst.setDouble(3, prod.getPeso());
 			ptst.setDouble(4, prod.getPreco());
 			ptst.setString(5, prod.getDescricao());
-			ptst.setString(6, prod.getImg());
 			int linhas = ptst.executeUpdate();
 			
 			if (linhas == 0) {
@@ -46,12 +45,12 @@ public class ProdutoDAO extends BaseDAO<ProdutoVO> {
 	}
 
 	public void excluir(ProdutoVO prod) {
-		String sql = "delete from produto where serie = ?";
+		String sql = "delete from produto where idproduto = ?";
 		//deletar do banco de dados a partir da serie do produto
 		PreparedStatement ptst;
 		try {
 			ptst = getConnection().prepareStatement(sql);
-			ptst.setString(1, prod.getSerie());
+			ptst.setLong(1, prod.getId());
 			int linhas = ptst.executeUpdate();
 			if (linhas == 0) {
 				throw new SQLException ("Nada foi excluido.");
@@ -64,7 +63,7 @@ public class ProdutoDAO extends BaseDAO<ProdutoVO> {
 
 	public void editar(ProdutoVO prod) {
 		String sql =  "update produto set nome = ?, peso = ?, preco = ?, descricao = ?, "
-				+ "imagem = ? serie = ? where idproduto = ? ";
+				+ " serie = ? where idproduto = ? ";
 		//irá realizar o update de tudo menso do número de serie
 		//a partir do número de serie que está na consulta
 		PreparedStatement ptst;
@@ -74,9 +73,8 @@ public class ProdutoDAO extends BaseDAO<ProdutoVO> {
 			ptst.setDouble(2, prod.getPeso());
 			ptst.setDouble(3, prod.getPreco());
 			ptst.setString(4, prod.getDescricao());
-			ptst.setString(5, prod.getImg());
-			ptst.setString(6, prod.getSerie());
-			ptst.setLong(7, prod.getId());
+			ptst.setString(5, prod.getSerie());
+			ptst.setLong(6, prod.getId());
 			int linhas = ptst.executeUpdate();
 			if (linhas == 0) {
 				throw new SQLException("Nada foi editado.");

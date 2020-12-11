@@ -8,7 +8,6 @@ public class ProdutoVO {
 	private double preco;
 	private int quantidade = 0; // quantKanalence + quantToinho
 	private int quantiPedido = 0;
-	private String img; // um endereço string
 	private long id;
 	
 	public String getNome() {
@@ -64,12 +63,7 @@ public class ProdutoVO {
 
 	public void setSerie(String serie) {
 		if (serie != null) {
-			if (serie.length() == 13) {
-				this.serie = serie; 
-				// verificar se o tamanho do numero de serie está correto
-			} else {
-				System.out.println("Digite novamente!");
-			}
+			this.serie = serie; 
 		} else {
 			System.out.println("Digite novamente!");
 		}
@@ -100,23 +94,6 @@ public class ProdutoVO {
 			}
 		}
 		return false;
-	}
-
-	public String getImg() {
-		return img;
-	}
-
-	public void setImg(String img) {
-		if (img != null) {
-			if (!img.isEmpty()) {
-				this.img = img; 
-				// se não estiver vazia, salva
-			} else {
-				System.out.println("Adicione uma imagem!");
-			}
-		} else {
-			System.out.println("Adicione uma imagem!");
-		}
 	}
 
 	public double getPeso() {

@@ -69,13 +69,9 @@ public class Telas extends Application {
 	
 	//TELAS DE PRODUTO//
 	public static void adicionarProduto() throws Exception{
-		Stage tela = new Stage();
 		Parent root = FXMLLoader.load(Telas.class.getResource("VE/adicionarProduto.fxml"));
 		Scene cena = new Scene(root);
-		tela.centerOnScreen();
-		tela.setResizable(false);
-		tela.setScene(cena);
-		tela.show();
+		primaryStage.setScene(cena);
 	}
 	
 	public static void editarProduto() throws Exception{
