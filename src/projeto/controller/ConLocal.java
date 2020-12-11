@@ -3,17 +3,29 @@ package projeto.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import projeto.model.bo.LocalBO;
-import projeto.model.bo.ResponsavelBO;
 import projeto.model.vo.LocalVO;
-import projeto.model.vo.ResponsavelVO;
 import projeto.view.Telas;
 
 public class ConLocal extends ConMenu implements Initializable{
+	
+	@FXML
+    private TableView<LocalVO> lista;
+    @FXML
+    private TableColumn<LocalVO, Long> id;
+    @FXML
+    private TableColumn<LocalVO, String> compar;
+    @FXML
+    private TableColumn<LocalVO, String> loca;
 
     @FXML
     private TextField localizacao;
@@ -22,12 +34,28 @@ public class ConLocal extends ConMenu implements Initializable{
     @FXML
     private TextField responsavel;
     
+    
+    
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if(responsavel != null) {
 			responsavel.setText(Telas.getUsuario().getNome());
 		}
+		System.out.print(".....");
+		preenxer();
 	}
+    
+    public void preenxer() {
+    	if (lista != null) {
+    		//irá mostrar todos os locais que o usuário logado tem
+    		LocalBO aux = new LocalBO();
+    		ObservableList<LocalVO> locaisUser = FXCollections.observableArrayList(aux.listar());
+    		id.setCellValueFactory(new PropertyValueFactory<LocalVO, Long>("id"));
+    		compar.setCellValueFactory(new PropertyValueFactory<LocalVO, String>("compartimento"));
+    		loca.setCellValueFactory(new PropertyValueFactory<LocalVO, String>("localizacao"));
+    		lista.setItems(locaisUser);
+    	}
+    }
 	
 	public void adicionar (ActionEvent e) throws Exception{
 		Telas.telaLocalCadastro();
@@ -38,11 +66,11 @@ public class ConLocal extends ConMenu implements Initializable{
 		
 	}
 	
-	public void EditarLocal(ActionEvent e) throws Exception{
+	public void editarLocal(ActionEvent e) throws Exception{
 		Telas.telaLocalEditar();
 	}
+	
 	public void editar (ActionEvent e) throws Exception{
-
 		LocalBO salvar = new LocalBO();
 		LocalVO aux = new LocalVO();
 		aux.setResponsavel(Telas.getUsuario());
@@ -53,7 +81,6 @@ public class ConLocal extends ConMenu implements Initializable{
 	}
 	
 	public void excluir (ActionEvent e) throws Exception{
-	
 		LocalBO salvar = new LocalBO();
 		LocalVO aux = new LocalVO();
 		aux.setResponsavel(Telas.getUsuario());

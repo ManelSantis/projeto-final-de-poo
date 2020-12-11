@@ -84,7 +84,7 @@
             <Font name="Tahoma Bold" size="11.0" />
          </font>
       </Button>
-      <Button fx:id="editar" layoutX="790.0" layoutY="470.0" mnemonicParsing="false" onAction="#EditarLocal" prefHeight="25.0" prefWidth="82.0" style="-fx-background-radius: 10px;" text="Editar">
+      <Button fx:id="editar" layoutX="790.0" layoutY="470.0" mnemonicParsing="false" onAction="#editarLocal" prefHeight="25.0" prefWidth="82.0" style="-fx-background-radius: 10px;" text="Editar">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -110,11 +110,11 @@
          </font>
       </Button>
       <TextField layoutX="399.0" layoutY="96.0" prefHeight="25.0" prefWidth="341.0" promptText="Pesquisar" />
-      <TableView layoutX="398.0" layoutY="136.0" prefHeight="315.0" prefWidth="573.0">
+      <TableView fx:id="lista" layoutX="398.0" layoutY="136.0" prefHeight="315.0" prefWidth="573.0">
          <columns>
-            <TableColumn prefWidth="52.0" text="ID" />
-            <TableColumn prefWidth="124.0" text="Compartimento" />
-            <TableColumn prefWidth="396.0" text="Localização" />
+            <TableColumn fx:id="id" prefWidth="52.0" text="ID" />
+            <TableColumn fx:id="compar" prefWidth="124.0" text="Compartimento" />
+            <TableColumn fx:id="loca" prefWidth="396.0" text="Localização" />
          </columns>
       </TableView>
    </children>

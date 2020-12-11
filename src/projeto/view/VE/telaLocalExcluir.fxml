@@ -13,12 +13,12 @@
             <Font name="Tahoma Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="251.0" layoutY="157.0" text="Responsavel">
+      <Label fx:id="resp" layoutX="251.0" layoutY="157.0" text="Responsavel">
          <font>
             <Font name="Tahoma" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="239.0" layoutY="200.0" text="Compartimento">
+      <Label fx:id="comp" layoutX="239.0" layoutY="200.0" text="Compartimento">
          <font>
             <Font name="Tahoma" size="18.0" />
          </font>
@@ -38,7 +38,7 @@
             <Image url="@bar.png" />
          </image>
       </ImageView>
-      <Label layoutX="255.0" layoutY="236.0" text="Localização">
+      <Label fx:id="loc" layoutX="255.0" layoutY="236.0" text="Localização">
          <font>
             <Font name="Tahoma" size="18.0" />
          </font>

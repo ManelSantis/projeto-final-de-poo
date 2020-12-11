@@ -29,6 +29,7 @@ public class LocalBO implements LocalInterBO {
 		try {
 			while (rs.next()) {
 				LocalVO aux = new LocalVO();
+				aux.setCompartimento(rs.getString("compartimento"));
 				aux.setLocalizacao(rs.getString("localizacao"));
 				aux.setId(rs.getLong("idlocal"));
 				aux.setResponsavel(responsavel);
