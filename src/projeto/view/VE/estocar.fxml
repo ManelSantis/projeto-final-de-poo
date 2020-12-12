@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="742.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ConEstoque">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="742.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ConProdutos">
    <children>
       <ImageView fitHeight="100.0" fitWidth="300.0" layoutX="-99.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" rotate="-45.0">
          <image>
@@ -18,12 +18,12 @@
             <Font name="Tahoma Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="cancelar" layoutX="626.0" layoutY="447.0" mnemonicParsing="false" onAction="#cancelar" onMouseClicked="#estoque" prefHeight="32.0" prefWidth="102.0" text="Cancelar">
+      <Button fx:id="cancelar" layoutX="626.0" layoutY="447.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="32.0" prefWidth="102.0" text="Cancelar">
          <font>
             <Font name="Tahoma Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="confirmar" layoutX="509.0" layoutY="447.0" mnemonicParsing="false" onAction="#estoq" onMouseClicked="#estoque" text="Confirmar">
+      <Button fx:id="confirmar" layoutX="509.0" layoutY="447.0" mnemonicParsing="false" onAction="#estoq" text="Confirmar">
          <font>
             <Font name="Tahoma Bold" size="16.0" />
          </font>

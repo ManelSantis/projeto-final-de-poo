@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ConEstoque">
+<Pane style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ConEstoqueInicio">
    <children>
       <ImageView fitHeight="600.0" fitWidth="1000.0" pickOnBounds="true" smooth="false">
          <image>
@@ -76,7 +76,7 @@
             <Font name="Tahoma Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="estoque" layoutX="700.0" layoutY="244.0" mnemonicParsing="false" onAction="#estoque" prefHeight="37.0" prefWidth="201.0" style="-fx-background-radius: 10;" text="Estoque">
+      <Button fx:id="estoque" layoutX="700.0" layoutY="244.0" mnemonicParsing="false" onAction="#estocados" prefHeight="37.0" prefWidth="201.0" style="-fx-background-radius: 10;" text="Estoque">
          <font>
             <Font name="Tahoma Bold" size="12.0" />
          </font>

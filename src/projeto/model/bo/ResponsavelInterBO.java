@@ -3,6 +3,7 @@ package projeto.model.bo;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import projeto.model.vo.EstoqueVO;
 import projeto.model.vo.ProdutoVO;
 import projeto.model.vo.ResponsavelVO;
 import projeto.model.vo.VendaVO;

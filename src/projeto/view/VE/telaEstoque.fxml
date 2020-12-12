@@ -101,7 +101,7 @@
          </font>
       </Button>
       <ComboBox fx:id="escolha" layoutX="757.0" layoutY="96.0" prefWidth="150.0" />
-      <Button fx:id="pesquisa" layoutX="919.0" layoutY="96.0" mnemonicParsing="false" onAction="#pesquisar" prefHeight="25.0" prefWidth="52.0" style="-fx-background-radius: 10px;" text="Ok">
+      <Button fx:id="ok" layoutX="919.0" layoutY="96.0" mnemonicParsing="false" onAction="#pesquisar" prefHeight="25.0" prefWidth="52.0" style="-fx-background-radius: 10px;" text="Ok">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -109,14 +109,15 @@
             <Font name="Tahoma Bold" size="11.0" />
          </font>
       </Button>
-      <TextField layoutX="399.0" layoutY="96.0" prefHeight="25.0" prefWidth="341.0" promptText="Pesquisar" />
+      <TextField fx:id="pesquisa" layoutX="399.0" layoutY="96.0" prefHeight="25.0" prefWidth="341.0" promptText="Pesquisar" />
       <TableView fx:id="lista" layoutX="398.0" layoutY="136.0" prefHeight="315.0" prefWidth="573.0">
          <columns>
-            <TableColumn fx:id="id" minWidth="0.0" prefWidth="31.0" text="ID" />
-            <TableColumn fx:id="numSerie" prefWidth="75.0" text="Nº" />
-            <TableColumn fx:id="nomeProd" prefWidth="289.0" text="Nome" />
-            <TableColumn fx:id="quantTotal" prefWidth="84.0" text="Estoque" />
-            <TableColumn fx:id="valor" minWidth="0.0" prefWidth="93.0" text="Preço" />
+            <TableColumn fx:id="loc" minWidth="0.0" prefWidth="61.0" text="Local" />
+            <TableColumn fx:id="id" minWidth="0.0" prefWidth="37.0" text="ID" />
+            <TableColumn fx:id="numSerie" prefWidth="81.0" text="Nº" />
+            <TableColumn fx:id="nomeProd" prefWidth="230.0" text="Nome" />
+            <TableColumn fx:id="quantTotal" prefWidth="86.0" text="Estoque" />
+            <TableColumn fx:id="valor" minWidth="0.0" prefWidth="77.0" text="Preço" />
          </columns>
       </TableView>
       <Button fx:id="voltar" layoutX="398.0" layoutY="464.0" mnemonicParsing="false" onAction="#voltar" prefHeight="25.0" prefWidth="82.0" style="-fx-background-radius: 10px;" text="Voltar">
@@ -127,5 +128,10 @@
             <Font name="Tahoma Bold" size="11.0" />
          </font>
       </Button>
+      <Label fx:id="mensagem" alignment="CENTER" layoutX="397.0" layoutY="121.0" prefHeight="17.0" prefWidth="573.0" text="Label" visible="false">
+         <font>
+            <Font name="Tahoma Bold" size="11.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

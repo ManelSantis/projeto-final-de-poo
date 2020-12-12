@@ -142,13 +142,30 @@ public class ProdutoDAO extends BaseDAO<ProdutoVO> {
 	}
 
 	public ResultSet findByName(ProdutoVO prod) {
-		String sql = "select * from produto where nome like ?";
+		String sql = "select * from produto where nome ilike ?";
 		PreparedStatement ptst;
 		ResultSet rs = null;
 		
 		try {
 			ptst = getConnection().prepareStatement(sql);
 			ptst.setString(1,"%"+ prod.getNome() + "%");
+			rs = ptst.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return rs;
+	}
+	
+	public ResultSet findBySerie(ProdutoVO prod) {
+		String sql = "select * from produto where serie ilike ?";
+		PreparedStatement ptst;
+		ResultSet rs = null;
+		
+		try {
+			ptst = getConnection().prepareStatement(sql);
+			ptst.setString(1,"%"+ prod.getSerie() + "%");
 			rs = ptst.executeQuery();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -61,7 +61,51 @@ public class ProdutoBO implements ProdutoInterBO{
 		}
 		return produto;
 	}
+	
+	public ArrayList<ProdutoVO> findByNome(ProdutoVO pro){
+		ResultSet rs = prod.findByName(pro);
+		ArrayList<ProdutoVO> produtos = new ArrayList<ProdutoVO>();
+		try {
+			while (rs.next()) {
+				ProdutoVO produto = new ProdutoVO();
+				produto.setNome(rs.getString("nome"));
+				produto.setPreco(rs.getDouble("preco"));
+				produto.setPeso(rs.getDouble("peso"));
+				produto.setDescricao(rs.getString("descricao"));
+				produto.setId(rs.getLong("idproduto"));
+				produto.setSerie(rs.getString("serie"));
+				produtos.add(produto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return produtos;
+	}
 
+	public ArrayList<ProdutoVO> findBySerie(ProdutoVO pro){
+		ResultSet rs = prod.findBySerie(pro);
+		ArrayList<ProdutoVO> produtos = new ArrayList<ProdutoVO>();
+		try {
+			while (rs.next()) {
+				ProdutoVO produto = new ProdutoVO();
+				produto.setNome(rs.getString("nome"));
+				produto.setPreco(rs.getDouble("preco"));
+				produto.setPeso(rs.getDouble("peso"));
+				produto.setDescricao(rs.getString("descricao"));
+				produto.setId(rs.getLong("idproduto"));
+				produto.setSerie(rs.getString("serie"));
+				produtos.add(produto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return produtos;
+	}
+	
 	public void excluir(ProdutoVO produto) {
 		prod.excluir(produto);
 	}

@@ -4,6 +4,8 @@ import projeto.model.vo.ResponsavelVO;
 import projeto.model.vo.VendaVO;
 import projeto.view.Telas;
 import projeto.model.dao.ResponsavelDAO;
+import projeto.model.vo.EstoqueVO;
+import projeto.model.vo.LocalVO;
 import projeto.model.vo.ProdutoVO;
 
 import java.sql.ResultSet;
@@ -25,14 +27,14 @@ public class ResponsavelBO implements ResponsavelInterBO {
 		if(rs != null) {
 			try {
 				while (rs.next()) {
-					ProdutoVO aux = new ProdutoVO();
-					aux.setNome(rs.getString("nome"));
-					aux.setPreco(rs.getDouble("preco"));
-					aux.setQuantidade(rs.getInt("quantidade"));
-					aux.setDescricao(rs.getString("descricao"));
-					aux.setId(rs.getLong("idproduto"));
-					aux.setSerie(rs.getString("serie"));
-					produtos.add(aux);
+					ProdutoVO aux1 = new ProdutoVO();
+					aux1.setNome(rs.getString("nome"));
+					aux1.setPreco(rs.getDouble("preco"));
+					aux1.setId(rs.getLong("idproduto"));
+					aux1.setSerie(rs.getString("serie"));
+					aux1.setDescricao(""+rs.getLong("idlocal"));
+					aux1.setQuantidade(rs.getInt("quantidade"));
+					produtos.add(aux1);
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -41,6 +43,60 @@ public class ResponsavelBO implements ResponsavelInterBO {
 		}
 		return produtos;
 	}
+	
+	public ArrayList<ProdutoVO> estoque(ResponsavelVO resp) {
+		// Irá procurar no banco de dados (em EstoqueDAO) todos os produtos
+		// que estiverem guardados no local que tenha como responsavel
+		// igual ao que está sendo apresentado lá será posto em um ArrayList, 
+		// para então ser passado todos os valores para 
+		// a ArrayList desse método e mandados para a exebição
+		ResultSet rs = responsavel.verEstoque(resp);
+		ArrayList<ProdutoVO> produtos = new ArrayList<ProdutoVO>();
+		if(rs != null) {
+			try {
+				while (rs.next()) {
+					ProdutoVO aux1 = new ProdutoVO();
+					aux1.setNome(rs.getString("nome"));
+					aux1.setPreco(rs.getDouble("preco"));
+					aux1.setId(rs.getLong("idproduto"));
+					aux1.setSerie(rs.getString("serie"));
+					aux1.setDescricao(""+rs.getLong("idlocal"));
+					aux1.setQuantidade(rs.getInt("quantidade"));
+					produtos.add(aux1);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return produtos;
+	}
+
+	
+	public ArrayList<ProdutoVO> estoqueNome(ResponsavelVO resp, ProdutoVO p) {
+		// Irá pesquisar, no estoque de um responsavel, um produto pelo noome
+		ResultSet rs = responsavel.nomeEstoque(resp, p);
+		ArrayList<ProdutoVO> produtos = new ArrayList<ProdutoVO>();
+		if(rs != null) {
+			try {
+				while (rs.next()) {
+					ProdutoVO aux1 = new ProdutoVO();
+					aux1.setNome(rs.getString("nome"));
+					aux1.setPreco(rs.getDouble("preco"));
+					aux1.setId(rs.getLong("idproduto"));
+					aux1.setSerie(rs.getString("serie"));
+					aux1.setDescricao(""+rs.getLong("idlocal"));
+					aux1.setQuantidade(rs.getInt("quantidade"));
+					produtos.add(aux1);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return produtos;
+	}
+
 
 	public ArrayList<VendaVO> historicoDeVendas(ResponsavelVO resp) {
 		ResultSet rs = responsavel.historicoVendas(resp);
@@ -83,6 +139,7 @@ public class ResponsavelBO implements ResponsavelInterBO {
 				aux.setNome(rs.getString("nome"));
 				aux.setCpf(rs.getString("cpf"));
 				aux.setTelefone(rs.getString("telefone"));
+				aux.setUsuario(rs.getString("usuario"));
 				aux.setId(rs.getLong("idresponsavel"));
 				aux.setIdPessoa(rs.getLong("idpessoa"));
 				responsaveis.add(aux);

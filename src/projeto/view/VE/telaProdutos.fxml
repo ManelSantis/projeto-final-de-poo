@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ConEstoque">
+<Pane style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ConProdutos">
    <children>
       <ImageView fitHeight="600.0" fitWidth="1000.0" pickOnBounds="true" smooth="false">
          <image>
@@ -101,7 +101,7 @@
          </font>
       </Button>
       <ComboBox fx:id="escolha" layoutX="757.0" layoutY="96.0" prefWidth="150.0" />
-      <Button fx:id="pesquisa" layoutX="919.0" layoutY="96.0" mnemonicParsing="false" onAction="#pesquisar" prefHeight="25.0" prefWidth="52.0" style="-fx-background-radius: 10px;" text="Ok">
+      <Button fx:id="ok" layoutX="919.0" layoutY="96.0" mnemonicParsing="false" onAction="#pesquisar" prefHeight="25.0" prefWidth="52.0" style="-fx-background-radius: 10px;" text="Ok">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -109,7 +109,7 @@
             <Font name="Tahoma Bold" size="11.0" />
          </font>
       </Button>
-      <TextField layoutX="399.0" layoutY="96.0" prefHeight="25.0" prefWidth="341.0" promptText="Pesquisar" />
+      <TextField fx:id="pesquisa" layoutX="399.0" layoutY="96.0" prefHeight="25.0" prefWidth="341.0" promptText="Pesquisar" />
       <TableView fx:id="lista" layoutX="398.0" layoutY="136.0" prefHeight="315.0" prefWidth="573.0">
          <columns>
             <TableColumn fx:id="id" minWidth="0.0" prefWidth="31.0" text="ID" />
@@ -135,5 +135,10 @@
             <Font name="Tahoma Bold" size="11.0" />
          </font>
       </Button>
+      <Label fx:id="mensagem" alignment="CENTER" layoutX="398.0" layoutY="120.0" prefHeight="17.0" prefWidth="573.0" text="Label" visible="false">
+         <font>
+            <Font name="Tahoma Bold" size="11.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

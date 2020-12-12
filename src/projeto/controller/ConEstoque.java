@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -17,23 +18,21 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
+import projeto.model.bo.EstoqueBO;
 import projeto.model.bo.LocalBO;
 import projeto.model.bo.ProdutoBO;
 import projeto.model.bo.ResponsavelBO;
+import projeto.model.vo.EstoqueVO;
 import projeto.model.vo.LocalVO;
 import projeto.model.vo.ProdutoVO;
+import projeto.model.vo.ResponsavelVO;
 import projeto.view.Telas;
 
-public class ConEstoque extends ConMenu implements Initializable{
-	private List<String> categorias = new ArrayList<String>();
-	private ObservableList<String> cb;
-	private static ProdutoVO editavel;
-	private static boolean estocar;
-	private static boolean editar;
-	private static boolean deletar;
-	
+public class ConEstoque extends ConMenu implements Initializable {
+
 	@FXML
-    private TableView<ProdutoVO> lista;
+	private TableView<ProdutoVO> lista;
 	@FXML
 	private TableColumn<ProdutoVO, String> numSerie;
 	@FXML
@@ -44,256 +43,189 @@ public class ConEstoque extends ConMenu implements Initializable{
 	private TableColumn<ProdutoVO, Double> valor;
 	@FXML
 	private TableColumn<ProdutoVO, Long> id;
-	
-	
 	@FXML
-	private Label tipo;
+	private TableColumn<ProdutoVO, Long> loc;
+
 	@FXML
-	private TextField serie;
-	@FXML
-	private TextField nome;
-	@FXML
-	private TextArea descricao;
-	@FXML
-	private TextField preco;
-	@FXML
-	private TextField peso;
-	@FXML
-	private TextField ID;
-	
+	private Label mensagem;
 	@FXML
 	private ComboBox<String> escolha;
 	@FXML
-	private ComboBox<String> locais;
-	
+	private TextField pesquisa;
+
 	@FXML
-	private Label nomeProduto;
+	private Button aumentar;
 	@FXML
-	private Label serieProduto;
-	
+	private Button diminuir;
+	@FXML
+	private Button deletar;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		if(descricao != null) {
-			descricao.setWrapText(true);
-		}
-		if(editar) {
-			nome.setText(editavel.getNome());
-			serie.setText(editavel.getSerie());
-			preco.setText(""+editavel.getPreco());
-			peso.setText(""+editavel.getPeso());
-			descricao.setText(editavel.getDescricao());
-		}
-		if(deletar) {
-			nomeProduto.setText(editavel.getNome());
-			serieProduto.setText(editavel.getSerie());
-		}
-		if (estocar) {
-			nome.setText(editavel.getNome());
-			serie.setText(editavel.getSerie());
-			preco.setText(""+editavel.getPreco());
-			peso.setText(""+editavel.getPeso());
-			ID.setText(""+editavel.getId());
-		}
-		locais();
 		escolhas();
 		preenxer();
 	}
-	
+
 	public void escolhas() {
-		if(escolha != null) {
-		categorias.add("Nome");
-		categorias.add("Responsável");
-		categorias.add("Serie");
-		cb = FXCollections.observableArrayList(categorias);
-		escolha.setItems(cb);
-		}
-	}
-	
-	public void locais() {
-		if(locais != null) {
-			LocalBO aux = new LocalBO();
-			ArrayList<LocalVO> aux2 = aux.listar();
-			ArrayList<String> aux3 = new ArrayList<String>();
-			
-			for (int i = 0; i< aux2.size(); i++) {
-				aux3.add(aux2.get(i).getId() + "/" + aux2.get(i).getCompartimento() + "/" + aux2.get(i).getLocalizacao());
+		if (escolha != null) {
+			ResponsavelBO aux = new ResponsavelBO();
+			ArrayList<ResponsavelVO> aux2 = aux.listar();
+			ArrayList<String> nomes = new ArrayList<String>();
+			for (int i = 0; i < aux2.size(); i++) {
+				nomes.add(aux2.get(i).getId() + "/" + aux2.get(i).getUsuario());
 			}
-			
-    		ObservableList<String> locaisUser = FXCollections.observableArrayList(aux3);
-    		locais.setItems(locaisUser);
+			ObservableList<String> cb = FXCollections.observableArrayList(nomes);
+			escolha.setItems(cb);
 		}
 	}
-	
-	public void estocar (ActionEvent e) throws Exception{
-		ProdutoVO prod = lista.getSelectionModel().getSelectedItem();
-		if (prod != null) {
-			ProdutoBO aux = new ProdutoBO();
-			prod = aux.findById(prod);
-			setEditavel(prod);
-			setEstocar(true);
-			Telas.estocar();
-		}
-	}
-	
-	public void estoq (ActionEvent e) throws Exception {
-		
-	}
-	
-	public void voltar (ActionEvent e) throws Exception{
-		Telas.telaEstoqueInicio();
-	}
-	
-	public void produtos (ActionEvent e) throws Exception{
-		Telas.telaProdutos();
-	}
-	
-	public void estoque (ActionEvent e) throws Exception{
-		Telas.telaEstoque();
-	}
-	
-	
+
 	public void preenxer() {
-		if (lista != null) {
-			if(tipo.getText().equals("Produtos")){
-				ProdutoBO aux = new ProdutoBO();
-				ObservableList<ProdutoVO> produtos = FXCollections.observableArrayList(aux.listar());
+		ResponsavelBO aux = new ResponsavelBO();
+		ObservableList<ProdutoVO> produtos = FXCollections.observableArrayList(aux.estoque());
+		nomeProd.setCellValueFactory(new PropertyValueFactory<ProdutoVO, String>("nome"));
+		numSerie.setCellValueFactory(new PropertyValueFactory<ProdutoVO, String>("serie"));
+		quantTotal.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Integer>("quantidade"));
+		valor.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Double>("preco"));
+		id.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("id"));
+		loc.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("descricao"));
+		lista.setItems(produtos);
+	}
+
+	/// ESTOQUE///
+	public void aumentar(ActionEvent e) throws Exception {
+		ProdutoVO aux = lista.getSelectionModel().getSelectedItem();
+		if (aux != null) {
+			LocalVO l = new LocalVO();
+			l.setId(Long.parseLong(aux.getDescricao()));
+			EstoqueVO es = new EstoqueVO();
+			es.setLocal(l);
+			es.setProduto(aux);
+			es.setQuantidade(1 + aux.getQuantidade());
+			EstoqueBO salvar = new EstoqueBO();
+			salvar.editar(es);
+			Telas.telaEstoque();
+		} else {
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText("Por favor, selecione um produto para aumentar a quantidade");
+			mensagem.setVisible(true);
+		}
+	}
+
+	public void diminuir(ActionEvent e) throws Exception {
+		ProdutoVO aux = lista.getSelectionModel().getSelectedItem();
+		if (aux != null) {
+			LocalVO l = new LocalVO();
+			l.setId(Long.parseLong(aux.getDescricao()));
+			EstoqueVO es = new EstoqueVO();
+			es.setLocal(l);
+			es.setProduto(aux);
+			es.setQuantidade(aux.getQuantidade() - 1);
+			EstoqueBO salvar = new EstoqueBO();
+			salvar.editar(es);
+			Telas.telaEstoque();
+		} else {
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText("Por favor, selecione um produto para diminuir a quantidade");
+			mensagem.setVisible(true);
+		}
+	}
+
+	public void deletar(ActionEvent e) throws Exception {
+		ProdutoVO aux = lista.getSelectionModel().getSelectedItem();
+		if (aux != null) {
+			LocalVO l = new LocalVO();
+			l.setId(Long.parseLong(aux.getDescricao()));
+			EstoqueVO es = new EstoqueVO();
+			es.setLocal(l);
+			es.setProduto(aux);
+			es.setQuantidade(aux.getQuantidade());
+			EstoqueBO salvar = new EstoqueBO();
+			salvar.excluir(es);
+			Telas.telaEstoque();
+		} else {
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText("Por favor, selecione um produto para remover do seu estoque");
+			mensagem.setVisible(true);
+		}
+	}
+
+	public void pesquisar(ActionEvent e) throws Exception {
+		if ((pesquisa.getText() != null) && (!pesquisa.getText().isEmpty())) {
+			if (escolha.getSelectionModel().getSelectedItem() != null) {
+				mensagem.setVisible(false);
+				String[] respon = escolha.getSelectionModel().getSelectedItem().split("/");
+
+				// Achar os dados do responsavel que está pesquisando;
+				ResponsavelBO resp = new ResponsavelBO();
+				ResponsavelVO re = new ResponsavelVO();
+				re.setId(Long.parseLong(respon[0]));
+				re = resp.findById(re);
+				if (re.getId() == Telas.getUsuario().getId()) {
+					aumentar.setVisible(true);
+					diminuir.setVisible(true);
+					deletar.setVisible(true);
+				} else {
+					aumentar.setVisible(false);
+					diminuir.setVisible(false);
+					deletar.setVisible(false);
+				}
+
+				// os dados do produto a ser pesquisado
+				ProdutoVO aux1 = new ProdutoVO();
+				aux1.setNome(pesquisa.getText());
+
+				ObservableList<ProdutoVO> produtos = FXCollections.observableArrayList(resp.estoqueNome(re, aux1));
 				nomeProd.setCellValueFactory(new PropertyValueFactory<ProdutoVO, String>("nome"));
 				numSerie.setCellValueFactory(new PropertyValueFactory<ProdutoVO, String>("serie"));
 				quantTotal.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Integer>("quantidade"));
 				valor.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Double>("preco"));
 				id.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("id"));
+				loc.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("descricao"));
 				lista.setItems(produtos);
 			} else {
-				ResponsavelBO aux = new ResponsavelBO();
-				ObservableList<ProdutoVO> produtos = FXCollections.observableArrayList(aux.estoque());
+				mensagem.setTextFill(Color.web("red"));
+				mensagem.setText("Por favor, selecione um tipo de pesquisa");
+				mensagem.setVisible(true);
+			}
+		} else {
+			if (escolha.getSelectionModel().getSelectedItem() != null) {
+				mensagem.setVisible(false);
+				String[] respon = escolha.getSelectionModel().getSelectedItem().split("/");
+
+				// Achar os dados do responsavel que está pesquisando;
+				ResponsavelBO resp = new ResponsavelBO();
+				ResponsavelVO re = new ResponsavelVO();
+				re.setId(Long.parseLong(respon[0]));
+				re = resp.findById(re);
+				if (re.getId() == Telas.getUsuario().getId()) {
+					aumentar.setVisible(true);
+					diminuir.setVisible(true);
+					deletar.setVisible(true);
+				} else {
+					aumentar.setVisible(false);
+					diminuir.setVisible(false);
+					deletar.setVisible(false);
+				}
+
+				ObservableList<ProdutoVO> produtos = FXCollections.observableArrayList(resp.estoque(re));
 				nomeProd.setCellValueFactory(new PropertyValueFactory<ProdutoVO, String>("nome"));
 				numSerie.setCellValueFactory(new PropertyValueFactory<ProdutoVO, String>("serie"));
 				quantTotal.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Integer>("quantidade"));
 				valor.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Double>("preco"));
 				id.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("id"));
+				loc.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("descricao"));
 				lista.setItems(produtos);
-			
+			} else {
+				mensagem.setTextFill(Color.web("red"));
+				mensagem.setText("Por favor, selecione um tipo de pesquisa");
+				mensagem.setVisible(true);
 			}
+
 		}
 	}
-	
-	public void telaAdicionar(ActionEvent e) throws Exception {
-		Telas.adicionarProduto();
-	}
-	
-	public void adicionar(ActionEvent e) throws Exception {
-		ProdutoVO prod = new ProdutoVO();
-		ProdutoBO salvar = new ProdutoBO();
-		prod.setNome(nome.getText());
-		prod.setSerie(serie.getText());
-		prod.setPreco(Double.parseDouble(preco.getText()));
-		prod.setPeso(Double.parseDouble(peso.getText()));
-		prod.setDescricao(descricao.getText());
-		salvar.cadastrar(prod);
-		Telas.telaEstoque();
-	}
-	
-	public void telaEditar(ActionEvent e) throws Exception{
-		ProdutoVO prod = lista.getSelectionModel().getSelectedItem();
-		if(prod != null) {
-			ProdutoBO aux = new ProdutoBO();
-			prod = aux.findById(prod);
-			setEditavel(prod);
-			setEditar(true);
-			Telas.editarProduto();
-		}
-	}
-	
-	public void editar (ActionEvent e) throws Exception {
-		ProdutoVO prod = new ProdutoVO();
-		ProdutoBO salvar = new ProdutoBO();
-		prod.setNome(nome.getText());
-		prod.setSerie(serie.getText());
-		prod.setPreco(Double.parseDouble(preco.getText()));
-		prod.setPeso(Double.parseDouble(peso.getText()));
-		prod.setDescricao(descricao.getText());
-		prod.setId(editavel.getId());
-		salvar.editar(prod);
-		setEditar(false);
-		Telas.telaEstoque();
-	}
-	
-	public void telaExcluir(ActionEvent e) throws Exception{
-		ProdutoVO prod = lista.getSelectionModel().getSelectedItem();
-		if(prod != null) {
-			ProdutoBO aux = new ProdutoBO();
-			prod = aux.findById(prod);
-			setEditavel(prod);
-			setDeletar(true);
-			Telas.excluirProduto();
-		}
-	}
-	
-	public void excluir (ActionEvent e) throws Exception {
-		ProdutoBO salvar = new ProdutoBO();
-		salvar.excluir(editavel);
-		setDeletar(false);
-		Telas.telaEstoque();
-	}
-	
-	public void aumentar (ActionEvent e) throws Exception{
-		Telas.telaEstoque();
-	}
-	
-	public void diminuir (ActionEvent e) throws Exception{
-		Telas.telaEstoque();
-	}
-	
-	public void deletar (ActionEvent e) throws Exception{
-		Telas.telaEstoque();
-	}
-	
-	public void pesquisar (ActionEvent e) throws Exception{
-		Telas.telaEstoque();
-	}
-	
-	public void cancelarP (ActionEvent e) throws Exception{
-		setDeletar(false);
-		setEditar(false);
-		Telas.telaProdutos();
-	}
-	
-	public void cancelarE (ActionEvent e) throws Exception{
-		setDeletar(false);
-		setEditar(false);
-		Telas.telaEstoque();
+
+	public void voltar(ActionEvent e) throws Exception {
+		Telas.telaEstoqueInicio();
 	}
 
-	public static ProdutoVO getEditavel() {
-		return editavel;
-	}
-
-	public static void setEditavel(ProdutoVO editavel) {
-		ConEstoque.editavel = editavel;
-	}
-
-	public static boolean isEditar() {
-		return editar;
-	}
-
-	public static void setEditar(boolean editar) {
-		ConEstoque.editar = editar;
-	}
-
-	public static boolean isDeletar() {
-		return deletar;
-	}
-
-	public static void setDeletar(boolean deletar) {
-		ConEstoque.deletar = deletar;
-	}
-
-	public static boolean isEstocar() {
-		return estocar;
-	}
-
-	public static void setEstocar(boolean estocar) {
-		ConEstoque.estocar = estocar;
-	}
-	
 }
