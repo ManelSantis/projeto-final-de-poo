@@ -23,7 +23,7 @@
             <Font name="Tahoma" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="confirmar" layoutX="367.0" layoutY="353.0" mnemonicParsing="false" onAction="#confirmar" style="-fx-background-radius: 10px;" text="Confirmar">
+      <Button fx:id="excluir" layoutX="367.0" layoutY="353.0" mnemonicParsing="false" onAction="#excluir" style="-fx-background-radius: 10px;" text="Confirmar">
          <font>
             <Font name="Tahoma Bold" size="16.0" />
          </font>

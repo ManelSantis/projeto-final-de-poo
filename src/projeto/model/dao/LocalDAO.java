@@ -64,7 +64,7 @@ public class LocalDAO extends BaseDAO<LocalVO> implements LocalInterDAO{
 
 	public void excluir(LocalVO local) {
 		//deletar o local e todos os itens dependentes desse local
-		String sql = "delete on cascade from local where idLocal = ?";
+		String sql = "delete  from local where idLocal = ?";
 		PreparedStatement ptst;
 		try {
 			ptst = getConnection().prepareStatement(sql);

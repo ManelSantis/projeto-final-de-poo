@@ -18,7 +18,7 @@
             <Font name="Tahoma Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="confirmar" layoutX="510.0" layoutY="447.0" mnemonicParsing="false" onAction="#confirmar" onMouseClicked="#estoque" style="-fx-background-radius: 10px;" text="Confirmar">
+      <Button fx:id="editar" layoutX="510.0" layoutY="447.0" mnemonicParsing="false" onAction="#editar" onMouseClicked="#estoque" style="-fx-background-radius: 10px;" text="Confirmar">
          <font>
             <Font name="Tahoma Bold" size="16.0" />
          </font>
@@ -33,7 +33,7 @@
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="resonsavel" disable="true" layoutX="184.0" layoutY="220.0" prefHeight="25.0" prefWidth="419.0" />
+      <TextField fx:id="responsavel" disable="true" layoutX="184.0" layoutY="220.0" prefHeight="25.0" prefWidth="419.0" />
       <TextField fx:id="compartimento" layoutX="184.0" layoutY="282.0" prefHeight="25.0" prefWidth="196.0" />
       <Label layoutX="407.0" layoutY="257.0" text="Localização">
          <font>

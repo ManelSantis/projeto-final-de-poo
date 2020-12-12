@@ -92,7 +92,7 @@
             <Font name="Tahoma Bold" size="11.0" />
          </font>
       </Button>
-      <Button fx:id="excluir" layoutX="889.0" layoutY="470.0" mnemonicParsing="false" onAction="#excluirlocal" prefHeight="25.0" prefWidth="82.0" style="-fx-background-radius: 10px;" text="Excluir">
+      <Button fx:id="excluirlocal" layoutX="889.0" layoutY="470.0" mnemonicParsing="false" onAction="#excluirlocal" prefHeight="25.0" prefWidth="82.0" style="-fx-background-radius: 10px;" text="Excluir">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

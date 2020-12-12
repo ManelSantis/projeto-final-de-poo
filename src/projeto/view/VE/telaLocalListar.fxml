@@ -90,7 +90,7 @@
         <columns>
           <TableColumn prefWidth="92.0" text="Id" />
           <TableColumn prefWidth="107.0" text="Responsavel" />
-            <TableColumn fx:id="tabela" prefWidth="124.0" text="LocalizaÃ§Ã£o" />
+            <TableColumn fx:id="tabela" prefWidth="124.0" text="Localização" />
         </columns>
       </TableView>
    </children>
