@@ -20,7 +20,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 		try {
 			st = getConnection().prepareStatement(sql);
 			st.setLong(1, responsavel.getId());
-			rs = st.executeQuery(sql);
+			rs = st.executeQuery();
 			/*
 			 * while (rs.next()) { //nesse while está sendo primeiramente adicionado apenas
 			 * os ids //de local e produto; EstoqueVO aux = new EstoqueVO(); //para salvar

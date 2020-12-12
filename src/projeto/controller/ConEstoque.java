@@ -252,7 +252,13 @@ public class ConEstoque extends ConMenu implements Initializable{
 		Telas.telaEstoque();
 	}
 	
-	public void cancelar (ActionEvent e) throws Exception{
+	public void cancelarP (ActionEvent e) throws Exception{
+		setDeletar(false);
+		setEditar(false);
+		Telas.telaProdutos();
+	}
+	
+	public void cancelarE (ActionEvent e) throws Exception{
 		setDeletar(false);
 		setEditar(false);
 		Telas.telaEstoque();
