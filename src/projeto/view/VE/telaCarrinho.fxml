@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="742.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ConVender">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="742.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ConCarrinho">
    <children>
-      <Button fx:id="adicionarCarrinho" layoutX="100.0" layoutY="372.0" mnemonicParsing="false" onAction="#adicionarCarrinho" prefHeight="32.0" prefWidth="245.0" style="-fx-background-radius: 10px;" text="Adicionar ao Carrinho">
-         <font>
-            <Font name="Tahoma Bold" size="16.0" />
-         </font>
-      </Button>
-      <Button fx:id="removerCarrinho" layoutX="422.0" layoutY="372.0" mnemonicParsing="false" onAction="#removerCarrinho" prefHeight="32.0" prefWidth="237.0" style="-fx-background-radius: 10px;" text="Remover do Carrinho">
-         <font>
-            <Font name="Tahoma Bold" size="16.0" />
-         </font>
-      </Button>
       <ImageView fitHeight="100.0" fitWidth="300.0" layoutX="-99.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" rotate="-45.0">
          <image>
             <Image url="@bar.png" />
@@ -28,18 +19,51 @@
             <Font name="Tahoma Bold" size="24.0" />
          </font>
       </Label>
-      <TableView layoutX="100.0" layoutY="109.0" prefHeight="254.0" prefWidth="559.0">
+      <TableView fx:id="lista" layoutX="102.0" layoutY="105.0" prefHeight="284.0" prefWidth="555.0">
          <columns>
-            <TableColumn prefWidth="75.0" text="Nº" />
-            <TableColumn prefWidth="184.0" text="Nome" />
-            <TableColumn prefWidth="197.0" text="Quantidade" />
-            <TableColumn fx:id="tabela" minWidth="0.0" prefWidth="102.0" text="Preço" />
+            <TableColumn fx:id="loc" prefWidth="58.0" text="Local" />
+            <TableColumn fx:id="id" prefWidth="47.0" text="ID" />
+            <TableColumn fx:id="nome" prefWidth="274.0" text="Nome" />
+            <TableColumn fx:id="quant" prefWidth="95.0" text="Carrinho" />
+            <TableColumn fx:id="preco" minWidth="0.0" text="Preço" />
          </columns>
       </TableView>
-      <Button fx:id="voltar" layoutX="257.0" layoutY="422.0" mnemonicParsing="false" onAction="#voltar" prefHeight="32.0" prefWidth="245.0" style="-fx-background-radius: 10px;" text="Voltar">
+      <Button fx:id="deletar" layoutX="575.0" layoutY="401.0" mnemonicParsing="false" onAction="#deletar" prefHeight="25.0" prefWidth="82.0" style="-fx-background-radius: 10px;" text="Deletar">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
          <font>
-            <Font name="Tahoma Bold" size="16.0" />
+            <Font name="Tahoma Bold" size="11.0" />
          </font>
       </Button>
+      <Button fx:id="diminuir" layoutX="481.0" layoutY="401.0" mnemonicParsing="false" onAction="#diminuir" prefHeight="25.0" prefWidth="82.0" style="-fx-background-radius: 10px;" text="Diminuir">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Tahoma Bold" size="11.0" />
+         </font>
+      </Button>
+      <Button fx:id="aumentar" layoutX="389.0" layoutY="401.0" mnemonicParsing="false" onAction="#aumentar" prefHeight="25.0" prefWidth="82.0" style="-fx-background-radius: 10px;" text="Aumentar">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Tahoma Bold" size="11.0" />
+         </font>
+      </Button>
+      <Button fx:id="voltar" layoutX="102.0" layoutY="401.0" mnemonicParsing="false" onAction="#voltar" prefHeight="25.0" prefWidth="82.0" style="-fx-background-radius: 10px;" text="Voltar">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Tahoma Bold" size="11.0" />
+         </font>
+      </Button>
+      <Label fx:id="mensagem" alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="88.0" prefHeight="17.0" prefWidth="555.0" text="Label" visible="false">
+         <font>
+            <Font name="Tahoma Bold" size="11.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

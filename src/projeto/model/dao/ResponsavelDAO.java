@@ -76,6 +76,61 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 
 		return rs;
 	}
+	
+	public ResultSet precoEstoque(ResponsavelVO responsavel, ProdutoVO produto) {
+		String sql = "select e.idlocal, e.idproduto, e.quantidade, p.nome, p.serie, p.preco " + 
+				  "from estoque as e, local as l, produto as p "
+				+ "where e.idlocal = l.idlocal and p.idproduto = e.idproduto and l.idresponsavel = ? and p.preco <= ?";
+
+		PreparedStatement st;
+		ResultSet rs = null;
+		// ArrayList<EstoqueVO> produtos = new ArrayList<EstoqueVO>();
+		try {
+			st = getConnection().prepareStatement(sql);
+			st.setLong(1, responsavel.getId());
+			st.setDouble(2, produto.getPreco());
+			rs = st.executeQuery();
+			/*
+			 * while (rs.next()) { //nesse while está sendo primeiramente adicionado apenas
+			 * os ids //de local e produto; EstoqueVO aux = new EstoqueVO(); //para salvar
+			 * dentro da arraylist ProdutoVO aux2 = new ProdutoVO(); //para salvar primeiro
+			 * a serie LocalVO aux3 = new LocalVO(); //para salvar primero o id do local //
+			 * já que na tabela estoque estão apenas o numero de serie e o id do local
+			 * aux2.setSerie(rs.getString("idProduto")); aux.setProduto(aux2);
+			 * aux3.setId(rs.getInt("idLocal")); aux.setLocal(aux3);
+			 * aux.setQuantidade(rs.getInt("quantidade")); produtos.add(aux); }
+			 */
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// sql = "select * from local where compartimento = ?";
+		// sql = "select * from produto where serie = ?";
+
+		return rs;
+	}
+
+	public ResultSet idEstoque(ResponsavelVO responsavel, ProdutoVO produto) {
+		String sql = "select e.idlocal, e.idproduto, e.quantidade, p.nome, p.serie, p.preco " + 
+				  "from estoque as e, local as l, produto as p "
+				+ "where e.idlocal = l.idlocal and p.idproduto = e.idproduto and l.idresponsavel = ? and p.idproduto = ?";
+
+		PreparedStatement st;
+		ResultSet rs = null;
+		try {
+			st = getConnection().prepareStatement(sql);
+			st.setLong(1, responsavel.getId());
+			st.setLong(2, produto.getId());
+			rs = st.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return rs;
+	}
+
 
 
 	public ResultSet historicoVendas(ResponsavelVO responsavel) {

@@ -106,6 +106,7 @@ public class ProdutoBO implements ProdutoInterBO{
 		return produtos;
 	}
 	
+	
 	public void excluir(ProdutoVO produto) {
 		prod.excluir(produto);
 	}

@@ -73,15 +73,16 @@
                   <Font name="Tahoma Bold" size="12.0" />
                </font>
             </Label>
-            <Button fx:id="Avancarcompra" layoutX="567.0" layoutY="424.0" mnemonicParsing="false" onAction="#avancar" prefHeight="25.0" prefWidth="227.0" style="-fx-background-radius: 10;" text="Avançar">
+            <Button fx:id="avançar" layoutX="567.0" layoutY="424.0" mnemonicParsing="false" onAction="#avancar" prefHeight="25.0" prefWidth="227.0" style="-fx-background-radius: 10;" text="Avançar">
                <font>
                   <Font name="Tahoma Bold" size="12.0" />
                </font>
             </Button>
-            <TableView layoutX="511.0" layoutY="167.0" prefHeight="242.0" prefWidth="338.0">
+            <TableView fx:id="lista" layoutX="511.0" layoutY="167.0" prefHeight="242.0" prefWidth="338.0">
               <columns>
-                <TableColumn prefWidth="173.0" text="Nome" />
-                <TableColumn fx:id="tabela2" prefWidth="179.0" text="CPF" />
+                  <TableColumn fx:id="id" prefWidth="40.0" text="ID" />
+                <TableColumn fx:id="nome" prefWidth="184.0" text="Nome" />
+                <TableColumn fx:id="cpf" prefWidth="113.0" text="CPF" />
               </columns>
             </TableView>
             <Label layoutX="639.0" layoutY="56.0" text="Vender">
@@ -89,8 +90,8 @@
                   <Font name="Tahoma Bold" size="36.0" />
                </font>
             </Label>
-            <TextField layoutX="511.0" layoutY="131.0" prefHeight="25.0" prefWidth="238.0" promptText="CPF" />
-            <Button fx:id="pesquisa" layoutX="770.0" layoutY="131.0" mnemonicParsing="false" onAction="#pesquisar" prefHeight="25.0" prefWidth="82.0" style="-fx-background-radius: 10px;" text="Pesquisar">
+            <TextField fx:id="pesquisa" layoutX="511.0" layoutY="123.0" prefHeight="25.0" prefWidth="238.0" promptText="CPF" />
+            <Button fx:id="ok" layoutX="770.0" layoutY="123.0" mnemonicParsing="false" onAction="#pesquisar" prefHeight="25.0" prefWidth="82.0" style="-fx-background-radius: 10px;" text="Pesquisar">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -98,6 +99,11 @@
                   <Font name="Tahoma Bold" size="11.0" />
                </font>
             </Button>
+            <Label fx:id="mensagem" alignment="CENTER" contentDisplay="CENTER" layoutX="510.0" layoutY="149.0" prefHeight="17.0" prefWidth="338.0" text="Label" visible="false">
+               <font>
+                  <Font name="Tahoma Bold" size="11.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Label fx:id="usuario" layoutX="100.0" layoutY="143.0" text="Label" visible="false" />

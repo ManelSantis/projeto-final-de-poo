@@ -174,5 +174,5 @@ public class ProdutoDAO extends BaseDAO<ProdutoVO> {
 		
 		return rs;
 	}
-
+	
 }

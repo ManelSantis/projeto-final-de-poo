@@ -8,34 +8,13 @@ import java.sql.Statement;
 import projeto.model.vo.ProdutoVO;
 import projeto.model.vo.VendaVO;
 
-public class ItemPedidoDAO extends BaseDAO<VendaVO> implements ItemPedidoInterDAO{
+public class ItemPedidoDAO extends BaseDAO<VendaVO> implements ItemPedidoInterDAO {
 
 	public void adicionarCarrinho(VendaVO venda, ProdutoVO produto) {
 		// esse método adicionar no carrinho, a chava primeira
-		//sendo idpedido + idproduto
-		PreparedStatement ptst;
-		String sql = "insert into itempedido (idPedido, idProduto, quantidade) "
-				+ "values (?, ?, ?);";
-		try {
-			ptst = getConnection().prepareStatement(sql);
-			ptst.setLong(1, venda.getId()); // salva o código da venda
-			ptst.setLong(2, produto.getId()); // salva o código do pedido
-			ptst.setInt(3, produto.getQuantiPedido());
-			// salva a quantidade que está sendo pedida
-			int linhas = ptst.executeUpdate();
-			if (linhas == 0) {
-				throw new SQLException("Nenhuma linha adicionada");
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public void editarCarrinho(VendaVO venda, ProdutoVO produto) {
-		// verificar se o item já existe dentro do pedido
+		// sendo idpedido + idproduto
 		boolean aux = false;
-		String sql = "select * from itempedito where idpedido = ? and idproduto = ?";
+		String sql = "select * from itempedido where idpedido = ? and idproduto = ?";
 		PreparedStatement ptst;
 		ResultSet rs;
 
@@ -51,7 +30,50 @@ public class ItemPedidoDAO extends BaseDAO<VendaVO> implements ItemPedidoInterDA
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		if (aux) {
+
+		} else {
+
+			sql = "insert into itempedido (idPedido, idProduto, idlocal, quantidade) " + "values (?, ?, ?, ?);";
+			try {
+				ptst = getConnection().prepareStatement(sql);
+				ptst.setLong(1, venda.getId()); // salva o código da venda
+				ptst.setLong(2, produto.getId()); // salva o código do pedido
+				ptst.setInt(3, produto.getQuantiPedido());
+				ptst.setLong(4, Long.parseLong(produto.getDescricao()));
+				// salva a quantidade que está sendo pedida
+				int linhas = ptst.executeUpdate();
+				if (linhas == 0) {
+					throw new SQLException("Nenhuma linha adicionada");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+	}
+
+	public void editarCarrinho(VendaVO venda, ProdutoVO produto) {
+		// verificar se o item já existe dentro do pedido
+		boolean aux = false;
+		String sql = "select * from itempedido where idpedido = ? and idproduto = ?";
+		PreparedStatement ptst;
+		ResultSet rs;
+
+		try {
+			ptst = getConnection().prepareStatement(sql);
+			ptst.setLong(1, venda.getId());
+			ptst.setLong(2, produto.getId());
+			rs = ptst.executeQuery();
+			while (rs.next()) {
+				aux = true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		if (aux) {
 			// se já existir, irá fazer um update
 			sql = "update itempedido set quantidade = ? where idpedido = ? and idproduto = ?";
@@ -82,9 +104,12 @@ public class ItemPedidoDAO extends BaseDAO<VendaVO> implements ItemPedidoInterDA
 			e.printStackTrace();
 		}
 	}
-	
-	public ResultSet listarItens (VendaVO venda) {
-		String sql = "select * from itempedido where idpedido = ?";
+
+	public ResultSet listarItens(VendaVO venda) {
+		String sql = "select p.nome, p.idproduto, p.preco, "
+				+ "i.idlocal, i.quantidade "
+				+ "from itempedido as i, produto as p, local as l "
+				+ "where i.idproduto = p.idproduto and i.idlocal = l.idlocal and i.idpedido = ?";
 		PreparedStatement ptst;
 		ResultSet rs = null;
 		try {
@@ -95,26 +120,25 @@ public class ItemPedidoDAO extends BaseDAO<VendaVO> implements ItemPedidoInterDA
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return rs;
 	}
-	
+
 	@Override
 	public void cadastrar(VendaVO vo) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void editar(VendaVO vo) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void excluir(VendaVO vo) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

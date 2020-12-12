@@ -9,7 +9,7 @@ import java.sql.Date;
 import projeto.model.vo.VendaVO;
 
 public class VendaDAO extends BaseDAO<VendaVO> {
-
+	
 	public void cadastrar(VendaVO venda) {
 		// nesse método a venda é confirmada
 		String sql = "insert into venda (idvenda, idpedido, data) values (?, ?, ?)";
