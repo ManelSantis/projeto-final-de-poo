@@ -142,7 +142,6 @@ public class ResponsavelBO implements ResponsavelInterBO {
 		return produto;
 	}
 
-
 	public ArrayList<VendaVO> historicoDeVendas(ResponsavelVO resp) {
 		ResultSet rs = responsavel.historicoVendas(resp);
 		ArrayList<VendaVO> vendas = new ArrayList<VendaVO>();
@@ -164,14 +163,7 @@ public class ResponsavelBO implements ResponsavelInterBO {
 		
 		return vendas;
 	}
-	
-	public ArrayList<VendaVO> relatorio(Calendar inicio, Calendar fim) {
-		// Irá pesquisar no banco de dados em VendasDAO as vendas que possuirem a data 
-		// entre o periodo posto, para então adiciona-las em uma ArrayList 
-		// e enviadas para esse método para serem exibidas
-		ArrayList<VendaVO> vendas = new ArrayList<VendaVO>();
-		return vendas;
-	}
+
 	
 	public ArrayList<ResponsavelVO> listar() {
 		//lista todos os funcionarios disponiveis

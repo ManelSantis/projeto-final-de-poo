@@ -71,13 +71,13 @@
             <Font name="Tahoma Bold" size="12.0" />
          </font>
       </Label>
-      <TableView layoutX="384.0" layoutY="163.0" prefHeight="310.0" prefWidth="572.0">
+      <TableView fx:id="lista" layoutX="384.0" layoutY="163.0" prefHeight="310.0" prefWidth="572.0">
         <columns>
-            <TableColumn fx:id="tabela" prefWidth="70.0" text="Nº" />
-          <TableColumn prefWidth="87.0" text="Data" />
-            <TableColumn prefWidth="131.0" text="Cliente" />
-            <TableColumn prefWidth="156.0" text="Responsavel" />
-          <TableColumn prefWidth="127.0" text="Valor" />
+            <TableColumn fx:id="id" prefWidth="70.0" text="Nº" />
+          <TableColumn fx:id="data" prefWidth="87.0" text="Data" />
+            <TableColumn fx:id="cliente" prefWidth="131.0" text="Cliente" />
+            <TableColumn fx:id="responsavel" prefWidth="156.0" text="Responsavel" />
+          <TableColumn fx:id="valor" prefWidth="127.0" text="Valor" />
         </columns>
       </TableView>
       <Label layoutX="572.0" layoutY="34.0" prefHeight="52.0" prefWidth="196.0" text="Relatório">
@@ -85,8 +85,8 @@
             <Font name="Tahoma Bold" size="41.0" />
          </font>
       </Label>
-      <DatePicker layoutX="423.0" layoutY="121.0" prefHeight="25.0" prefWidth="190.0" promptText="Início" />
-      <DatePicker layoutX="653.0" layoutY="121.0" prefHeight="25.0" prefWidth="190.0" promptText="Fim" />
+      <DatePicker fx:id="comeco" layoutX="423.0" layoutY="121.0" prefHeight="25.0" prefWidth="190.0" promptText="Início" />
+      <DatePicker fx:id="fim" layoutX="653.0" layoutY="121.0" prefHeight="25.0" prefWidth="190.0" promptText="Fim" />
       <Label layoutX="396.0" layoutY="125.0" text="De">
          <font>
             <Font name="Tahoma" size="14.0" />
@@ -106,5 +106,10 @@
          </font>
       </Button>
       <Label layoutX="731.0" layoutY="482.0" text="Toque na linha que deseja ver a nota fiscal" />
+      <Label fx:id="mensagem" alignment="CENTER" contentDisplay="CENTER" layoutX="384.0" layoutY="146.0" prefHeight="14.0" prefWidth="572.0" text="Label" visible="false">
+         <font>
+            <Font name="Tahoma Bold" size="11.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

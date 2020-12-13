@@ -97,7 +97,6 @@ public class ClienteBO implements ClienteInterBO {
 				cliente.setCpf(rs.getString("cpf"));
 				cliente.setEndereco(rs.getString("endereco"));
 				cliente.setNome(rs.getString("nome"));
-				System.out.print(cliente.getNome());
 				cliente.setTelefone(rs.getString("telefone"));
 				cliente.setId(rs.getLong("idcliente"));
 				cliente.setIdPessoa(rs.getLong("idpessoa"));

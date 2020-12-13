@@ -34,13 +34,14 @@ public class ItemPedidoDAO extends BaseDAO<VendaVO> implements ItemPedidoInterDA
 
 		} else {
 
-			sql = "insert into itempedido (idPedido, idProduto, idlocal, quantidade) " + "values (?, ?, ?, ?);";
+			sql = "insert into itempedido (idPedido, idProduto, idlocal, quantidade) " 
+			+ "values (?, ?, ?, ?);";
 			try {
 				ptst = getConnection().prepareStatement(sql);
 				ptst.setLong(1, venda.getId()); // salva o código da venda
 				ptst.setLong(2, produto.getId()); // salva o código do pedido
-				ptst.setInt(3, produto.getQuantiPedido());
-				ptst.setLong(4, Long.parseLong(produto.getDescricao()));
+				ptst.setLong(3, Long.parseLong(produto.getDescricao()));
+				ptst.setInt(4, produto.getQuantiPedido());
 				// salva a quantidade que está sendo pedida
 				int linhas = ptst.executeUpdate();
 				if (linhas == 0) {

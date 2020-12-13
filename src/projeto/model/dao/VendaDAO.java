@@ -12,13 +12,14 @@ public class VendaDAO extends BaseDAO<VendaVO> {
 	
 	public void cadastrar(VendaVO venda) {
 		// nesse método a venda é confirmada
-		String sql = "insert into venda (idvenda, idpedido, data) values (?, ?, ?)";
+		String sql = "insert into venda (idvenda, idpedido, data, valor) values (?, ?, ?, ?)";
 		PreparedStatement ptst;
 		try {
 			ptst = getConnection().prepareStatement(sql);
 			ptst.setString(1, venda.getCodigo()); // salva o código da venda,
 			ptst.setLong(2, venda.getId()); //id do pedido
-			ptst.setDate(3, (java.sql.Date) new Date(venda.getData().getTimeInMillis()));
+			ptst.setDate(3, new Date(venda.getData().getTimeInMillis()));
+			ptst.setDouble(4, venda.getValor());
 			ptst.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -48,8 +49,9 @@ public class VendaDAO extends BaseDAO<VendaVO> {
 	}
 
 	public ResultSet periodo(Calendar inicio, Calendar fim) {
-		String sql = "select v.idVenda, v.data, p.idcliente, p.responsavel" + "from venda as v, pedido as p "
-				+ "where v.idvenda = p.idvenda and v.data between ? and ?;";
+		String sql = "select v.data, v.idpedido, v.valor, "
+				+ " p.idresponsavel, p.idcliente from venda as v, pedido as p "
+				+ "where v.idpedido = p.idpedido and v.data between ? and ?;";
 		PreparedStatement ptst;
 		ResultSet rs = null;
 		// ArrayList<VendaVO> vendas = new ArrayList<VendaVO>();
@@ -95,7 +97,9 @@ public class VendaDAO extends BaseDAO<VendaVO> {
 	@Override
 	public ResultSet listar() {
 		//listar todas as vendas já feitas
-		String sql = "select * from venda";
+		String sql = "select v.data, v.idpedido, v.valor,"
+				+ " p.idresponsavel, p.idcliente from venda as v, pedido as p"
+				+ " where p.idpedido = v.idpedido";
 		PreparedStatement ptst;
 		ResultSet rs = null;
 		try {

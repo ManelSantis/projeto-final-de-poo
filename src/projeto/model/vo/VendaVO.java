@@ -68,6 +68,24 @@ public class VendaVO {
 		//para auxiliar no dao
 		this.data = data;
 	}
+	
+	public String getCli() {
+		//para passar o calendar como string
+		String cli = cliente.getNome();
+		return cli;
+	}
+	
+	public String getResp() {
+		//para passar o calendar como string
+		String resp = responsavel.getNome();
+		return resp;
+	}
+	
+	public String getString() {
+		//para passar o calendar como string
+		String dataFinal = data.get(Calendar.YEAR) + "-" + data.get(Calendar.MONTH) + "-" +data.get(Calendar.DAY_OF_MONTH);
+		return dataFinal;
+	}
 
 	public double getValor() {
 		return valor;
@@ -84,6 +102,11 @@ public class VendaVO {
 	public void zerarValor() {
 		// Usado para zerar o valor caso retornar para alterações na compra
 		valor = 0;
+	}
+	
+	public void setValor(double valor) {
+		// ajduar na hora de pegar uma venda do bd
+		this.valor = valor;
 	}
 
 	public String getCodigo() {
