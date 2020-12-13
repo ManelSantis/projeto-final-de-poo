@@ -6,29 +6,29 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="742.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ConVender">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="742.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ConCarrinho">
    <children>
-      <Button fx:id="cancelarpedido" layoutX="626.0" layoutY="447.0" mnemonicParsing="false" onAction="#cancelarVenda" onMouseClicked="#estoque" prefHeight="32.0" prefWidth="102.0" style="-fx-background-radius: 10px;" text="Cancelar">
+      <Button fx:id="cancelar" layoutX="626.0" layoutY="447.0" mnemonicParsing="false" onAction="#cancelarVenda" onMouseClicked="#estoque" prefHeight="32.0" prefWidth="102.0" style="-fx-background-radius: 10px;" text="Cancelar">
          <font>
             <Font name="Tahoma Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="confirmarpedido" layoutX="510.0" layoutY="447.0" mnemonicParsing="false" onAction="#confirmarVenda" onMouseClicked="#estoque" style="-fx-background-radius: 10px;" text="Confirmar">
+      <Button fx:id="confirmar" layoutX="510.0" layoutY="447.0" mnemonicParsing="false" onAction="#confirmarVenda" onMouseClicked="#estoque" style="-fx-background-radius: 10px;" text="Confirmar">
          <font>
             <Font name="Tahoma Bold" size="16.0" />
          </font>
       </Button>
-      <Label layoutX="93.0" layoutY="105.0" prefHeight="18.0" prefWidth="85.0" text="NomeCliente">
+      <Label fx:id="nomeCli" layoutX="92.0" layoutY="129.0" prefHeight="18.0" prefWidth="274.0" text="NomeCliente">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="92.0" layoutY="138.0" prefHeight="17.0" prefWidth="43.0" text="CPF">
+      <Label fx:id="cpfCli" layoutX="92.0" layoutY="180.0" prefHeight="18.0" prefWidth="274.0" text="CPF">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="92.0" layoutY="171.0" text="Endereco">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="92.0" layoutY="87.0" prefHeight="18.0" prefWidth="274.0" text="Cliente">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
@@ -43,33 +43,40 @@
             <Font name="Tahoma Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="411.0" layoutY="138.0" prefHeight="17.0" prefWidth="43.0" text="CPF">
+      <Label fx:id="cpfResp" layoutX="373.0" layoutY="180.0" prefHeight="18.0" prefWidth="274.0" text="CPF">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="411.0" layoutY="105.0" prefHeight="18.0" prefWidth="132.0" text="NomeResponsavel">
+      <Label fx:id="nomeResp" layoutX="373.0" layoutY="129.0" prefHeight="18.0" prefWidth="274.0" text="NomeResponsavel">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <TableView layoutX="92.0" layoutY="202.0" prefHeight="199.0" prefWidth="559.0">
+      <Label alignment="CENTER" layoutX="373.0" layoutY="87.0" prefHeight="18.0" prefWidth="274.0" text="Responsável">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="valorFinal" layoutX="459.0" layoutY="409.0" prefHeight="18.0" prefWidth="188.0" text="Valor final">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Label>
+      <Separator layoutX="368.0" layoutY="92.0" orientation="VERTICAL" prefHeight="113.0" prefWidth="6.0" />
+      <TableView fx:id="lista" layoutX="91.0" layoutY="204.0" prefHeight="194.0" prefWidth="555.0">
          <columns>
-            <TableColumn prefWidth="75.0" text="Nº" />
-            <TableColumn prefWidth="184.0" text="Nome" />
-            <TableColumn prefWidth="197.0" text="Quantidade" />
-            <TableColumn fx:id="tabela" minWidth="0.0" prefWidth="102.0" text="Preço" />
+            <TableColumn fx:id="loc" prefWidth="58.0" text="Local" />
+            <TableColumn fx:id="id" prefWidth="47.0" text="ID" />
+            <TableColumn fx:id="nome" prefWidth="274.0" text="Nome" />
+            <TableColumn fx:id="quant" prefWidth="95.0" text="Carrinho" />
+            <TableColumn fx:id="preco" minWidth="0.0" text="Preço" />
          </columns>
       </TableView>
-      <Label layoutX="411.0" layoutY="171.0" text="Endereco">
+      <Button fx:id="voltar" layoutX="14.0" layoutY="447.0" mnemonicParsing="false" onAction="#voltar" onMouseClicked="#estoque" prefHeight="32.0" prefWidth="102.0" style="-fx-background-radius: 10px;" text="Voltar">
          <font>
-            <Font name="Tahoma" size="14.0" />
+            <Font name="Tahoma Bold" size="16.0" />
          </font>
-      </Label>
-      <Label layoutX="459.0" layoutY="409.0" prefHeight="18.0" prefWidth="102.0" text="Valor final">
-         <font>
-            <Font name="Tahoma" size="14.0" />
-         </font>
-      </Label>
+      </Button>
    </children>
 </Pane>

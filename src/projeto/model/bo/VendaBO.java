@@ -19,6 +19,7 @@ public class VendaBO implements VendaInterBO{
 		// Irá receber a venda parametrizada e então adiconará ela no banco de dados 
 		// caso não exista ainda a partir do VendaDAO para poder confirmar a venda
 		// no final chamando o método imprimir de NotaFiscalBO para poder ser entregue ao cliente
+		vend.cadastrar(venda);
 	}
 	
 	public void inicioVenda(VendaVO venda) {

@@ -71,7 +71,6 @@ public class ResponsavelBO implements ResponsavelInterBO {
 		}
 		return produtos;
 	}
-
 	
 	public ArrayList<ProdutoVO> estoqueNome(ResponsavelVO resp, ProdutoVO p) {
 		// Irá pesquisar, no estoque de um responsavel, um produto pelo noome
@@ -123,12 +122,11 @@ public class ResponsavelBO implements ResponsavelInterBO {
 	
 	public ProdutoVO estoqueId(ResponsavelVO resp, ProdutoVO p) {
 		// Irá pesquisar, no estoque de um responsavel, um produto pelo noome
-		ResultSet rs = responsavel.precoEstoque(resp, p);
+		ResultSet rs = responsavel.idEstoque(resp, p);
 		ProdutoVO produto = new ProdutoVO();
 		if(rs != null) {
 			try {
 				while (rs.next()) {
-					ProdutoVO aux1 = new ProdutoVO();
 					produto.setNome(rs.getString("nome"));
 					produto.setPreco(rs.getDouble("preco"));
 					produto.setId(rs.getLong("idproduto"));

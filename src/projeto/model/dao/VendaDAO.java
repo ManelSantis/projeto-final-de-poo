@@ -17,7 +17,7 @@ public class VendaDAO extends BaseDAO<VendaVO> {
 		try {
 			ptst = getConnection().prepareStatement(sql);
 			ptst.setString(1, venda.getCodigo()); // salva o código da venda,
-			ptst.setLong(2, venda.getId()); //id da compra
+			ptst.setLong(2, venda.getId()); //id do pedido
 			ptst.setDate(3, (java.sql.Date) new Date(venda.getData().getTimeInMillis()));
 			ptst.execute();
 		} catch (SQLException e) {

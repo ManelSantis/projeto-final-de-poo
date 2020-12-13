@@ -17,7 +17,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import projeto.model.bo.EstoqueBO;
-import projeto.model.bo.ProdutoBO;
 import projeto.model.bo.ResponsavelBO;
 import projeto.model.bo.VendaBO;
 import projeto.model.vo.EstoqueVO;
@@ -28,19 +27,17 @@ import projeto.model.vo.VendaVO;
 import projeto.view.Telas;
 
 public class ConCarrinho extends ConMenu implements Initializable {
-	private static boolean car;
+	private static boolean car; //verificar se está adicionando no carrinho
+	private static boolean ok; //verificar se está confirmando a venda
+	
 	@FXML
 	private TableView<ProdutoVO> lista;
-
 	@FXML
 	private TableColumn<ProdutoVO, Long> loc;
-
 	@FXML
 	private TableColumn<ProdutoVO, String> nome;
-
 	@FXML
 	private TableColumn<ProdutoVO, Integer> quant;
-
 	@FXML
 	private TableColumn<ProdutoVO, Double> preco;
 
@@ -48,6 +45,18 @@ public class ConCarrinho extends ConMenu implements Initializable {
 	private TextField pesquisa;
 	@FXML
 	private Label mensagem;
+	
+	@FXML
+	private Label valorFinal;
+	@FXML
+	private Label nomeCli;
+	@FXML
+	private Label cpfCli;
+	@FXML
+	private Label nomeResp;
+	@FXML
+	private Label cpfResp;
+	
 	@FXML
 	private TableColumn<ProdutoVO, Long> id;
 	@FXML
@@ -57,6 +66,16 @@ public class ConCarrinho extends ConMenu implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		preenxer();
 		escolhas();
+		if(ok) { //se for para a tela de confirmar a compra
+			
+			nomeCli.setText("Nome: " + ConVender.getCli().getNome());
+			cpfCli.setText("CPF: " + ConVender.getCli().getCpf());
+
+			nomeResp.setText("Nome: " + Telas.getUsuario().getNome());
+			cpfResp.setText("CPF: " + Telas.getUsuario().getCpf());
+			
+			valorFinal.setText("Valor final: R$ " + ConVender.getVenda().getValor());
+		}
 	}
 
 	public void escolhas() {
@@ -71,7 +90,7 @@ public class ConCarrinho extends ConMenu implements Initializable {
 
 	public void preenxer() {
 		if (lista != null) {
-			if (car) {
+			if (car) { //para caso ir ver o carrinho
 				VendaBO aux = new VendaBO();
 				ObservableList<ProdutoVO> produtos = FXCollections
 						.observableArrayList(aux.listarItens(ConVender.getVenda()));
@@ -81,7 +100,17 @@ public class ConCarrinho extends ConMenu implements Initializable {
 				id.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("id"));
 				loc.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("descricao"));
 				lista.setItems(produtos);
-			} else {
+			} else if (ok){ //para caso ir completar a venda
+				VendaBO aux = new VendaBO();
+				ObservableList<ProdutoVO> produtos = FXCollections
+						.observableArrayList(aux.listarItens(ConVender.getVenda()));
+				nome.setCellValueFactory(new PropertyValueFactory<ProdutoVO, String>("nome"));
+				quant.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Integer>("quantidade"));
+				preco.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Double>("preco"));
+				id.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("id"));
+				loc.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("descricao"));
+				lista.setItems(produtos);
+			} else { //para caso ir para a tela de adicionar produtos no carrinho novamente
 				ResponsavelBO aux = new ResponsavelBO();
 				ObservableList<ProdutoVO> produtos = FXCollections.observableArrayList(aux.estoque());
 				nome.setCellValueFactory(new PropertyValueFactory<ProdutoVO, String>("nome"));
@@ -138,12 +167,10 @@ public class ConCarrinho extends ConMenu implements Initializable {
 	}
 
 	public void voltar(ActionEvent e) throws Exception {
-		setCar(false);
+		setCar(false); //saindo do carrinho
+		setOk(false); //saindo da tela de confirmar venda
+		ConVender.getVenda().zerarValor(); //resetar o valor final da venda
 		Telas.telaVendaCarrinho();
-	}
-
-	public void confirmar(ActionEvent e) throws Exception {
-		Telas.telaVendaConfirmar();
 	}
 
 	public void adicionarCarrinho(ActionEvent e) throws Exception {
@@ -155,15 +182,47 @@ public class ConCarrinho extends ConMenu implements Initializable {
 			aux = aux1.estoqueId(Telas.getUsuario(), aux);
 			aux.setQuantiPedido(1);
 			salvar.adicionarItens(ven, aux);
+			ConVender.getVenda().setCarrinho(aux);
 			mensagem.setTextFill(Color.web("green"));
 			mensagem.setText("Item adicionado no carrinho");
+			mensagem.setVisible(true);
+		} else {
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText("Por favor, selecione um item para adicionar ao carrinho");
 			mensagem.setVisible(true);
 		}
 	}
 
 	public void confirmarVenda(ActionEvent e) throws Exception {
+		VendaBO completar = new VendaBO();
+		ConVender.getVenda().setCodigo();
+		ConVender.getVenda().setData();
+		completar.confirmarVenda(ConVender.getVenda());
+		for (int i = 0; i < ConVender.getVenda().getCarrinho().size(); i++) {
+			//pegando o local do produto
+			LocalVO l = new LocalVO();
+			l.setId(Long.parseLong(ConVender.getVenda().getCarrinho().get(i).getDescricao()));
+			ResponsavelBO re = new ResponsavelBO();
+			EstoqueVO es = new EstoqueVO();
+			//adiconando o local
+			es.setLocal(l);
+			//adicionando o produto
+			es.setProduto(re.estoqueId(Telas.getUsuario(), ConVender.getVenda().getCarrinho().get(i)));
+			es.setQuantidade(es.getProduto().getQuantidade() 
+					- ConVender.getVenda().getCarrinho().get(i).getQuantiPedido());
+			EstoqueBO salvar = new EstoqueBO();
+			//por fim edita o estoque no final
+			salvar.editar(es);
+		}
+		setCar(false); //saindo do carrinho
+		setOk(false); //saindo da tela de confirmar venda
 		Telas.telaVenda();
-
+	}
+	
+	public void confirmar(ActionEvent e) throws Exception {
+		setOk(true);
+		ConVender.getVenda().setValor();
+		Telas.telaVendaConfirmar();
 	}
 
 	public void verCarrinho(ActionEvent e) throws Exception {
@@ -177,12 +236,17 @@ public class ConCarrinho extends ConMenu implements Initializable {
 			VendaBO salvar = new VendaBO();
 			ResponsavelBO aux1 = new ResponsavelBO();
 			int x = aux.getQuantidade();
-			System.out.println(aux.getQuantiPedido());
 			aux = aux1.estoqueId(Telas.getUsuario(), aux);
 			aux.setQuantiPedido(x + 1);
 			salvar.editarItens(ConVender.getVenda(), aux);
-
-			System.out.println(aux.getQuantiPedido());
+			for (int i = 0; i < ConVender.getVenda().getCarrinho().size(); i++) {
+				if(ConVender.getVenda().getCarrinho().get(i).getId() == aux.getId()) {
+					ConVender.getVenda().getCarrinho().get(i)
+					.setQuantiPedido(aux.getQuantiPedido());
+					System.out.println(ConVender.getVenda().getCarrinho().get(i)
+					.getQuantiPedido());
+				}
+			}
 			VendaBO aux2 = new VendaBO();
 			ObservableList<ProdutoVO> produtos = FXCollections
 					.observableArrayList(aux2.listarItens(ConVender.getVenda()));
@@ -192,8 +256,6 @@ public class ConCarrinho extends ConMenu implements Initializable {
 			id.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("id"));
 			loc.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("descricao"));
 			lista.setItems(produtos);
-
-			System.out.println(aux.getQuantiPedido());
 			Telas.telaCarrinho();
 		} else {
 			mensagem.setTextFill(Color.web("red"));
@@ -212,8 +274,19 @@ public class ConCarrinho extends ConMenu implements Initializable {
 			aux.setQuantiPedido(x - 1);
 			if (aux.getQuantiPedido() == 0) {
 				salvar.deletarItens(ConVender.getVenda(), aux);
+				for (int i = 0; i < ConVender.getVenda().getCarrinho().size(); i++) {
+					if(ConVender.getVenda().getCarrinho().get(i).getId() == aux.getId()) {
+						ConVender.getVenda().getCarrinho().remove(i);
+					}
+				}
 			} else {
 				salvar.editarItens(ConVender.getVenda(), aux);
+				for (int i = 0; i < ConVender.getVenda().getCarrinho().size(); i++) {
+					if(ConVender.getVenda().getCarrinho().get(i).getId() == aux.getId()) {
+						ConVender.getVenda().getCarrinho().get(i)
+						.setQuantiPedido(aux.getQuantiPedido());
+					}
+				}
 			}
 			VendaBO aux2 = new VendaBO();
 			ObservableList<ProdutoVO> produtos = FXCollections
@@ -237,10 +310,14 @@ public class ConCarrinho extends ConMenu implements Initializable {
 		if (aux != null) {
 			VendaBO salvar = new VendaBO();
 			ResponsavelBO aux1 = new ResponsavelBO();
-			int x = aux.getQuantidade();
 			aux = aux1.estoqueId(Telas.getUsuario(), aux);
 			salvar.deletarItens(ConVender.getVenda(), aux);
 			VendaBO aux2 = new VendaBO();
+			for (int i = 0; i < ConVender.getVenda().getCarrinho().size(); i++) {
+				if(ConVender.getVenda().getCarrinho().get(i).getId() == aux.getId()) {
+					ConVender.getVenda().getCarrinho().remove(i);
+				}
+			}
 			ObservableList<ProdutoVO> produtos = FXCollections
 					.observableArrayList(aux2.listarItens(ConVender.getVenda()));
 			nome.setCellValueFactory(new PropertyValueFactory<ProdutoVO, String>("nome"));
@@ -258,6 +335,8 @@ public class ConCarrinho extends ConMenu implements Initializable {
 	}
 
 	public void cancelarVenda(ActionEvent e) throws Exception {
+		setCar(false);
+		setOk(false);
 		Telas.telaVenda();
 	}
 
@@ -267,6 +346,14 @@ public class ConCarrinho extends ConMenu implements Initializable {
 
 	public static void setCar(boolean car) {
 		ConCarrinho.car = car;
+	}
+
+	public static boolean isOk() {
+		return ok;
+	}
+
+	public static void setOk(boolean ok) {
+		ConCarrinho.ok = ok;
 	}
 
 }

@@ -41,22 +41,9 @@ public class VendaVO {
 		return carrinho;
 	}
 
-	public void setCarrinho(ProdutoVO produto, int quantidade) {
-		if (produto != null) { // Primeiro Verifica se o produto está vindo corretamente
-			if (quantidade > 0) { // Depois verifica se a quantidade pedida é maior que zero
-				if (produto.setQuantiPedido(quantidade)) { // Então chama o metodo setQuantiPedido que tem em produtoVO
-					// lá ele retorna um valor true se a quantidade for aceita (existir em estoque), senão
-					// retorna false
-					this.carrinho.add(produto); // Se sim, adiciona na arraylist
-					System.out.println("Produto adicionado");
-				} else {
-					System.out.println("Não possuimos a quantidade pedida em estoque.");
-				}
-			} else {
-				System.out.println("Quantidade adicionana precisa ser maior que zero.");
-			}
-		} else {
-			System.out.println("Produto não foi adicionado.");
+	public void setCarrinho(ProdutoVO produto) {
+		if (produto != null) {
+			this.carrinho.add(produto);//adicionando produto no carrinho
 		}
 	}
 
@@ -92,6 +79,11 @@ public class VendaVO {
 		for (int i = 0; i < carrinho.size(); i++) {
 				valor = valor + (carrinho.get(i).getPreco() * carrinho.get(i).getQuantiPedido());
 		}
+	}
+	
+	public void zerarValor() {
+		// Usado para zerar o valor caso retornar para alterações na compra
+		valor = 0;
 	}
 
 	public String getCodigo() {
