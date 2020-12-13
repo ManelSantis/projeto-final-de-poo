@@ -13,12 +13,12 @@
             <Font name="Tahoma Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="cancelar" layoutX="626.0" layoutY="447.0" mnemonicParsing="false" onAction="#responsavel" onMouseClicked="#estoque" prefHeight="32.0" prefWidth="102.0" style="-fx-background-radius: 10px;" text="Cancelar">
+      <Button fx:id="cancelar" layoutX="626.0" layoutY="447.0" mnemonicParsing="false" onAction="#responsavel" prefHeight="32.0" prefWidth="102.0" style="-fx-background-radius: 10px;" text="Cancelar">
          <font>
             <Font name="Tahoma Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="confirmar" layoutX="510.0" layoutY="447.0" mnemonicParsing="false" onAction="#cadastrarResp" onMouseClicked="#estoque" style="-fx-background-radius: 10px;" text="Confirmar">
+      <Button fx:id="confirmar" layoutX="510.0" layoutY="447.0" mnemonicParsing="false" onAction="#cadastrarResp" style="-fx-background-radius: 10px;" text="Confirmar">
          <font>
             <Font name="Tahoma Bold" size="16.0" />
          </font>
@@ -82,11 +82,16 @@
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="senha" layoutX="400.0" layoutY="343.0" prefHeight="25.0" prefWidth="205.0" />
       <Label layoutX="401.0" layoutY="319.0" text="Senha">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
+      <Label fx:id="mensagem" alignment="CENTER" contentDisplay="CENTER" layoutX="183.0" layoutY="378.0" prefHeight="17.0" prefWidth="419.0" text="Label" visible="false">
+         <font>
+            <Font name="Tahoma Bold" size="11.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="senha" layoutX="401.0" layoutY="343.0" prefHeight="25.0" prefWidth="205.0" />
    </children>
 </Pane>

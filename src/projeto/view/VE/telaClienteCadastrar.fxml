@@ -13,12 +13,12 @@
             <Font name="Tahoma Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="cancelar" layoutX="626.0" layoutY="447.0" mnemonicParsing="false" onAction="#cliente" onMouseClicked="#estoque" prefHeight="32.0" prefWidth="102.0" style="-fx-background-radius: 10px;" text="Cancelar">
+      <Button fx:id="cancelar" layoutX="626.0" layoutY="447.0" mnemonicParsing="false" onAction="#cliente" prefHeight="32.0" prefWidth="102.0" style="-fx-background-radius: 10px;" text="Cancelar">
          <font>
             <Font name="Tahoma Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="confirmar" layoutX="510.0" layoutY="447.0" mnemonicParsing="false" onAction="#cadastrarCli" onMouseClicked="#estoque" style="-fx-background-radius: 10px;" text="Confirmar">
+      <Button fx:id="confirmar" layoutX="510.0" layoutY="447.0" mnemonicParsing="false" onAction="#cadastrarCli" style="-fx-background-radius: 10px;" text="Confirmar">
          <font>
             <Font name="Tahoma Bold" size="16.0" />
          </font>
@@ -74,6 +74,11 @@
       <Label layoutX="184.0" layoutY="106.0" prefHeight="17.0" prefWidth="43.0" text="Nome">
          <font>
             <Font name="Tahoma" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="mensagem" alignment="CENTER" contentDisplay="CENTER" layoutX="184.0" layoutY="321.0" prefHeight="17.0" prefWidth="419.0" text="Label" visible="false">
+         <font>
+            <Font name="Tahoma Bold" size="11.0" />
          </font>
       </Label>
    </children>

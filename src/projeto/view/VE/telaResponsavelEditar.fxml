@@ -82,10 +82,15 @@
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="senha" layoutX="400.0" layoutY="343.0" prefHeight="25.0" prefWidth="205.0" />
       <Label layoutX="401.0" layoutY="319.0" text="Senha">
          <font>
             <Font name="Tahoma" size="14.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="senha" layoutX="401.0" layoutY="343.0" prefHeight="25.0" prefWidth="205.0" />
+      <Label fx:id="mensagem" alignment="CENTER" contentDisplay="CENTER" layoutX="185.0" layoutY="379.0" prefHeight="17.0" prefWidth="419.0" text="Label" visible="false">
+         <font>
+            <Font name="Tahoma Bold" size="11.0" />
          </font>
       </Label>
    </children>

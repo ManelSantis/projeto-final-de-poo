@@ -93,7 +93,7 @@ public class ClienteDAO extends PessoaDAO<ClienteVO> implements ClienteInterDAO{
 	public ResultSet findByName(ClienteVO cliente) {
 		String sql = "select p.nome, p.cpf, p.telefone, p.endereco, c.idcliente, p.idpessoa "
 				+ "from pessoa as p, cliente as c "
-				+ "where p.idpessoa = c.idpessoa and p.nome like ?";
+				+ "where p.idpessoa = c.idpessoa and p.nome ilike ?";
 		PreparedStatement ptst;
 		ResultSet rs = null;
 		try {
@@ -141,28 +141,6 @@ public class ClienteDAO extends PessoaDAO<ClienteVO> implements ClienteInterDAO{
 		}
 
 		return rs;
-	}
-
-	public ResultSet historicoCompras(ClienteVO cliente) {
-		// pesquisar todas as vendas que o cliente participou
-		// a partir de seu id
-		String sql = "select v.idvenda, v.data " + "from venda as v, pedido as p "
-				+ "where p.idpedido = v.idpedido and p.idcliente = ?";
-
-		PreparedStatement ptst;
-		ResultSet rs = null;
-
-		try {
-			ptst = getConnection().prepareStatement(sql);
-			ptst.setLong(1, cliente.getId());
-			rs = ptst.executeQuery();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return rs;
-
 	}
 
 }

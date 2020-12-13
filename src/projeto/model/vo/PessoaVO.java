@@ -1,5 +1,7 @@
 package projeto.model.vo;
 
+import projeto.exception.ExceptionCampoInvalido;
+
 public abstract class PessoaVO {
 	private String nome;
 	private String cpf;
@@ -11,17 +13,11 @@ public abstract class PessoaVO {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		if (nome != null) {
-			if ((nome.length() <= 100) && (!nome.isEmpty())) {
-				this.nome = nome; 
-				// Limitar o tamanho do nome do cliente e se está vazio
-				// para então ser salvo
-			} else {
-				System.out.print("Operação invalida");
-			}
+	public void setNome(String nome) throws ExceptionCampoInvalido {
+		if ((nome != null) && (!nome.isEmpty())) {
+			this.nome = nome;
 		} else {
-			System.out.print("Operação invalida");
+			throw new ExceptionCampoInvalido("Nome inválido");
 		}
 	}
 
@@ -29,16 +25,31 @@ public abstract class PessoaVO {
 		return cpf;
 	}
 
-	public void setCpf(String cpf) {
-		// Ainda vendo como fazer uma validação melhor
-		if (cpf != null) {
-			if ((cpf.length() != 11) && (!cpf.isEmpty())) {
-				System.out.println("CPF está invalido."); // se o tamnho está certo, e se está vazio
+	public void setCpf(String cpf) throws ExceptionCampoInvalido {
+		// Validando
+		if ((cpf != null) && (!cpf.isEmpty())) {
+			if (cpf.length() == 11) {
+				if(cpf.substring(0,10).matches("[0-9]*")) {
+					if ((!cpf.equals("00000000000")) && (!cpf.equals("11111111111")) && (!cpf.equals("22222222222"))
+						&& (!cpf.equals("33333333333")) && (!cpf.equals("44444444444")) && (!cpf.equals("55555555555"))
+						&& (!cpf.equals("66666666666")) && (!cpf.equals("77777777777")) && (!cpf.equals("88888888888"))
+						&& (!cpf.equals("99999999999"))) {
+						this.cpf = cpf;
+					} else {
+						//Digitar números repetidos
+						throw new ExceptionCampoInvalido("CPF não ser apenas números iguais");
+					}
+				} else {
+					//Digitou uma letra
+					throw new ExceptionCampoInvalido("CPF só pode ter números"); 
+				}
 			} else {
-				this.cpf = cpf;
+				//Tamanho inválido
+				throw new ExceptionCampoInvalido("CPF tem que ter pelo menos 11 caracteres"); 
 			}
 		} else {
-			System.out.println("CPF está invalido."); // se o tamnho está certo, e se está vazio
+			// Se a variavel vier vazia
+			throw new ExceptionCampoInvalido("CPF inválido"); 
 		}
 	}
 
@@ -46,51 +57,38 @@ public abstract class PessoaVO {
 		return endereco;
 	}
 
-	public void setEndereco(String estado, String cidade, String bairro, String rua, String numero) {
+	public void setEndereco(String estado, String cidade, String bairro, String rua, String numero)
+			throws ExceptionCampoInvalido {
 		// Irá verificar se todos os dados passados estão com
 		// alguma coisa escrita para então ser aceito
 		if ((estado != null) && (cidade != null) && (bairro != null) && (rua != null) && (numero != null)) {
-			if ((!estado.isEmpty()) && (!cidade.isEmpty()) && (!bairro.isEmpty()) && (!rua.isEmpty()) && (!numero.isEmpty())) {
-				this.endereco = bairro + ", " + rua + ", " + numero + ", " + cidade + ", " + estado; 
+			if ((!estado.isEmpty()) && (!cidade.isEmpty()) && (!bairro.isEmpty()) && (!rua.isEmpty())
+					&& (!numero.isEmpty())) {
+				this.endereco = bairro + ", " + rua + ", " + numero + ", " + cidade + ", " + estado;
 				// salvar tudo separado por , para ficar mais facil de verificar depois
 			} else {
-				System.out.println("Não foi possivel salvar o seu endereço!");
+				throw new ExceptionCampoInvalido("Erro ao salvar o endereço");
 			}
 		} else {
-			System.out.println("Não foi possivel salvar o seu endereço!");
+			throw new ExceptionCampoInvalido("Erro ao salvar o endereço");
 		}
 	}
 
 	public void setEndereco(String endereco) {
 		// Construtor set usado como auxiliar para o bd
-		if (endereco != null) {
-			if (!endereco.isEmpty()) {
-				this.endereco = endereco; 
-				// salvar tudo separado por , para ficar mais facil de verificar depois
-			} else {
-				System.out.println("Não foi possivel salvar o seu endereço!");
-			}
-		} else {
-			System.out.println("Não foi possivel salvar o seu endereço!");
-		}
+		this.endereco = endereco;
 	}
 
-	
 	public String getTelefone() {
 		return telefone;
 	}
 
-	
-	public void setTelefone(String telefone) {
+	public void setTelefone(String telefone) throws ExceptionCampoInvalido {
 		// Ainda vendo como fazer uma validação melhor
-		if (telefone != null) {
-			if ((telefone.length() >= 10) && (!telefone.isEmpty())){
-				this.telefone = telefone;
-			} else {
-				System.out.println("Não foi possivel salvar o telefone!");
-			}
+		if ((telefone != null) && (!telefone.isEmpty())) {
+			this.telefone = telefone;
 		} else {
-			System.out.println("Não foi possivel salvar o telefone!");
+			throw new ExceptionCampoInvalido("Telefone inválido");
 		}
 
 	}

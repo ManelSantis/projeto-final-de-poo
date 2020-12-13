@@ -16,7 +16,7 @@ public class EstoqueDAO extends BaseDAO<EstoqueVO>{
 		//esse responsavel tem em estoque produto
 		PreparedStatement ptst;
 		try {
-			ptst = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			ptst = getConnection().prepareStatement(sql);
 			ptst.setLong(1, estoque.getLocal().getId());
 			ptst.setLong(2, estoque.getProduto().getId());
 			ptst.setInt(3, estoque.getQuantidade());
@@ -24,13 +24,7 @@ public class EstoqueDAO extends BaseDAO<EstoqueVO>{
 			if (linhas == 0) {
 				throw new SQLException ("Nenhuma linha foi alterada.");
 			}
-			
-			ResultSet rs = ptst.getGeneratedKeys();
-			if (rs.next()) {
-				estoque.setId(rs.getLong(1));
-			} else {
-				throw new SQLException ("Falhou");
-			}
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

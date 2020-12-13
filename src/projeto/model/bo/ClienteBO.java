@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import projeto.exception.ExceptionCampoInvalido;
 import projeto.model.dao.ClienteDAO;
 import projeto.model.vo.ClienteVO;
 import projeto.model.vo.ResponsavelVO;
@@ -23,8 +24,8 @@ public class ClienteBO implements ClienteInterBO {
 		cli.excluir(cliente);
 	}
 
-	
 	public ArrayList<ClienteVO> listar() {
+		// Listar todos os clientes cadastrados
 		ResultSet rs = cli.listar();
 		ArrayList<ClienteVO> clientes = new ArrayList<ClienteVO>();
 		
@@ -41,12 +42,16 @@ public class ClienteBO implements ClienteInterBO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ExceptionCampoInvalido e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return clientes;
 	}
 	
 	public ArrayList<ClienteVO> nomes(ClienteVO cliente){
+		//Listar clientes a partir do nome
 		ResultSet rs = cli.findByName(cliente);
 		ArrayList<ClienteVO> clientes = new ArrayList<ClienteVO>();
 		
@@ -63,13 +68,15 @@ public class ClienteBO implements ClienteInterBO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ExceptionCampoInvalido e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return clientes;
 	}
 	
 	public ArrayList<ClienteVO> cpfs(String cpf){
-		// Como tem uma verificação ao adicionar o cpf em um objeto
-		// então achamos melhor por variavel aqui
+		// Listar clientes pelo cpf
 		ResultSet rs = cli.findByCpf(cpf);
 		ArrayList<ClienteVO> clientes = new ArrayList<ClienteVO>();
 		
@@ -86,11 +93,15 @@ public class ClienteBO implements ClienteInterBO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ExceptionCampoInvalido e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return clientes;
 	}
 	
 	public ClienteVO findById(ClienteVO cliente) {
+		// Pesquisar um cliente pelo ID
 		ResultSet rs = cli.findById(cliente);
 		try {
 			while(rs.next()) {
@@ -104,11 +115,15 @@ public class ClienteBO implements ClienteInterBO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ExceptionCampoInvalido e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return cliente;
 	}
 	
 	public ClienteVO findByIdPessoa (ClienteVO cliente) {
+		//Pesquisar um clinte pelo IdPessoa
 		ResultSet rs = cli.findByIdPessoa(cliente);
 		try {
 			while(rs.next()) {
@@ -122,17 +137,11 @@ public class ClienteBO implements ClienteInterBO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ExceptionCampoInvalido e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return cliente;
-	}
-	
-	public ArrayList<VendaVO> historicoDeCompras(ClienteVO cliente) {
-		// Nesse metodo terá que ser primeiro feita uma consulta 
-		// no banco de dados em VendaDAO para saber as vendas que foram feitas
-		// pelo cliente parametrizado então elas serão guardadas em uma ArrayList 
-		// para depois serem listadas
-		ArrayList<VendaVO> vendas = new ArrayList<VendaVO>();
-		return vendas;
 	}
 
 }

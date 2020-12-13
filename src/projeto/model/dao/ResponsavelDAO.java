@@ -5,115 +5,75 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import projeto.exception.ExceptionCampoInvalido;
 import projeto.model.vo.ProdutoVO;
 import projeto.model.vo.ResponsavelVO;
 
-public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements ResponsavelInterDAO{
+public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements ResponsavelInterDAO {
 
 	public ResultSet verEstoque(ResponsavelVO responsavel) {
-		String sql = "select e.idlocal, e.idproduto, e.quantidade, p.nome, p.serie, p.preco " + 
-				  "from estoque as e, local as l, produto as p "
+		// Ver estoque de um responsavel
+		String sql = "select e.idlocal, e.idproduto, e.quantidade, p.nome, p.serie, p.preco "
+				+ "from estoque as e, local as l, produto as p "
 				+ "where e.idlocal = l.idlocal and p.idproduto = e.idproduto and l.idresponsavel = ?";
 
 		PreparedStatement st;
 		ResultSet rs = null;
-		// ArrayList<EstoqueVO> produtos = new ArrayList<EstoqueVO>();
 		try {
 			st = getConnection().prepareStatement(sql);
 			st.setLong(1, responsavel.getId());
 			rs = st.executeQuery();
-			/*
-			 * while (rs.next()) { //nesse while está sendo primeiramente adicionado apenas
-			 * os ids //de local e produto; EstoqueVO aux = new EstoqueVO(); //para salvar
-			 * dentro da arraylist ProdutoVO aux2 = new ProdutoVO(); //para salvar primeiro
-			 * a serie LocalVO aux3 = new LocalVO(); //para salvar primero o id do local //
-			 * já que na tabela estoque estão apenas o numero de serie e o id do local
-			 * aux2.setSerie(rs.getString("idProduto")); aux.setProduto(aux2);
-			 * aux3.setId(rs.getInt("idLocal")); aux.setLocal(aux3);
-			 * aux.setQuantidade(rs.getInt("quantidade")); produtos.add(aux); }
-			 */
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		// sql = "select * from local where compartimento = ?";
-		// sql = "select * from produto where serie = ?";
-
 		return rs;
 	}
-	
+
 	public ResultSet nomeEstoque(ResponsavelVO responsavel, ProdutoVO produto) {
-		String sql = "select e.idlocal, e.idproduto, e.quantidade, p.nome, p.serie, p.preco " + 
-				  "from estoque as e, local as l, produto as p "
+		// Pesquisar no estoque de um responsavel a partir do nome do produto
+		String sql = "select e.idlocal, e.idproduto, e.quantidade, p.nome, p.serie, p.preco "
+				+ "from estoque as e, local as l, produto as p "
 				+ "where e.idlocal = l.idlocal and p.idproduto = e.idproduto and l.idresponsavel = ? and p.nome ilike ?";
 
 		PreparedStatement st;
 		ResultSet rs = null;
-		// ArrayList<EstoqueVO> produtos = new ArrayList<EstoqueVO>();
 		try {
 			st = getConnection().prepareStatement(sql);
 			st.setLong(1, responsavel.getId());
 			st.setString(2, "%" + produto.getNome() + "%");
 			rs = st.executeQuery();
-			/*
-			 * while (rs.next()) { //nesse while está sendo primeiramente adicionado apenas
-			 * os ids //de local e produto; EstoqueVO aux = new EstoqueVO(); //para salvar
-			 * dentro da arraylist ProdutoVO aux2 = new ProdutoVO(); //para salvar primeiro
-			 * a serie LocalVO aux3 = new LocalVO(); //para salvar primero o id do local //
-			 * já que na tabela estoque estão apenas o numero de serie e o id do local
-			 * aux2.setSerie(rs.getString("idProduto")); aux.setProduto(aux2);
-			 * aux3.setId(rs.getInt("idLocal")); aux.setLocal(aux3);
-			 * aux.setQuantidade(rs.getInt("quantidade")); produtos.add(aux); }
-			 */
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		// sql = "select * from local where compartimento = ?";
-		// sql = "select * from produto where serie = ?";
-
 		return rs;
 	}
-	
+
 	public ResultSet precoEstoque(ResponsavelVO responsavel, ProdutoVO produto) {
-		String sql = "select e.idlocal, e.idproduto, e.quantidade, p.nome, p.serie, p.preco " + 
-				  "from estoque as e, local as l, produto as p "
+		// Pesquisar no estoque de um Responsavel pelo preco <=
+		String sql = "select e.idlocal, e.idproduto, e.quantidade, p.nome, p.serie, p.preco "
+				+ "from estoque as e, local as l, produto as p "
 				+ "where e.idlocal = l.idlocal and p.idproduto = e.idproduto and l.idresponsavel = ? and p.preco <= ?";
 
 		PreparedStatement st;
 		ResultSet rs = null;
-		// ArrayList<EstoqueVO> produtos = new ArrayList<EstoqueVO>();
 		try {
 			st = getConnection().prepareStatement(sql);
 			st.setLong(1, responsavel.getId());
 			st.setDouble(2, produto.getPreco());
 			rs = st.executeQuery();
-			/*
-			 * while (rs.next()) { //nesse while está sendo primeiramente adicionado apenas
-			 * os ids //de local e produto; EstoqueVO aux = new EstoqueVO(); //para salvar
-			 * dentro da arraylist ProdutoVO aux2 = new ProdutoVO(); //para salvar primeiro
-			 * a serie LocalVO aux3 = new LocalVO(); //para salvar primero o id do local //
-			 * já que na tabela estoque estão apenas o numero de serie e o id do local
-			 * aux2.setSerie(rs.getString("idProduto")); aux.setProduto(aux2);
-			 * aux3.setId(rs.getInt("idLocal")); aux.setLocal(aux3);
-			 * aux.setQuantidade(rs.getInt("quantidade")); produtos.add(aux); }
-			 */
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		// sql = "select * from local where compartimento = ?";
-		// sql = "select * from produto where serie = ?";
-
 		return rs;
 	}
 
 	public ResultSet idEstoque(ResponsavelVO responsavel, ProdutoVO produto) {
-		String sql = "select e.idlocal, e.idproduto, e.quantidade, p.nome, p.serie, p.preco " + 
-				  "from estoque as e, local as l, produto as p "
+		// Pesquisar no esstoque do responsavel pelo id do produto
+		String sql = "select e.idlocal, e.idproduto, e.quantidade, p.nome, p.serie, p.preco "
+				+ "from estoque as e, local as l, produto as p "
 				+ "where e.idlocal = l.idlocal and p.idproduto = e.idproduto and l.idresponsavel = ? and p.idproduto = ?";
 
 		PreparedStatement st;
@@ -131,29 +91,9 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 		return rs;
 	}
 
-
-
-	public ResultSet historicoVendas(ResponsavelVO responsavel) {
-		String sql = "select v.idvenda, v.data " + "from venda as v, pedido as p "
-				+ "where p.idpedido = v.idpedido and p.idresponsavel = ?";
-
-		PreparedStatement ptst;
-		ResultSet rs = null;
-
-		try {
-			ptst = getConnection().prepareStatement(sql);
-			ptst.setLong(1, responsavel.getId());
-			rs = ptst.executeQuery();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return rs;
-	}
-
-	public boolean logar (ResponsavelVO responsavel) {
-		if(buscarLogin(responsavel)) {
+	public boolean logar(ResponsavelVO responsavel) {
+		// Logar
+		if (buscarLogin(responsavel)) {
 			String sql = "select * from responsavel where usuario = ?";
 			PreparedStatement ptst;
 			ResultSet rs = null;
@@ -170,22 +110,19 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if((!responsavel.getSenha().isEmpty()) &&(responsavel.getSenha().equals(aux))) {
-				System.out.println("Login efetuado");
+			if ((!responsavel.getSenha().isEmpty()) && (responsavel.getSenha().equals(aux))) {
 				return true;
 			} else {
-				System.out.println("Senha incorreta");
 				return false;
 			}
-			
+
 		} else {
-			System.out.println("Usuario não existe");
 			return false;
 		}
 	}
-	
+
 	public boolean buscarLogin(ResponsavelVO responsavel) {
-		// verifica se o login existe no banco de dados
+		// Verifica se o login existe no banco de dados
 		String sql = "select * from responsavel where usuario = ?";
 		PreparedStatement ptst;
 		ResultSet rs = null;
@@ -206,13 +143,11 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 
 	public void cadastrar(ResponsavelVO responsavel) {
 		if (buscarLogin(responsavel)) {
-			System.out.println("Usuário já existe");
+			return;
 		} else {
 			try {
 				super.cadastrar(responsavel);
-				String sql = "insert into Responsavel" 
-						+ "(usuario, senha, idpessoa) " 
-						+ "values (?, ?, ?);";
+				String sql = "insert into Responsavel" + "(usuario, senha, idpessoa) " + "values (?, ?, ?);";
 				PreparedStatement ptst;
 				ptst = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				ptst.setString(1, responsavel.getUsuario());
@@ -237,36 +172,36 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 	}
 
 	public void editar(ResponsavelVO responsavel) {
-		// editar o responsavel adicionado
-		try {
-			super.editar(responsavel);
-			String sql = "update Responsavel set " 
-				+ "usuario = ?, senha = ? " 
-				+ "where idresponsavel = ?";
-			PreparedStatement ptst;
-			ptst = getConnection().prepareStatement(sql);
-			ptst.setString(1, responsavel.getUsuario());
-			ptst.setString(2, responsavel.getSenha());
-			ptst.setLong(3, responsavel.getId());
-			int linhas = ptst.executeUpdate();
-			if (linhas == 0) {
-				throw new SQLException("Atualização falho.");
+		if (buscarLogin(responsavel)) {
+			return;
+		} else {
+			try {
+				super.editar(responsavel);
+				String sql = "update Responsavel set " + "usuario = ?, senha = ? " + "where idresponsavel = ?";
+				PreparedStatement ptst;
+				ptst = getConnection().prepareStatement(sql);
+				ptst.setString(1, responsavel.getUsuario());
+				ptst.setString(2, responsavel.getSenha());
+				ptst.setLong(3, responsavel.getId());
+				int linhas = ptst.executeUpdate();
+				if (linhas == 0) {
+					throw new SQLException("Atualização falho.");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 
 	public void excluir(ResponsavelVO responsavel) {
-		// excluir um responsavel pelo id
+		// Excluir um responsavel pelo id
 		String sql = "delete from responsavel where idresponsavel = ?";
 		PreparedStatement ptst;
 		try {
 			ptst = getConnection().prepareStatement(sql);
 			ptst.setLong(1, responsavel.getId());
 			ptst.executeUpdate();
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -275,9 +210,9 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 	}
 
 	public ResultSet findById(ResponsavelVO responsavel) {
-		String sql = "select p.nome, p.cpf, p.telefone, p.endereco, p.idpessoa, r.idresponsavel, r.usuario, r.senha " 
-				+ "from pessoa as p, responsavel as r "
-				+ "where p.idpessoa = r.idpessoa and r.idresponsavel = ?";
+		//Encontrar um responsavel pelo ID
+		String sql = "select p.nome, p.cpf, p.telefone, p.endereco, p.idpessoa, r.idresponsavel, r.usuario, r.senha "
+				+ "from pessoa as p, responsavel as r " + "where p.idpessoa = r.idpessoa and r.idresponsavel = ?";
 		PreparedStatement ptst;
 		ResultSet rs = null;
 		try {
@@ -291,11 +226,11 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 
 		return rs;
 	}
-	
+
 	public ResultSet findByIdPessoa(ResponsavelVO responsavel) {
-		String sql = "select p.nome, p.cpf, p.telefone, p.endereco, p.idpessoa, r.idresponsavel, r.usuario, r.senha " 
-				+ "from pessoa as p, responsavel as r "
-				+ "where p.idpessoa = r.idpessoa and p.idpessoa = ?";
+		//Encontrar um responsavel pelo IdPessoa
+		String sql = "select p.nome, p.cpf, p.telefone, p.endereco, p.idpessoa, r.idresponsavel, r.usuario, r.senha "
+				+ "from pessoa as p, responsavel as r " + "where p.idpessoa = r.idpessoa and p.idpessoa = ?";
 		PreparedStatement ptst;
 		ResultSet rs = null;
 		try {
@@ -312,8 +247,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 	public ResultSet listar() {
 		// listar todos os responsaveis cadastrados
 		String sql = "select p.nome, p.cpf, p.telefone, p.endereco, p.idpessoa, r.idresponsavel, r.usuario, r.senha "
-				+ "from pessoa as p, responsavel as r "
-				+ "where p.idpessoa = r.idpessoa";
+				+ "from pessoa as p, responsavel as r " + "where p.idpessoa = r.idpessoa";
 		PreparedStatement ptst;
 		ResultSet rs = null;
 		try {
@@ -328,8 +262,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 
 	public ResultSet findByName(ResponsavelVO responsavel) {
 		String sql = "select p.nome, p.cpf, p.telefone, p.endereco, p.idpessoa, r.idresponsavel, r.usuario, r.senha "
-				+ "from pessoa as p, responsavel as r "
-				+ "where p.idpessoa = r.idpessoa and p.nome like ?";
+				+ "from pessoa as p, responsavel as r " + "where p.idpessoa = r.idpessoa and p.nome ilike ?";
 		PreparedStatement ptst;
 		ResultSet rs = null;
 		try {
@@ -340,14 +273,13 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return rs;
 	}
-	
+
 	public ResultSet findByCpf(String cpf) {
+		//Buscar por cpf
 		String sql = "select p.nome, p.cpf, p.telefone, p.endereco, p.idpessoa, r.idresponsavel, r.usuario, r.senha "
-				+ "from pessoa as p, responsavel as r "
-				+ "where p.idpessoa = r.idpessoa and p.cpf like ?";
+				+ "from pessoa as p, responsavel as r " + "where p.idpessoa = r.idpessoa and p.cpf like ?";
 		PreparedStatement ptst;
 		ResultSet rs = null;
 		try {

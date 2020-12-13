@@ -1,6 +1,7 @@
 package projeto.controller;
 
 import javafx.scene.input.MouseEvent;//como os botões do menu são labels, tem que usar o MouseEvent
+import projeto.model.dao.BaseDAO;
 import projeto.view.Telas;
 
 public class ConMenu {
@@ -26,6 +27,7 @@ public class ConMenu {
 		Telas.telaPessoaInicio();
 	}
 	public void sair (MouseEvent e) throws Exception{
+		BaseDAO.closeConnection();
 		Telas.telaLogin();
 	}
 }

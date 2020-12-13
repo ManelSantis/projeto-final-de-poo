@@ -18,6 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
+import projeto.exception.ExceptionCampoInvalido;
 import projeto.model.bo.ClienteBO;
 import projeto.model.bo.ResponsavelBO;
 import projeto.model.vo.ClienteVO;
@@ -115,7 +116,12 @@ public class ConPessoa extends ConMenu implements Initializable {
 				if (!pesquisa.getText().isEmpty()) {
 					mensagem.setVisible(false);
 					ResponsavelVO resp = new ResponsavelVO();
-					resp.setNome(pesquisa.getText());
+					try {
+						resp.setNome(pesquisa.getText());
+					} catch (ExceptionCampoInvalido e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					ResponsavelBO aux = new ResponsavelBO();
 					ObservableList<PessoaVO> responsaveis = FXCollections.observableArrayList(aux.nomes(resp));
 					nome.setCellValueFactory(new PropertyValueFactory<PessoaVO, String>("nome"));
@@ -156,7 +162,12 @@ public class ConPessoa extends ConMenu implements Initializable {
 				if (!pesquisa.getText().isEmpty()) {
 					mensagem.setVisible(false);
 					ClienteVO cli = new ClienteVO();
-					cli.setNome(pesquisa.getText());
+					try {
+						cli.setNome(pesquisa.getText());
+					} catch (ExceptionCampoInvalido e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					ClienteBO aux = new ClienteBO();
 					ObservableList<PessoaVO> clientes = FXCollections.observableArrayList(aux.nomes(cli));
 					nome.setCellValueFactory(new PropertyValueFactory<PessoaVO, String>("nome"));

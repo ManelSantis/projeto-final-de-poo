@@ -3,6 +3,7 @@ package projeto.model.bo;
 import projeto.model.vo.ResponsavelVO;
 import projeto.model.vo.VendaVO;
 import projeto.view.Telas;
+import projeto.exception.ExceptionCampoInvalido;
 import projeto.model.dao.ResponsavelDAO;
 import projeto.model.vo.EstoqueVO;
 import projeto.model.vo.LocalVO;
@@ -17,11 +18,7 @@ public class ResponsavelBO implements ResponsavelInterBO {
 	ResponsavelDAO responsavel = new ResponsavelDAO();
 	
 	public ArrayList<ProdutoVO> estoque() {
-		// Irá procurar no banco de dados (em EstoqueDAO) todos os produtos
-		// que estiverem guardados no local que tenha como responsavel
-		// igual ao que está sendo apresentado lá será posto em um ArrayList, 
-		// para então ser passado todos os valores para 
-		// a ArrayList desse método e mandados para a exebição
+		// Pesquisa no banco de dados o estoque do responsável logado
 		ResultSet rs = responsavel.verEstoque(Telas.getUsuario());
 		ArrayList<ProdutoVO> produtos = new ArrayList<ProdutoVO>();
 		if(rs != null) {
@@ -45,11 +42,7 @@ public class ResponsavelBO implements ResponsavelInterBO {
 	}
 	
 	public ArrayList<ProdutoVO> estoque(ResponsavelVO resp) {
-		// Irá procurar no banco de dados (em EstoqueDAO) todos os produtos
-		// que estiverem guardados no local que tenha como responsavel
-		// igual ao que está sendo apresentado lá será posto em um ArrayList, 
-		// para então ser passado todos os valores para 
-		// a ArrayList desse método e mandados para a exebição
+		// Pesquisa no BD o estoque de um responsavel parametrisado
 		ResultSet rs = responsavel.verEstoque(resp);
 		ArrayList<ProdutoVO> produtos = new ArrayList<ProdutoVO>();
 		if(rs != null) {
@@ -73,7 +66,7 @@ public class ResponsavelBO implements ResponsavelInterBO {
 	}
 	
 	public ArrayList<ProdutoVO> estoqueNome(ResponsavelVO resp, ProdutoVO p) {
-		// Irá pesquisar, no estoque de um responsavel, um produto pelo noome
+		// Irá pesquisar, no estoque de um responsavel, um produto pelo nome
 		ResultSet rs = responsavel.nomeEstoque(resp, p);
 		ArrayList<ProdutoVO> produtos = new ArrayList<ProdutoVO>();
 		if(rs != null) {
@@ -97,7 +90,7 @@ public class ResponsavelBO implements ResponsavelInterBO {
 	}
 
 	public ArrayList<ProdutoVO> estoquePreco(ResponsavelVO resp, ProdutoVO p) {
-		// Irá pesquisar, no estoque de um responsavel, um produto pelo noome
+		// Irá pesquisar, no estoque de um responsavel, um produto pelo preço
 		ResultSet rs = responsavel.precoEstoque(resp, p);
 		ArrayList<ProdutoVO> produtos = new ArrayList<ProdutoVO>();
 		if(rs != null) {
@@ -121,7 +114,7 @@ public class ResponsavelBO implements ResponsavelInterBO {
 	}
 	
 	public ProdutoVO estoqueId(ResponsavelVO resp, ProdutoVO p) {
-		// Irá pesquisar, no estoque de um responsavel, um produto pelo noome
+		// Irá pesquisar um produto no estoque do responsavel, a aprtir do id desse produto
 		ResultSet rs = responsavel.idEstoque(resp, p);
 		ProdutoVO produto = new ProdutoVO();
 		if(rs != null) {
@@ -135,38 +128,14 @@ public class ResponsavelBO implements ResponsavelInterBO {
 					produto.setQuantidade(rs.getInt("quantidade"));
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		return produto;
 	}
 
-	public ArrayList<VendaVO> historicoDeVendas(ResponsavelVO resp) {
-		ResultSet rs = responsavel.historicoVendas(resp);
-		ArrayList<VendaVO> vendas = new ArrayList<VendaVO>();
-		
-		try {
-			while(rs.next()) {
-				VendaVO aux = new VendaVO();
-				aux.setId(rs.getLong("idVenda"));
-				aux.setCodigo(rs.getString("codigo"));
-				//aux.setData(new Calendar(rs.getDate("data"));
-				aux.setResponsavel(resp);
-				
-				vendas.add(aux);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return vendas;
-	}
-
-	
 	public ArrayList<ResponsavelVO> listar() {
-		//lista todos os funcionarios disponiveis
+		// Lista todos os responsaveis cadastrados
 		ResultSet rs = responsavel.listar();
 		ArrayList<ResponsavelVO> responsaveis = new ArrayList<ResponsavelVO>();
 		
@@ -184,13 +153,16 @@ public class ResponsavelBO implements ResponsavelInterBO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ExceptionCampoInvalido e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return responsaveis;
 	}
 	
 	public ArrayList<ResponsavelVO> nomes(ResponsavelVO resp) {
-		//lista todos os funcionarios disponiveis
+		// Pesquisa os responsaveis cadastrados pelo nome
 		ResultSet rs = responsavel.findByName(resp);
 		ArrayList<ResponsavelVO> responsaveis = new ArrayList<ResponsavelVO>();
 		
@@ -207,13 +179,16 @@ public class ResponsavelBO implements ResponsavelInterBO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ExceptionCampoInvalido e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return responsaveis;
 	}
 	
 	public ArrayList<ResponsavelVO> cpfs(String cpf) {
-		//lista todos os funcionarios disponiveis
+		// Pesquisa os responsaveis cadastrados pelo cpf
 		ResultSet rs = responsavel.findByCpf(cpf);
 		ArrayList<ResponsavelVO> responsaveis = new ArrayList<ResponsavelVO>();
 		
@@ -228,6 +203,9 @@ public class ResponsavelBO implements ResponsavelInterBO {
 				responsaveis.add(aux);
 			}
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExceptionCampoInvalido e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -248,7 +226,7 @@ public class ResponsavelBO implements ResponsavelInterBO {
 	}
 	
 	public ResponsavelVO findById(ResponsavelVO resp) {
-		//está pesquisando pelo id do responavel cadastrado
+		// Está pesquisando um responsavel por ID
 		ResultSet rs = responsavel.findById(resp);
 		try {
 			while(rs.next()) {
@@ -264,14 +242,15 @@ public class ResponsavelBO implements ResponsavelInterBO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ExceptionCampoInvalido e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return resp;
 	}
 	
-	
-	
 	public ResponsavelVO findByIdPessoa(ResponsavelVO resp) {
-		//está pesquisando pelo id pessoa do responsavel cadastrado
+		// Está pesquisando um responsavel pelo ID ligado a pessoa
 		ResultSet rs = responsavel.findByIdPessoa(resp);
 		try {
 			while(rs.next()) {
@@ -287,12 +266,15 @@ public class ResponsavelBO implements ResponsavelInterBO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ExceptionCampoInvalido e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return resp;
 	}
 
 	public boolean login(ResponsavelVO resp) {
-		//primeiro vai para o banco de dados saber se é possivel o login, antes de iniciar
+		// Tenta logar
 		if(responsavel.logar(resp)) {
 			ResultSet rs = responsavel.findById(resp);
 			try {
@@ -305,6 +287,9 @@ public class ResponsavelBO implements ResponsavelInterBO {
 					resp.setIdPessoa(rs.getLong("idpessoa"));
 				}
 			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExceptionCampoInvalido e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
