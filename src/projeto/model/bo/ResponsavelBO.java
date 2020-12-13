@@ -1,18 +1,15 @@
 package projeto.model.bo;
 
 import projeto.model.vo.ResponsavelVO;
-import projeto.model.vo.VendaVO;
 import projeto.view.Telas;
 import projeto.exception.ExceptionCampoInvalido;
+import projeto.exception.ExceptionLoginExistente;
 import projeto.model.dao.ResponsavelDAO;
-import projeto.model.vo.EstoqueVO;
-import projeto.model.vo.LocalVO;
 import projeto.model.vo.ProdutoVO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class ResponsavelBO implements ResponsavelInterBO {
 	ResponsavelDAO responsavel = new ResponsavelDAO();

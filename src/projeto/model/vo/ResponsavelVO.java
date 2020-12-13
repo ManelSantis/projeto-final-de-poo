@@ -1,6 +1,7 @@
 package projeto.model.vo;
 
 import projeto.exception.ExceptionCampoInvalido;
+import projeto.exception.ExceptionLoginExistente;
 import projeto.model.dao.ResponsavelDAO;
 
 public class ResponsavelVO extends PessoaVO {
@@ -12,9 +13,20 @@ public class ResponsavelVO extends PessoaVO {
 		return usuario;
 	}
 
-	public void setUsuarioAux(String usuario) {
+	public void setUsuarioAux(String usuario) throws ExceptionLoginExistente {
 		// usado para verificar se o usuario já existe no banco de dados
-		this.usuario = usuario;
+		ResponsavelDAO aux = new ResponsavelDAO();
+		ResponsavelVO x = new ResponsavelVO();
+		try {
+			x.setUsuario(usuario);
+		} catch (ExceptionCampoInvalido e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (aux.buscarLogin(x)) {
+			throw new ExceptionLoginExistente("Usuário já existe");
+		} else return;
 	}
 
 	public void setUsuario(String usuario) throws ExceptionCampoInvalido {

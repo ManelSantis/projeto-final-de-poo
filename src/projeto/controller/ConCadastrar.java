@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import projeto.exception.ExceptionCampoInvalido;
 import projeto.exception.ExceptionCampoVazio;
+import projeto.exception.ExceptionLoginExistente;
 import projeto.model.bo.ClienteBO;
 import projeto.model.bo.ResponsavelBO;
 import projeto.model.vo.ClienteVO;
@@ -26,6 +27,7 @@ public class ConCadastrar extends ConMenu implements Initializable {
 	private static ClienteVO cliEditavel; // objeto cliente que será usado para editar
 	private static boolean editarCli; // se for true, irá editar cliente
 	private static boolean deletarCli;
+	private static String userEditarInicial; //usado para ajudar na verificação do novo usuario
 
 	@FXML
 	private PasswordField senha;
@@ -99,15 +101,20 @@ public class ConCadastrar extends ConMenu implements Initializable {
 			ResponsavelBO salvar = new ResponsavelBO();
 			respon.setNome(nome.getText());
 			respon.setCpf(cpf.getText());
-			respon.setUsuario(usuario.getText());
-			respon.setSenha(senha.getText());
 			respon.setEndereco(estado.getText(), cidade.getText(), bairro.getText(), rua.getText(), numero.getText());
 			respon.setTelefone(telefone.getText());
+			respon.setUsuarioAux(usuario.getText());//primeiro verifica se está no bd
+			respon.setUsuario(usuario.getText());// para depois salvar
+			respon.setSenha(senha.getText());
 			salvar.cadastrar(respon);
 			Telas.telaResponsavelInicio();
 		} catch (ExceptionCampoInvalido e) {
 			mensagem.setTextFill(Color.web("red"));
 			mensagem.setText(e.getMessage());
+			mensagem.setVisible(true);
+		} catch (ExceptionLoginExistente e1) {
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText(e1.getMessage());
 			mensagem.setVisible(true);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -152,6 +159,7 @@ public class ConCadastrar extends ConMenu implements Initializable {
 		cidade.setText(enderecoCompleto[3]);
 		estado.setText(enderecoCompleto[4]);
 		usuario.setText(respEditavel.getUsuario());
+		setUserEditarInicial(respEditavel.getUsuario());
 		senha.setText(respEditavel.getSenha());
 	}
 
@@ -187,7 +195,10 @@ public class ConCadastrar extends ConMenu implements Initializable {
 				respEditavel.setEndereco(estado.getText(), cidade.getText(), bairro.getText(), rua.getText(),
 				numero.getText());
 				respEditavel.setTelefone(telefone.getText());
-				respEditavel.setUsuario(usuario.getText());
+				if(!getUserEditarInicial().equals(usuario.getText())) { //verifica se o usuario foi alterado
+					respEditavel.setUsuarioAux(usuario.getText()); //primeiro verifica se está no bd
+				}
+				respEditavel.setUsuario(usuario.getText()); //para depois salvar
 				respEditavel.setSenha(senha.getText());
 				aux.editar(respEditavel);
 				setEditarCli(false);
@@ -197,9 +208,13 @@ public class ConCadastrar extends ConMenu implements Initializable {
 				mensagem.setTextFill(Color.web("red"));
 				mensagem.setText(e1.getMessage());
 				mensagem.setVisible(true);
+			} catch (ExceptionLoginExistente e1) {
+				mensagem.setTextFill(Color.web("red"));
+				mensagem.setText(e1.getMessage());
+				mensagem.setVisible(true);
 			} catch (Exception e) {
-				
-			}
+				System.out.println(e.getMessage());
+			} 
 		} else {
 			ClienteBO aux = new ClienteBO();
 			try {
@@ -225,7 +240,7 @@ public class ConCadastrar extends ConMenu implements Initializable {
 				mensagem.setText(e1.getMessage());
 				mensagem.setVisible(true);
 			} catch (Exception e) {
-				
+				System.out.println(e.getMessage());
 			}
 		}
 	}
@@ -336,5 +351,13 @@ public class ConCadastrar extends ConMenu implements Initializable {
 
 	public static void setDeletarCli(boolean deletarCli) {
 		ConCadastrar.deletarCli = deletarCli;
+	}
+
+	public static String getUserEditarInicial() {
+		return userEditarInicial;
+	}
+
+	public static void setUserEditarInicial(String userEditarInicial) {
+		ConCadastrar.userEditarInicial = userEditarInicial;
 	}
 }

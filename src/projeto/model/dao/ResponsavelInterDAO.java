@@ -2,6 +2,7 @@ package projeto.model.dao;
 
 import java.sql.ResultSet;
 
+import projeto.exception.ExceptionLoginExistente;
 import projeto.model.vo.ProdutoVO;
 import projeto.model.vo.ResponsavelVO;
 

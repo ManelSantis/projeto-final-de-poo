@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import projeto.exception.ExceptionCampoInvalido;
+import projeto.exception.ExceptionLoginExistente;
 import projeto.model.vo.ProdutoVO;
 import projeto.model.vo.ResponsavelVO;
 
@@ -143,55 +144,47 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 	}
 
 	public void cadastrar(ResponsavelVO responsavel) {
-		if (buscarLogin(responsavel)) {
-			return;
-		} else {
-			try {
-				super.cadastrar(responsavel);
-				String sql = "insert into Responsavel" + "(usuario, senha, idpessoa) " + "values (?, ?, ?);";
-				PreparedStatement ptst;
-				ptst = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-				ptst.setString(1, responsavel.getUsuario());
-				ptst.setString(2, responsavel.getSenha());
-				ptst.setLong(3, responsavel.getIdPessoa());
-				int linhas = ptst.executeUpdate();
-				if (linhas == 0) {
-					throw new SQLException("Nenhuma linha foi alterada.");
-				}
-				ResultSet rs = ptst.getGeneratedKeys();
-				if (rs.next()) {
-					responsavel.setId(rs.getLong(3));
-				} else {
-					throw new SQLException("Incersão falha.");
-				}
-
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		try {
+			super.cadastrar(responsavel);
+			String sql = "insert into Responsavel" + "(usuario, senha, idpessoa) " + "values (?, ?, ?);";
+			PreparedStatement ptst;
+			ptst = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			ptst.setString(1, responsavel.getUsuario());
+			ptst.setString(2, responsavel.getSenha());
+			ptst.setLong(3, responsavel.getIdPessoa());
+			int linhas = ptst.executeUpdate();
+			if (linhas == 0) {
+				throw new SQLException("Nenhuma linha foi alterada.");
 			}
+			ResultSet rs = ptst.getGeneratedKeys();
+			if (rs.next()) {
+				responsavel.setId(rs.getLong(3));
+			} else {
+				throw new SQLException("Incersão falha.");
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
 	public void editar(ResponsavelVO responsavel) {
-		if (buscarLogin(responsavel)) {
-			return;
-		} else {
-			try {
-				super.editar(responsavel);
-				String sql = "update Responsavel set " + "usuario = ?, senha = ? " + "where idresponsavel = ?";
-				PreparedStatement ptst;
-				ptst = getConnection().prepareStatement(sql);
-				ptst.setString(1, responsavel.getUsuario());
-				ptst.setString(2, responsavel.getSenha());
-				ptst.setLong(3, responsavel.getId());
-				int linhas = ptst.executeUpdate();
-				if (linhas == 0) {
-					throw new SQLException("Atualização falho.");
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		try {
+			super.editar(responsavel);
+			String sql = "update Responsavel set " + "usuario = ?, senha = ? " + "where idresponsavel = ?";
+			PreparedStatement ptst;
+			ptst = getConnection().prepareStatement(sql);
+			ptst.setString(1, responsavel.getUsuario());
+			ptst.setString(2, responsavel.getSenha());
+			ptst.setLong(3, responsavel.getId());
+			int linhas = ptst.executeUpdate();
+			if (linhas == 0) {
+				throw new SQLException("Atualização falho.");
 			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -211,7 +204,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 	}
 
 	public ResultSet findById(ResponsavelVO responsavel) {
-		//Encontrar um responsavel pelo ID
+		// Encontrar um responsavel pelo ID
 		String sql = "select p.nome, p.cpf, p.telefone, p.endereco, p.idpessoa, r.idresponsavel, r.usuario, r.senha "
 				+ "from pessoa as p, responsavel as r " + "where p.idpessoa = r.idpessoa and r.idresponsavel = ?";
 		PreparedStatement ptst;
@@ -229,7 +222,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 	}
 
 	public ResultSet findByIdPessoa(ResponsavelVO responsavel) {
-		//Encontrar um responsavel pelo IdPessoa
+		// Encontrar um responsavel pelo IdPessoa
 		String sql = "select p.nome, p.cpf, p.telefone, p.endereco, p.idpessoa, r.idresponsavel, r.usuario, r.senha "
 				+ "from pessoa as p, responsavel as r " + "where p.idpessoa = r.idpessoa and p.idpessoa = ?";
 		PreparedStatement ptst;
@@ -278,7 +271,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 	}
 
 	public ResultSet findByCpf(String cpf) {
-		//Buscar por cpf
+		// Buscar por cpf
 		String sql = "select p.nome, p.cpf, p.telefone, p.endereco, p.idpessoa, r.idresponsavel, r.usuario, r.senha "
 				+ "from pessoa as p, responsavel as r " + "where p.idpessoa = r.idpessoa and p.cpf like ?";
 		PreparedStatement ptst;
