@@ -74,7 +74,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 		// Pesquisar no esstoque do responsavel pelo id do produto
 		String sql = "select e.idlocal, e.idproduto, e.quantidade, p.nome, p.serie, p.preco "
 				+ "from estoque as e, local as l, produto as p "
-				+ "where e.idlocal = l.idlocal and p.idproduto = e.idproduto and l.idresponsavel = ? and p.idproduto = ?";
+				+ "where e.idlocal = l.idlocal and p.idproduto = e.idproduto and l.idresponsavel = ? and p.idproduto = ? and e.idlocal = ?";
 
 		PreparedStatement st;
 		ResultSet rs = null;
@@ -82,6 +82,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 			st = getConnection().prepareStatement(sql);
 			st.setLong(1, responsavel.getId());
 			st.setLong(2, produto.getId());
+			st.setLong(3, Long.parseLong(produto.getDescricao()));
 			rs = st.executeQuery();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

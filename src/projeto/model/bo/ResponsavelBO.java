@@ -36,6 +36,9 @@ public class ResponsavelBO implements ResponsavelInterBO {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (ExceptionCampoInvalido e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		return produtos;
@@ -58,6 +61,9 @@ public class ResponsavelBO implements ResponsavelInterBO {
 					produtos.add(aux1);
 				}
 			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExceptionCampoInvalido e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -84,6 +90,9 @@ public class ResponsavelBO implements ResponsavelInterBO {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (ExceptionCampoInvalido e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		return produtos;
@@ -108,6 +117,9 @@ public class ResponsavelBO implements ResponsavelInterBO {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (ExceptionCampoInvalido e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		return produtos;
@@ -128,6 +140,9 @@ public class ResponsavelBO implements ResponsavelInterBO {
 					produto.setQuantidade(rs.getInt("quantidade"));
 				}
 			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (ExceptionCampoInvalido e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

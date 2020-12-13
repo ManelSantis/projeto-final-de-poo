@@ -7,6 +7,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import projeto.exception.ExceptionCampoInvalido;
 import projeto.model.bo.ResponsavelBO;
+import projeto.model.dao.BaseDAO;
 import projeto.model.vo.ResponsavelVO;
 import projeto.view.Telas;
 
@@ -23,7 +24,6 @@ public class ConLogin {
 	
 	@FXML
 	public void logar (ActionEvent e) {
-		
 		ResponsavelVO resp = new ResponsavelVO();
 		try {
 			resp.setUsuario(usuario.getText());

@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import projeto.exception.ExceptionCampoInvalido;
 import projeto.model.dao.ProdutoDAO;
 import projeto.model.vo.ProdutoVO;
 
@@ -11,14 +12,6 @@ public class ProdutoBO implements ProdutoInterBO{
 	ProdutoDAO prod = new ProdutoDAO();
 	public void cadastrar(ProdutoVO produto) {
 		prod.cadastrar(produto);
-	}
-
-	public ArrayList<ProdutoVO> pesquisar(String pesquisa) {
-		// Irá identificar o produto no banco de dados em ProdutoDAO a partir de qual atributo
-		// o usuário selecionou, ou a partir do quão parecido é a String, e irá
-		// adiciona-los em uma ArrayList para então serem exibidas aqui
-		ArrayList<ProdutoVO> produtos = new ArrayList<ProdutoVO>();
-		return produtos;
 	}
 	
 	public ArrayList<ProdutoVO> listar() {
@@ -38,6 +31,9 @@ public class ProdutoBO implements ProdutoInterBO{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ExceptionCampoInvalido e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 		
 		return produtos;
@@ -56,6 +52,9 @@ public class ProdutoBO implements ProdutoInterBO{
 				produto.setSerie(rs.getString("serie"));
 			}
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExceptionCampoInvalido e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -79,6 +78,9 @@ public class ProdutoBO implements ProdutoInterBO{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ExceptionCampoInvalido e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return produtos;
@@ -99,6 +101,9 @@ public class ProdutoBO implements ProdutoInterBO{
 				produtos.add(produto);
 			}
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExceptionCampoInvalido e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -18,6 +18,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
+import projeto.exception.ExceptionCampoInvalido;
+import projeto.exception.ExceptionCampoVazio;
 import projeto.model.bo.EstoqueBO;
 import projeto.model.bo.LocalBO;
 import projeto.model.bo.ProdutoBO;
@@ -147,16 +149,58 @@ public class ConProdutos extends ConMenu implements Initializable {
 		Telas.adicionarProduto();
 	}
 
-	public void adicionar(ActionEvent e) throws Exception {
-		ProdutoVO prod = new ProdutoVO();
-		ProdutoBO salvar = new ProdutoBO();
-		prod.setNome(nome.getText());
-		prod.setSerie(serie.getText());
-		prod.setPreco(Double.parseDouble(preco.getText()));
-		prod.setPeso(Double.parseDouble(peso.getText()));
-		prod.setDescricao(descricao.getText());
-		salvar.cadastrar(prod);
-		Telas.telaProdutos();
+	private void verificarCampo(TextField tf) throws ExceptionCampoVazio {
+		if (tf.getText().isEmpty()) {
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText("Preenxa todos os campos antes de salvar");
+			mensagem.setVisible(true);
+			throw new ExceptionCampoVazio("Complete todos os campos.");
+		} else
+			return;
+	}
+
+	private void verificarArea(TextArea tf) throws ExceptionCampoVazio {
+		if (tf.getText().isEmpty()) {
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText("Preenxa todos os campos antes de salvar");
+			mensagem.setVisible(true);
+			throw new ExceptionCampoVazio("Complete todos os campos.");
+		} else
+			return;
+	}
+
+	public void adicionar(ActionEvent e) {
+		try {
+			verificarCampo(nome);
+			verificarCampo(serie);
+			verificarCampo(preco);
+			verificarCampo(peso);
+			verificarArea(descricao);
+			ProdutoVO prod = new ProdutoVO();
+			ProdutoBO salvar = new ProdutoBO();
+			prod.setNome(nome.getText());
+			prod.setSerie(serie.getText());
+			prod.setPreco(Double.parseDouble(preco.getText()));
+			prod.setPeso(Double.parseDouble(peso.getText()));
+			prod.setDescricao(descricao.getText());
+			salvar.cadastrar(prod);
+			Telas.telaProdutos();
+		} catch (NumberFormatException e1) {
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText("Digitar apenas números em preço e peso");
+			mensagem.setVisible(true);
+		} catch (ExceptionCampoVazio e1) {
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText(e1.getMessage());
+			mensagem.setVisible(true);
+		} catch (ExceptionCampoInvalido e1) {
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText(e1.getMessage());
+			mensagem.setVisible(true);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	public void telaEditar(ActionEvent e) throws Exception {
@@ -174,18 +218,40 @@ public class ConProdutos extends ConMenu implements Initializable {
 		}
 	}
 
-	public void editar(ActionEvent e) throws Exception {
-		ProdutoVO prod = new ProdutoVO();
-		ProdutoBO salvar = new ProdutoBO();
-		prod.setNome(nome.getText());
-		prod.setSerie(serie.getText());
-		prod.setPreco(Double.parseDouble(preco.getText()));
-		prod.setPeso(Double.parseDouble(peso.getText()));
-		prod.setDescricao(descricao.getText());
-		prod.setId(editavel.getId());
-		salvar.editar(prod);
-		setEditar(false);
-		Telas.telaProdutos();
+	public void editar(ActionEvent e) {
+		try {
+			verificarCampo(nome);
+			verificarCampo(serie);
+			verificarCampo(preco);
+			verificarCampo(peso);
+			verificarArea(descricao);
+			ProdutoVO prod = new ProdutoVO();
+			ProdutoBO salvar = new ProdutoBO();
+			prod.setNome(nome.getText());
+			prod.setSerie(serie.getText());
+			prod.setPreco(Double.parseDouble(preco.getText()));
+			prod.setPeso(Double.parseDouble(peso.getText()));
+			prod.setDescricao(descricao.getText());
+			prod.setId(editavel.getId());
+			salvar.editar(prod);
+			setEditar(false);
+			Telas.telaProdutos();
+		} catch (NumberFormatException e1) {
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText("Digitar apenas números em preço e peso");
+			mensagem.setVisible(true);
+		} catch (ExceptionCampoVazio e1) {
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText(e1.getMessage());
+			mensagem.setVisible(true);
+		} catch (ExceptionCampoInvalido e1) {
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText(e1.getMessage());
+			mensagem.setVisible(true);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	public void telaExcluir(ActionEvent e) throws Exception {
@@ -225,26 +291,49 @@ public class ConProdutos extends ConMenu implements Initializable {
 		}
 	}
 
-	public void estoq(ActionEvent e) throws Exception {
-		ProdutoBO aux1 = new ProdutoBO();
-		ProdutoVO aux = new ProdutoVO();
-		aux.setId(Long.parseLong(ID.getText()));
-		aux = aux1.findById(aux);
-
-		LocalVO local = new LocalVO();
-		String[] localCompleto = locais.getSelectionModel().getSelectedItem().split("/");
-		local.setId(Long.parseLong(localCompleto[0]));
-		local.setCompartimento(localCompleto[1]);
-		local.setLocalizacao(localCompleto[2]);
-		local.setResponsavel(Telas.getUsuario());
-		EstoqueVO esto = new EstoqueVO();
-		esto.setLocal(local);
-		esto.setProduto(getEditavel());
-		esto.setQuantidade(Integer.parseInt(quant.getText()));
-		EstoqueBO salvar = new EstoqueBO();
-		setEstocar(false);
-		salvar.cadastrar(esto);
-		Telas.telaProdutos();
+	public void estoq(ActionEvent e) {
+		if (locais.getSelectionModel().getSelectedItem() != null) {
+			try {
+				verificarCampo(quant);
+				ProdutoBO aux1 = new ProdutoBO();
+				ProdutoVO aux = new ProdutoVO();
+				aux.setId(Long.parseLong(ID.getText()));
+				aux = aux1.findById(aux);
+				LocalVO local = new LocalVO();
+				String[] localCompleto = locais.getSelectionModel().getSelectedItem().split("/");
+				local.setId(Long.parseLong(localCompleto[0]));
+				local.setCompartimento(localCompleto[1]);
+				local.setLocalizacao(localCompleto[2]);
+				local.setResponsavel(Telas.getUsuario());
+				EstoqueVO esto = new EstoqueVO();
+				esto.setLocal(local);
+				esto.setProduto(getEditavel());
+				esto.setQuantidade(Integer.parseInt(quant.getText()));
+				EstoqueBO salvar = new EstoqueBO();
+				setEstocar(false);
+				salvar.cadastrar(esto);
+				Telas.telaProdutos();
+			} catch (NumberFormatException e1) {
+				mensagem.setTextFill(Color.web("red"));
+				mensagem.setText("Digitar apenas números na quantidade");
+				mensagem.setVisible(true);
+			} catch (ExceptionCampoVazio e1) {
+				mensagem.setTextFill(Color.web("red"));
+				mensagem.setText(e1.getMessage());
+				mensagem.setVisible(true);
+			} catch (ExceptionCampoInvalido e1) {
+				mensagem.setTextFill(Color.web("red"));
+				mensagem.setText(e1.getMessage());
+				mensagem.setVisible(true);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} else {
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText("Selecione um local aonde irá guardar o produto");
+			mensagem.setVisible(true);
+		}
 	}
 
 	public void pesquisar(ActionEvent e) throws Exception {

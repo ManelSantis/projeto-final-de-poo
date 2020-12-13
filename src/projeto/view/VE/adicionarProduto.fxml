@@ -71,5 +71,10 @@
          </font>
       </Label>
       <TextArea fx:id="descricao" layoutX="163.0" layoutY="253.0" prefHeight="139.0" prefWidth="419.0" />
+      <Label fx:id="mensagem" alignment="CENTER" contentDisplay="CENTER" layoutX="163.0" layoutY="399.0" prefHeight="17.0" prefWidth="419.0" text="Label" visible="false">
+         <font>
+            <Font name="Tahoma Bold" size="11.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

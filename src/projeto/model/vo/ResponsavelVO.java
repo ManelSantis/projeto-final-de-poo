@@ -34,7 +34,7 @@ public class ResponsavelVO extends PessoaVO {
 			if (senha.length() >= 5) {
 				this.senha = senha;
 			} else {
-				throw new ExceptionCampoInvalido("Senha inválida");
+				throw new ExceptionCampoInvalido("Senha precisa ter pelo menos 5 caracteres");
 			}
 		} else {
 			throw new ExceptionCampoInvalido("Senha inválida");

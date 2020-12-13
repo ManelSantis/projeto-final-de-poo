@@ -91,5 +91,10 @@
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
+      <Label fx:id="mensagem" alignment="CENTER" contentDisplay="CENTER" layoutX="168.0" layoutY="345.0" prefHeight="17.0" prefWidth="419.0" text="Label" visible="false">
+         <font>
+            <Font name="Tahoma Bold" size="11.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import projeto.exception.ExceptionCampoInvalido;
 import projeto.model.dao.ItemPedidoDAO;
 import projeto.model.dao.PedidoDAO;
 import projeto.model.dao.VendaDAO;
@@ -60,6 +61,9 @@ public class VendaBO implements VendaInterBO{
 					produtos.add(aux1);
 				}
 			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExceptionCampoInvalido e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

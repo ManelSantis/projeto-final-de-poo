@@ -13,65 +13,67 @@
             <Image url="@bar.png" />
          </image>
       </ImageView>
-      <Label layoutX="284.0" layoutY="32.0" text="Editar Produto">
+      <Label layoutX="285.0" layoutY="32.0" text="Editar Produto">
          <font>
             <Font name="Tahoma Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="cancelar" layoutX="626.0" layoutY="447.0" mnemonicParsing="false" onAction="#cancelar" onMouseClicked="#estoque" prefHeight="32.0" prefWidth="102.0" text="Cancelar">
+      <Button fx:id="cancelar" layoutX="626.0" layoutY="447.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="32.0" prefWidth="102.0" text="Cancelar">
          <font>
             <Font name="Tahoma Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="confirmar" layoutX="509.0" layoutY="447.0" mnemonicParsing="false" onAction="#editar" onMouseClicked="#estoque" text="Confirmar">
+      <Button fx:id="confirmar" layoutX="509.0" layoutY="447.0" mnemonicParsing="false" onAction="#editar" text="Confirmar">
          <font>
             <Font name="Tahoma Bold" size="16.0" />
          </font>
       </Button>
-      <TextArea fx:id="descricao" layoutX="162.0" layoutY="290.0" prefHeight="108.0" prefWidth="419.0">
-         <font>
-            <Font name="Tahoma" size="12.0" />
-         </font></TextArea>
-      <Label layoutX="162.0" layoutY="203.0" prefHeight="17.0" prefWidth="43.0" text="Serie">
+      <Label layoutX="458.0" layoutY="172.0" prefHeight="17.0" prefWidth="43.0" text="Serie">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="162.0" layoutY="96.0" prefHeight="17.0" prefWidth="43.0" text="Nome">
+      <Label layoutX="162.0" layoutY="118.0" prefHeight="17.0" prefWidth="43.0" text="Nome">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="162.0" layoutY="150.0" prefHeight="17.0" prefWidth="43.0" text="Preço">
+      <Label layoutX="162.0" layoutY="172.0" prefHeight="17.0" prefWidth="43.0" text="Preço">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="164.0" layoutY="263.0" prefHeight="17.0" prefWidth="83.0" text="Descrição">
+      <Label layoutX="164.0" layoutY="229.0" prefHeight="17.0" prefWidth="83.0" text="Descrição">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="nome" layoutX="162.0" layoutY="125.0" prefHeight="25.0" prefWidth="419.0">
+      <TextField fx:id="nome" layoutX="162.0" layoutY="147.0" prefHeight="25.0" prefWidth="419.0">
          <font>
             <Font name="Tahoma" size="12.0" />
          </font></TextField>
-      <TextField fx:id="preco" layoutX="162.0" layoutY="178.0" prefHeight="25.0" prefWidth="198.0">
+      <TextField fx:id="peso" layoutX="310.0" layoutY="202.0" prefHeight="25.0" prefWidth="123.0">
          <font>
             <Font name="Tahoma" size="12.0" />
          </font></TextField>
-      <TextField fx:id="serie" layoutX="162.0" layoutY="229.0" prefHeight="25.0" prefWidth="419.0">
+      <TextField fx:id="serie" layoutX="458.0" layoutY="202.0" prefHeight="25.0" prefWidth="123.0">
          <font>
             <Font name="Tahoma" size="12.0" />
          </font></TextField>
-      <TextField fx:id="peso" layoutX="381.0" layoutY="178.0" prefHeight="25.0" prefWidth="198.0">
+      <TextField fx:id="preco" layoutX="162.0" layoutY="202.0" prefHeight="25.0" prefWidth="123.0">
          <font>
             <Font name="Tahoma" size="12.0" />
          </font>
       </TextField>
-      <Label layoutX="381.0" layoutY="152.0" prefHeight="17.0" prefWidth="43.0" text="Peso">
+      <Label layoutX="310.0" layoutY="172.0" prefHeight="17.0" prefWidth="43.0" text="Peso">
          <font>
             <Font name="Tahoma" size="14.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="descricao" layoutX="163.0" layoutY="253.0" prefHeight="139.0" prefWidth="419.0" />
+      <Label fx:id="mensagem" alignment="CENTER" contentDisplay="CENTER" layoutX="163.0" layoutY="399.0" prefHeight="17.0" prefWidth="419.0" text="Label" visible="false">
+         <font>
+            <Font name="Tahoma Bold" size="11.0" />
          </font>
       </Label>
    </children>

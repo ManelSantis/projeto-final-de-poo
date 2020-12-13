@@ -63,6 +63,10 @@ public class ConVender extends ConMenu implements Initializable {
 			cpf.setCellValueFactory(new PropertyValueFactory<ClienteVO, String>("cpf"));
 			id.setCellValueFactory(new PropertyValueFactory<ClienteVO, Long>("id"));
 			lista.setItems(clientes);
+		} else {
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText("Por favor, digite algo para pesquisa");
+			mensagem.setVisible(true);
 		}
 	}
 

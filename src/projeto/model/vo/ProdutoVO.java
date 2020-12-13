@@ -1,5 +1,7 @@
 package projeto.model.vo;
 
+import projeto.exception.ExceptionCampoInvalido;
+
 public class ProdutoVO {
 	private String nome;
 	private String descricao;
@@ -9,21 +11,16 @@ public class ProdutoVO {
 	private int quantidade = 0; // quantKanalence + quantToinho
 	private int quantiPedido = 0;
 	private long id;
-	
+
 	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		if (nome != null) {
-			if ((nome.length() <= 100) && (!nome.isEmpty())) {
-				this.nome = nome; 
-				// limitar o tamanho do nome do produto e se não está vazio
-			} else {
-				System.out.print("Operação invalida");
-			}
+	public void setNome(String nome) throws ExceptionCampoInvalido {
+		if ((nome != null) && (!nome.isEmpty())) {
+			this.nome = nome;
 		} else {
-			System.out.print("Operação invalida");
+			throw new ExceptionCampoInvalido("Digite um nome válido");
 		}
 	}
 
@@ -31,16 +28,15 @@ public class ProdutoVO {
 		return descricao;
 	}
 
-	public void setDescricao(String descricao) {
+	public void setDescricao(String descricao) throws ExceptionCampoInvalido {
 		if (descricao != null) {
 			if ((descricao.length() <= 500) && (!descricao.isEmpty())) {
-				this.descricao = descricao; 
-				// limitar o tamanho da descrição do produto e se não está vazia
+				this.descricao = descricao;
 			} else {
-				System.out.print("Operação inválida!");
+				throw new ExceptionCampoInvalido("Descrição não pode ter mais do que 500 caracteres");
 			}
 		} else {
-			System.out.print("Operação inválida!");
+			throw new ExceptionCampoInvalido("Digite alguma coisa para descrever o produto");
 		}
 	}
 
@@ -48,12 +44,11 @@ public class ProdutoVO {
 		return preco;
 	}
 
-	public void setPreco(double preco) {
+	public void setPreco(double preco) throws ExceptionCampoInvalido {
 		if (preco > 0) {
-			this.preco = preco; 
-			// verificar se o preço está sendo um valor positivo e maior que zero
+			this.preco = preco;
 		} else {
-			System.out.print("Quantidade inválida!");
+			throw new ExceptionCampoInvalido("Digite um valor diferente de 0 para o preço");
 		}
 	}
 
@@ -61,11 +56,11 @@ public class ProdutoVO {
 		return serie;
 	}
 
-	public void setSerie(String serie) {
+	public void setSerie(String serie) throws ExceptionCampoInvalido {
 		if (serie != null) {
-			this.serie = serie; 
+			this.serie = serie;
 		} else {
-			System.out.println("Digite novamente!");
+			throw new ExceptionCampoInvalido("Coloque uma serie para o produto");
 		}
 	}
 
@@ -73,39 +68,39 @@ public class ProdutoVO {
 		return quantidade;
 	}
 
-	public void setQuantidade(int quantidade) { 
+	public void setQuantidade(int quantidade) {
 		// esse método é usado em estoqueVO para aumentar
 		// ou diminuir a quantidade, e lá mesmo
 		// verifica se a quantidade é valida ou não
 		this.quantidade += quantidade;
 	}
-	
+
 	public int getQuantiPedido() {
 		return quantiPedido;
 	}
 
-	public boolean setQuantiPedido(int quantiPedido) {
+	public void setQuantiPedido(int quantiPedido) throws ExceptionCampoInvalido {
 		// médodo usado em vendaVO para vericar se a quantidade
 		// pedida é aceita
 		if (quantiPedido > 0) {
 			if (quantiPedido <= quantidade) {
-				this.quantiPedido = quantiPedido;
-				return true;
+				this.quantiPedido = quantiPedido;;
+			} else {
+				throw new ExceptionCampoInvalido("Quantidade do pedido não pode exceder o que tem em estoque");
 			}
 		}
-		return false;
 	}
 
 	public double getPeso() {
 		return peso;
 	}
 
-	public void setPeso(double peso) {
+	public void setPeso(double peso) throws ExceptionCampoInvalido {
 		if (peso > 0) {
-			this.peso = peso; 
+			this.peso = peso;
 			// verificar se o preço está sendo um valor positivo e maior que zero
 		} else {
-			System.out.print("Quantidade inválida!");
+			throw new ExceptionCampoInvalido("Digite algo maior que 0 para o peso do produto");
 		}
 	}
 
@@ -116,5 +111,5 @@ public class ProdutoVO {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 }

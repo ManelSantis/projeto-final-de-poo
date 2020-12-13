@@ -27,7 +27,6 @@ public class ConMenu {
 		Telas.telaPessoaInicio();
 	}
 	public void sair (MouseEvent e) throws Exception{
-		BaseDAO.closeConnection();
 		Telas.telaLogin();
 	}
 }

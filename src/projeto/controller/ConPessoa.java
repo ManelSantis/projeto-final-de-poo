@@ -55,11 +55,6 @@ public class ConPessoa extends ConMenu implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		preenxer();
 		escolhas();
-		/*
-		 * if(lista != null) { if(lista.getSelectionModel().getSelectedItem() != null) {
-		 * editar.setDisable(false); } else { editar.setDisable(true); } }
-		 */
-
 	}
 
 	public void voltar(ActionEvent e) throws Exception {

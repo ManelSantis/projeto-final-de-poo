@@ -217,7 +217,7 @@ public class ConEstoque extends ConMenu implements Initializable {
 				lista.setItems(produtos);
 			} else {
 				mensagem.setTextFill(Color.web("red"));
-				mensagem.setText("Por favor, selecione um tipo de pesquisa");
+				mensagem.setText("Por favor, selecione um responsável para ver o estoque");
 				mensagem.setVisible(true);
 			}
 

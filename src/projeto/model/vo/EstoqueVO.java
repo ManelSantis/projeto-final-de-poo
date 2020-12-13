@@ -1,5 +1,7 @@
 package projeto.model.vo;
 
+import projeto.exception.ExceptionCampoInvalido;
+
 public class EstoqueVO {
 	private ProdutoVO produto;
 	private LocalVO local;
@@ -10,12 +12,12 @@ public class EstoqueVO {
 		return produto;
 	}
 	
-	public void setProduto(ProdutoVO produto) {
+	public void setProduto(ProdutoVO produto) throws ExceptionCampoInvalido {
 		if (produto != null) {
 			// Adicionar o produto se ele não for nulo
 			this.produto = produto;
 		} else {
-			System.out.println("Não foi possivel adicionar o produto");
+			throw new ExceptionCampoInvalido("Produto não aceito");
 		}
 
 	}
@@ -24,11 +26,11 @@ public class EstoqueVO {
 		return local;
 	}
 
-	public void setLocal(LocalVO local) {
+	public void setLocal(LocalVO local) throws ExceptionCampoInvalido {
 		if (local != null) {
 			this.local = local;	
 		} else {
-			System.out.println("Não foi possivel adicionar o local");
+			throw new ExceptionCampoInvalido("Local não aceito");
 		}
 	}
 
@@ -36,7 +38,7 @@ public class EstoqueVO {
 		return quantidade;
 	}
 
-	public void setQuantidade(int quantidade) {
+	public void setQuantidade(int quantidade) throws ExceptionCampoInvalido {
 		if (quantidade >= 0) {
 			//Maior igual a zero, para caso acabe no estoque
 			//ou só adicione para um responsavel guardar 
@@ -49,7 +51,7 @@ public class EstoqueVO {
 			this.quantidade += quantidade;
 			produto.setQuantidade(quantidade);
 		} else {
-			System.out.println("Quantidade não aceita!");
+			throw new ExceptionCampoInvalido("Digitar quantidade maior que zero");
 		}
 	}
 

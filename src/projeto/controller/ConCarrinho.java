@@ -16,6 +16,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
+import projeto.exception.ExceptionCampoInvalido;
 import projeto.model.bo.EstoqueBO;
 import projeto.model.bo.ResponsavelBO;
 import projeto.model.bo.VendaBO;
@@ -177,6 +178,7 @@ public class ConCarrinho extends ConMenu implements Initializable {
 		VendaVO ven = ConVender.getVenda();
 		ProdutoVO aux = lista.getSelectionModel().getSelectedItem();
 		if (aux != null) {
+			System.out.println(aux.getDescricao());
 			VendaBO salvar = new VendaBO();
 			ResponsavelBO aux1 = new ResponsavelBO();
 			aux = aux1.estoqueId(Telas.getUsuario(), aux);
@@ -206,6 +208,7 @@ public class ConCarrinho extends ConMenu implements Initializable {
 			EstoqueVO es = new EstoqueVO();
 			//adiconando o local
 			es.setLocal(l);
+			System.out.println(es.getLocal().getId());
 			//adicionando o produto
 			es.setProduto(re.estoqueId(Telas.getUsuario(), ConVender.getVenda().getCarrinho().get(i)));
 			es.setQuantidade(es.getProduto().getQuantidade() 
@@ -233,30 +236,36 @@ public class ConCarrinho extends ConMenu implements Initializable {
 	public void aumentar(ActionEvent e) throws Exception {
 		ProdutoVO aux = lista.getSelectionModel().getSelectedItem();
 		if (aux != null) {
-			VendaBO salvar = new VendaBO();
-			ResponsavelBO aux1 = new ResponsavelBO();
-			int x = aux.getQuantidade();
-			aux = aux1.estoqueId(Telas.getUsuario(), aux);
-			aux.setQuantiPedido(x + 1);
-			salvar.editarItens(ConVender.getVenda(), aux);
-			for (int i = 0; i < ConVender.getVenda().getCarrinho().size(); i++) {
-				if(ConVender.getVenda().getCarrinho().get(i).getId() == aux.getId()) {
-					ConVender.getVenda().getCarrinho().get(i)
-					.setQuantiPedido(aux.getQuantiPedido());
-					System.out.println(ConVender.getVenda().getCarrinho().get(i)
-					.getQuantiPedido());
+			try {
+				VendaBO salvar = new VendaBO();
+				ResponsavelBO aux1 = new ResponsavelBO();
+				int x = aux.getQuantidade();
+				aux = aux1.estoqueId(Telas.getUsuario(), aux);
+				aux.setQuantiPedido(x + 1);
+				salvar.editarItens(ConVender.getVenda(), aux);
+				for (int i = 0; i < ConVender.getVenda().getCarrinho().size(); i++) {
+					if(ConVender.getVenda().getCarrinho().get(i).getId() == aux.getId()) {
+						ConVender.getVenda().getCarrinho().get(i)
+						.setQuantiPedido(aux.getQuantiPedido());
+						System.out.println(ConVender.getVenda().getCarrinho().get(i)
+						.getQuantiPedido());
+					}
 				}
+				VendaBO aux2 = new VendaBO();
+				ObservableList<ProdutoVO> produtos = FXCollections
+						.observableArrayList(aux2.listarItens(ConVender.getVenda()));
+				nome.setCellValueFactory(new PropertyValueFactory<ProdutoVO, String>("nome"));
+				quant.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Integer>("quantidade"));
+				preco.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Double>("preco"));
+				id.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("id"));
+				loc.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("descricao"));
+				lista.setItems(produtos);
+				Telas.telaCarrinho();
+			} catch (ExceptionCampoInvalido e1) {
+				mensagem.setTextFill(Color.web("red"));
+				mensagem.setText(e1.getMessage());
+				mensagem.setVisible(true);
 			}
-			VendaBO aux2 = new VendaBO();
-			ObservableList<ProdutoVO> produtos = FXCollections
-					.observableArrayList(aux2.listarItens(ConVender.getVenda()));
-			nome.setCellValueFactory(new PropertyValueFactory<ProdutoVO, String>("nome"));
-			quant.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Integer>("quantidade"));
-			preco.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Double>("preco"));
-			id.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("id"));
-			loc.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("descricao"));
-			lista.setItems(produtos);
-			Telas.telaCarrinho();
 		} else {
 			mensagem.setTextFill(Color.web("red"));
 			mensagem.setText("Por favor, selecione um produto para aumentar a quantidade no carrinho");
