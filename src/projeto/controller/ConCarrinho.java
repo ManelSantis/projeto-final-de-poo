@@ -1,8 +1,26 @@
 package projeto.controller;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+
+
+
+
+
+
+
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -216,10 +234,77 @@ public class ConCarrinho extends ConMenu implements Initializable {
 			EstoqueBO salvar = new EstoqueBO();
 			//por fim edita o estoque no final
 			salvar.editar(es);
+			
 		}
 		setCar(false); //saindo do carrinho
 		setOk(false); //saindo da tela de confirmar venda
 		Telas.telaVenda();
+	}
+	
+	public void pdf(ActionEvent e) throws Exception {
+		Document doc = new Document();
+		try {
+			PdfWriter.getInstance(doc,
+					new FileOutputStream("Nota_de_venda.pdf"));
+			doc.open();
+			doc.setPageSize(PageSize.A3);
+			Paragraph p = new Paragraph("Nota de venda");
+			p.setAlignment(1);
+			doc.add(p);
+			p = new Paragraph(" ");
+			doc.add(p);
+			// nome do responsavel
+			Paragraph tex = new Paragraph("Nome: " + ConVender.getCli().getNome());
+			doc.add(tex);
+			// CPF do cliente
+			tex = new Paragraph("CPF : " + ConVender.getCli().getCpf());
+			doc.add(tex);
+			// Data da compra
+			tex = new Paragraph("Data : " +  ConVender.getVenda().getData());
+			doc.add(tex);
+			// Nome do Responsavel.
+			tex = new Paragraph("Nome: " + Telas.getUsuario().getNome());
+			doc.add(tex);
+			doc.add(p);
+			PdfPTable table = new PdfPTable(4);
+
+			PdfPCell cel1 = new PdfPCell(new Paragraph(" Serial"));
+			PdfPCell cel2 = new PdfPCell(new Paragraph(" Nome Produto"));
+			PdfPCell cel3 = new PdfPCell(new Paragraph(" Descrição"));
+			PdfPCell cel4 = new PdfPCell(new Paragraph(" Quantidade"));
+
+			table.addCell(cel1);
+			table.addCell(cel2);
+			table.addCell(cel3);
+			table.addCell(cel4);
+			doc.add(table);
+			for (int i = 0; i < ConVender.getVenda().getCarrinho().size(); i++) {
+				 cel1 = new PdfPCell(new Paragraph(	ConVender.getVenda().getCarrinho().get(i).getId()));
+				 cel2 = new PdfPCell(new Paragraph(	ConVender.getVenda().getCarrinho().get(i).getNome()));
+				 cel3 = new PdfPCell(new Paragraph(	ConVender.getVenda().getCarrinho().get(i).getDescricao()));
+				 cel4 = new PdfPCell(new Paragraph(	ConVender.getVenda().getCarrinho().get(i).getQuantidade()));
+				 table.addCell(cel1);
+				 table.addCell(cel2);
+				 table.addCell(cel3);
+				 table.addCell(cel4);
+				 doc.add(table);
+
+			}
+			cel1 = new PdfPCell(new Paragraph(" "));
+			cel2 = new PdfPCell(new Paragraph(" "));
+			cel3 = new PdfPCell(new Paragraph("Valoe final: "));
+			cel4 = new PdfPCell(new Paragraph(	(float) ConVender.getVenda().getValor()));
+
+		} catch (FileNotFoundException er) {
+			// TODO Auto-generated catch block
+			er.printStackTrace();
+		} catch (DocumentException er) {
+			// TODO Auto-generated catch block
+			er.printStackTrace();
+		} finally {
+			doc.close();
+		}
+
 	}
 	
 	public void confirmar(ActionEvent e) throws Exception {
