@@ -17,9 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import projeto.model.bo.LocalBO;
-import projeto.model.bo.ProdutoBO;
 import projeto.model.vo.LocalVO;
-import projeto.model.vo.ProdutoVO;
 import projeto.view.Telas;
 
 public class ConLocal extends ConMenu implements Initializable {
@@ -47,6 +45,10 @@ public class ConLocal extends ConMenu implements Initializable {
 	@FXML
 	private ComboBox<String> escolha;
 	@FXML
+	private Label mensagem;
+	@FXML
+	private TextField pesquisa;
+	@FXML
 	private Label resp;
 
 	@FXML
@@ -73,27 +75,26 @@ public class ConLocal extends ConMenu implements Initializable {
 
 		}
 		preenxer();
+		escolha();
 	}
 
-	public void escolhas() {
+	public void escolha() {
 		if (escolha != null) {
-			categorias.add("compartimento");
-			categorias.add("localização");
+			categorias.add("Compartimento");
+			categorias.add("Localização");
 			cb = FXCollections.observableArrayList(categorias);
 			escolha.setItems(cb);
 		}
-	}	
+	}
+
 	public void preenxer() {
 		if (lista != null) {
 			// irá mostrar todos os locais que o usuário logado tem
 			LocalBO aux = new LocalBO();
-			ObservableList<LocalVO> locaisUser = FXCollections
-					.observableArrayList(aux.listar());
+			ObservableList<LocalVO> locaisUser = FXCollections.observableArrayList(aux.listar());
 			id.setCellValueFactory(new PropertyValueFactory<LocalVO, Long>("id"));
-			compar.setCellValueFactory(new PropertyValueFactory<LocalVO, String>(
-					"compartimento"));
-			loca.setCellValueFactory(new PropertyValueFactory<LocalVO, String>(
-					"localizacao"));
+			compar.setCellValueFactory(new PropertyValueFactory<LocalVO, String>("compartimento"));
+			loca.setCellValueFactory(new PropertyValueFactory<LocalVO, String>("localizacao"));
 			lista.setItems(locaisUser);
 		}
 	}
@@ -148,9 +149,44 @@ public class ConLocal extends ConMenu implements Initializable {
 	}
 
 	public void pesquisar(ActionEvent e) throws Exception {
-		Telas.telaLocal();
+		if ((escolha.getSelectionModel().getSelectedItem() != null)
+				&& (escolha.getSelectionModel().getSelectedItem().equals("Compartimento"))) {
+			if (!pesquisa.getText().isEmpty()) {
+				mensagem.setVisible(false);
+				LocalVO local = new LocalVO();
+				local.setCompartimento(pesquisa.getText());
+				LocalBO aux = new LocalBO();
+				ObservableList<LocalVO> locais = FXCollections.observableArrayList(aux.compartimento(local));
+				id.setCellValueFactory(new PropertyValueFactory<LocalVO, Long>("id"));
+				compar.setCellValueFactory(new PropertyValueFactory<LocalVO, String>("compartimento"));
+				loca.setCellValueFactory(new PropertyValueFactory<LocalVO, String>("localizacao"));
+				lista.setItems(locais);
+			} else {
+				mensagem.setText("Por favor, digite algo para pesquisar");
+				mensagem.setVisible(true);
+			}
+		}
+		else if ((escolha.getSelectionModel().getSelectedItem() != null)
+				&& (escolha.getSelectionModel().getSelectedItem().equals("Localização"))) {
+			if (!pesquisa.getText().isEmpty()) {
+				mensagem.setVisible(false);
+				LocalVO local = new LocalVO();
+				local.setCompartimento(pesquisa.getText());
+				LocalBO aux = new LocalBO();
+				ObservableList<LocalVO> locais = FXCollections.observableArrayList(aux.localizacao(local));
+				id.setCellValueFactory(new PropertyValueFactory<LocalVO, Long>("id"));
+				compar.setCellValueFactory(new PropertyValueFactory<LocalVO, String>("compartimento"));
+				loca.setCellValueFactory(new PropertyValueFactory<LocalVO, String>("localizacao"));
+				lista.setItems(locais);
+			}} else {
+				
+				mensagem.setText("Por favor, digite algo para pesquisar");
+				mensagem.setVisible(true);
+			
+		}
+}
 
-	}
+
 
 	public void confirmar(ActionEvent e) throws Exception {
 		LocalVO local = new LocalVO();

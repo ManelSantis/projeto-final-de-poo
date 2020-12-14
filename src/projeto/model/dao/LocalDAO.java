@@ -115,8 +115,10 @@ public class LocalDAO extends BaseDAO<LocalVO> implements LocalInterDAO{
 			ptst.setLong(1, local.getId());
 			rs = ptst.executeQuery();
 			while (rs.next()) {
+				aux.setCompartimento(rs.getString("compartimento"));
 				aux.setLocalizacao(rs.getString("localizacao"));
 				aux.setId(rs.getLong("idlocal"));
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -125,13 +127,48 @@ public class LocalDAO extends BaseDAO<LocalVO> implements LocalInterDAO{
 		return rs;
 	}
 
-	public ResultSet findByName(LocalVO local) {
+	public ResultSet findbycompartimento(LocalVO local) {
 		
-		return null;
+		String sql = "select * from local where compartimento  ilike ?";
+		PreparedStatement ptst;
+		ResultSet rs = null;
+		try {
+			ptst = getConnection().prepareStatement(sql);
+			ptst.setString(1, "%"+ local.getCompartimento() + "%");
+			rs = ptst.executeQuery();
+			
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+	}
+public ResultSet findybylocalizacao(LocalVO local) {
+		String sql = "select * from local where localizacao  ilike ?";
+		PreparedStatement ptst;
+		ResultSet rs = null;
+		try {
+			ptst = getConnection().prepareStatement(sql);
+			ptst.setString(1, "%"+ local.getLocalizacao()+"%");
+			rs = ptst.executeQuery();
+
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
 	}
 
 	@Override
 	public ResultSet listar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultSet findByName(LocalVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -44,8 +44,45 @@ public class LocalBO implements LocalInterBO {
 }
 
 	@Override
-	public ArrayList<LocalVO> listar(ResponsavelVO responsavel) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<LocalVO> compartimento(LocalVO local) {
+		ResponsavelVO responsavel = Telas.getUsuario();
+		ResultSet rs = loca.findbycompartimento(local);
+		ArrayList<LocalVO> loc = new ArrayList<LocalVO>();
+		try {
+			while (rs.next()) {
+				LocalVO aux = new LocalVO();
+				aux.setCompartimento(rs.getString("compartimento"));
+				aux.setLocalizacao(rs.getString("localizacao"));
+				aux.setId(rs.getLong("idlocal"));
+				aux.setResponsavel(responsavel);
+				loc.add(aux);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return loc;
+	}
+	@Override
+	public ArrayList<LocalVO> localizacao(LocalVO local) {
+		ResponsavelVO responsavel = Telas.getUsuario();
+		ResultSet rs = loca.findybylocalizacao(local);
+		ArrayList<LocalVO> loc = new ArrayList<LocalVO>();
+		try {
+			while (rs.next()) {
+				LocalVO aux = new LocalVO();
+				aux.setCompartimento(rs.getString("compartimento"));
+				aux.setLocalizacao(rs.getString("localizacao"));
+				aux.setId(rs.getLong("idlocal"));
+				aux.setResponsavel(responsavel);
+				loc.add(aux);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return loc;
 	}
 }
