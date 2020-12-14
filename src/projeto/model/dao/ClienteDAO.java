@@ -42,12 +42,14 @@ public class ClienteDAO extends PessoaDAO<ClienteVO> implements ClienteInterDAO{
 		try {
 			ptst = getConnection().prepareStatement(sql);
 			ptst.setLong(1, cliente.getId());
+			System.out.println(cliente.getId());
 			ptst.executeUpdate();
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 		super.excluir(cliente);//deletar da tabela pessoas também
 	}
 

@@ -1,5 +1,6 @@
 package projeto.model.vo;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
@@ -83,7 +84,8 @@ public class VendaVO {
 	
 	public String getString() {
 		//para passar o calendar como string
-		String dataFinal = data.get(Calendar.YEAR) + "-" + data.get(Calendar.MONTH) + "-" +data.get(Calendar.DAY_OF_MONTH);
+		SimpleDateFormat df1 = new SimpleDateFormat("MM");
+		String dataFinal = data.get(Calendar.YEAR) + "-" + df1.format(data.get(Calendar.MONTH)) + "-" +data.get(Calendar.DAY_OF_MONTH);
 		return dataFinal;
 	}
 

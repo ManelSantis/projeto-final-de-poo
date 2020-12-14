@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import projeto.model.vo.VendaVO;
 
@@ -45,7 +46,23 @@ public class NotaFiscalDAO extends BaseDAO<VendaVO>{
 		}
 		return rs;
 	}
+	
+	public ResultSet periodo(Calendar inicio, Calendar fim) {
+		String sql = "select * from nota where data between ? and ?;";
+		PreparedStatement ptst;
+		ResultSet rs = null;
+		try {
+			ptst = getConnection().prepareStatement(sql);
+			ptst.setDate(1, new Date (inicio.getTimeInMillis()));
+			ptst.setDate(2, new Date (fim.getTimeInMillis()));
+			rs = ptst.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
+		return rs;
+	}
 
 	@Override
 	public void editar(VendaVO vo) {

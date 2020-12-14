@@ -71,7 +71,7 @@
             <Font name="Tahoma Bold" size="12.0" />
          </font>
       </Label>
-      <TableView fx:id="lista" layoutX="384.0" layoutY="163.0" prefHeight="310.0" prefWidth="572.0">
+      <TableView fx:id="lista" layoutX="384.0" layoutY="163.0" prefHeight="290.0" prefWidth="572.0">
         <columns>
             <TableColumn fx:id="id" prefWidth="70.0" text="Nº" />
           <TableColumn fx:id="data" prefWidth="87.0" text="Data" />
@@ -105,11 +105,18 @@
             <Font name="Tahoma Bold" size="11.0" />
          </font>
       </Button>
-      <Label layoutX="731.0" layoutY="482.0" text="Toque na linha que deseja ver a nota fiscal" />
       <Label fx:id="mensagem" alignment="CENTER" contentDisplay="CENTER" layoutX="384.0" layoutY="146.0" prefHeight="14.0" prefWidth="572.0" text="Label" visible="false">
          <font>
             <Font name="Tahoma Bold" size="11.0" />
          </font>
       </Label>
+      <Button fx:id="nota" layoutX="829.0" layoutY="465.0" mnemonicParsing="false" onAction="#gerarNota" prefHeight="25.0" prefWidth="127.0" style="-fx-background-radius: 10px;" text="Nota Fiscal">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Tahoma Bold" size="11.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

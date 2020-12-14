@@ -9,5 +9,7 @@ public interface LocalInterBO {
 	public void cadastrar(LocalVO local);
 	public void editar(LocalVO local);
 	public void excluir(LocalVO local);
-	public ArrayList<LocalVO> listar(ResponsavelVO responsavel);
+	public ArrayList<LocalVO> listar();
+	public ArrayList<LocalVO> compartimento(LocalVO local);
+	public ArrayList<LocalVO> localizacao(LocalVO local);
 }

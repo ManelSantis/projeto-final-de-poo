@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import projeto.model.vo.LocalVO;
 import projeto.model.vo.ResponsavelVO;
 import projeto.view.Telas;
+import projeto.exception.ExceptionCampoInvalido;
 import projeto.model.dao.LocalDAO;
 public class LocalBO implements LocalInterBO {
 	LocalDAO loca = new LocalDAO();
@@ -38,12 +39,14 @@ public class LocalBO implements LocalInterBO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ExceptionCampoInvalido e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return loc;
 }
 
-	@Override
 	public ArrayList<LocalVO> compartimento(LocalVO local) {
 		ResponsavelVO responsavel = Telas.getUsuario();
 		ResultSet rs = loca.findbycompartimento(local);
@@ -60,11 +63,14 @@ public class LocalBO implements LocalInterBO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ExceptionCampoInvalido e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return loc;
 	}
-	@Override
+	
 	public ArrayList<LocalVO> localizacao(LocalVO local) {
 		ResponsavelVO responsavel = Telas.getUsuario();
 		ResultSet rs = loca.findybylocalizacao(local);
@@ -81,8 +87,12 @@ public class LocalBO implements LocalInterBO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ExceptionCampoInvalido e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return loc;
 	}
+
 }

@@ -14,7 +14,7 @@ public class ItemPedidoDAO extends BaseDAO<VendaVO> implements ItemPedidoInterDA
 		// esse método adicionar no carrinho, a chava primeira
 		// sendo idpedido + idproduto
 		boolean aux = false;
-		String sql = "select * from itempedido where idpedido = ? and idproduto = ?";
+		String sql = "select * from itempedido where idpedido = ? and idproduto = ? and idlocal = ?";
 		PreparedStatement ptst;
 		ResultSet rs;
 
@@ -22,6 +22,7 @@ public class ItemPedidoDAO extends BaseDAO<VendaVO> implements ItemPedidoInterDA
 			ptst = getConnection().prepareStatement(sql);
 			ptst.setLong(1, venda.getId());
 			ptst.setLong(2, produto.getId());
+			ptst.setLong(3, Long.parseLong(produto.getDescricao()));
 			rs = ptst.executeQuery();
 			while (rs.next()) {
 				aux = true;
@@ -31,7 +32,7 @@ public class ItemPedidoDAO extends BaseDAO<VendaVO> implements ItemPedidoInterDA
 			e.printStackTrace();
 		}
 		if (aux) {
-
+			
 		} else {
 
 			sql = "insert into itempedido (idPedido, idProduto, idlocal, quantidade) " 
@@ -58,7 +59,7 @@ public class ItemPedidoDAO extends BaseDAO<VendaVO> implements ItemPedidoInterDA
 	public void editarCarrinho(VendaVO venda, ProdutoVO produto) {
 		// verificar se o item já existe dentro do pedido
 		boolean aux = false;
-		String sql = "select * from itempedido where idpedido = ? and idproduto = ?";
+		String sql = "select * from itempedido where idpedido = ? and idproduto = ? and idlocal = ?";
 		PreparedStatement ptst;
 		ResultSet rs;
 
@@ -66,6 +67,7 @@ public class ItemPedidoDAO extends BaseDAO<VendaVO> implements ItemPedidoInterDA
 			ptst = getConnection().prepareStatement(sql);
 			ptst.setLong(1, venda.getId());
 			ptst.setLong(2, produto.getId());
+			ptst.setLong(3, Long.parseLong(produto.getDescricao()));
 			rs = ptst.executeQuery();
 			while (rs.next()) {
 				aux = true;
@@ -77,12 +79,13 @@ public class ItemPedidoDAO extends BaseDAO<VendaVO> implements ItemPedidoInterDA
 
 		if (aux) {
 			// se já existir, irá fazer um update
-			sql = "update itempedido set quantidade = ? where idpedido = ? and idproduto = ?";
+			sql = "update itempedido set quantidade = ? where idpedido = ? and idproduto = ? and idlocal = ?";
 			try {
 				ptst = getConnection().prepareStatement(sql);
 				ptst.setInt(1, produto.getQuantiPedido());
 				ptst.setLong(2, venda.getId());
 				ptst.setLong(3, produto.getId());
+				ptst.setLong(4, Long.parseLong(produto.getDescricao()));
 				ptst.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -93,12 +96,13 @@ public class ItemPedidoDAO extends BaseDAO<VendaVO> implements ItemPedidoInterDA
 
 	public void removerCarrinho(VendaVO venda, ProdutoVO produto) {
 		// remover do carrinho
-		String sql = "delete from itempedido where idpedido = ? and idproduto = ?";
+		String sql = "delete from itempedido where idpedido = ? and idproduto = ? and idlocal = ?";
 		PreparedStatement ptst;
 		try {
 			ptst = getConnection().prepareStatement(sql);
 			ptst.setLong(1, venda.getId()); // salva o código da venda
 			ptst.setLong(2, produto.getId());
+			ptst.setLong(3, Long.parseLong(produto.getDescricao()));
 			ptst.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -126,8 +126,6 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 	public boolean buscarLogin(ResponsavelVO responsavel) {
 		// Verifica se o login existe no banco de dados
 		String sql = "select * from responsavel where usuario = ?;";
-		System.out.println(responsavel.getUsuario());
-		System.out.println(responsavel.getSenha());
 		PreparedStatement ptst;
 		ResultSet rs = null;
 		boolean aux = false;

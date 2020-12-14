@@ -1,5 +1,7 @@
 package projeto.model.vo;
 
+import projeto.exception.ExceptionCampoInvalido;
+
 public class LocalVO {
 	private String localizacao;
 	private String compartimento;
@@ -10,14 +12,14 @@ public class LocalVO {
 		return localizacao;
 	}
 
-	public void setLocalizacao(String localizacao) {
+	public void setLocalizacao(String localizacao) throws ExceptionCampoInvalido {
 		if (localizacao != null) {
 			if (!localizacao.isEmpty()) {
 				this.localizacao = localizacao; 
 				// Cadastra informação caso realment esteja preenchida.
 			}
 		} else {
-			System.out.println("Informação incorreta"); // Informado invalizes caso esteja vazio.
+			throw new ExceptionCampoInvalido("Localização inválida"); //Informado invalizes caso esteja vazio.
 		}
 
 	}
@@ -37,8 +39,6 @@ public class LocalVO {
 	public void setResponsavel(ResponsavelVO responsavel) {
 		if (responsavel != null) {
 			this.responsavel = responsavel;	
-		} else {
-			System.out.println("Não foi possivel adicionar responsavel");
 		}
 	}
 
@@ -46,9 +46,11 @@ public class LocalVO {
 		return compartimento;
 	}
 
-	public void setCompartimento(String compartimento) {
+	public void setCompartimento(String compartimento) throws ExceptionCampoInvalido {
 		if((compartimento != null) && (!compartimento.isEmpty())) {
 			this.compartimento = compartimento;	
+		} else {
+			throw new ExceptionCampoInvalido("Conpartimento inválido");
 		}
 	}
 

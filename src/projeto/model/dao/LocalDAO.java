@@ -114,12 +114,6 @@ public class LocalDAO extends BaseDAO<LocalVO> implements LocalInterDAO{
 			ptst = getConnection().prepareStatement(sql);
 			ptst.setLong(1, local.getId());
 			rs = ptst.executeQuery();
-			while (rs.next()) {
-				aux.setCompartimento(rs.getString("compartimento"));
-				aux.setLocalizacao(rs.getString("localizacao"));
-				aux.setId(rs.getLong("idlocal"));
-
-			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -152,8 +146,6 @@ public ResultSet findybylocalizacao(LocalVO local) {
 			ptst = getConnection().prepareStatement(sql);
 			ptst.setString(1, "%"+ local.getLocalizacao()+"%");
 			rs = ptst.executeQuery();
-
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

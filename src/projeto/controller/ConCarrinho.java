@@ -191,7 +191,6 @@ public class ConCarrinho extends ConMenu implements Initializable {
 		VendaVO ven = ConVender.getVenda();
 		ProdutoVO aux = lista.getSelectionModel().getSelectedItem();
 		if (aux != null) {
-			System.out.println(aux.getDescricao());
 			VendaBO salvar = new VendaBO();
 			ResponsavelBO aux1 = new ResponsavelBO();
 			aux = aux1.estoqueId(Telas.getUsuario(), aux);
@@ -276,20 +275,23 @@ public class ConCarrinho extends ConMenu implements Initializable {
 			tex = new Paragraph("\nEndereço : " + Telas.getUsuario().getEndereco());
 			doc.add(tex);
 			// Data da compra
-			tex = new Paragraph("Data : " + data);
-			doc.add(tex);
-			tex = new Paragraph("Código : " + venda.getCodigo() + "\n\n");
-			doc.add(tex);
-			p = new Paragraph("\n--------------- Dados da Venda ---------------\n\n\n");
+			
+			p = new Paragraph("\n--------------- Dados da Venda ---------------");
 			p.setAlignment(1);
 			doc.add(p);
-			PdfPTable table = new PdfPTable(4);
-			PdfPCell cel = new PdfPCell(new Paragraph(" Local"));
-			PdfPCell cel1 = new PdfPCell(new Paragraph(" Serie"));
+			
+			tex = new Paragraph("\nData : " + data);
+			doc.add(tex);
+			tex = new Paragraph("\nCódigo : " + venda.getCodigo() + "\n\n");
+			doc.add(tex);
+			
+			PdfPTable table = new PdfPTable(5);
+			PdfPCell cel = new PdfPCell(new Paragraph(" Local "));
+			PdfPCell cel1 = new PdfPCell(new Paragraph(" Serie "));
 			PdfPCell cel2 = new PdfPCell(new Paragraph(" Nome "));
 			PdfPCell cel3 = new PdfPCell(new Paragraph(" Quantidade"));
 			PdfPCell cel4 = new PdfPCell(new Paragraph(" Preço Unitaro"));
-			
+
 			table.addCell(cel);
 			table.addCell(cel1);
 			table.addCell(cel2);
@@ -302,6 +304,7 @@ public class ConCarrinho extends ConMenu implements Initializable {
 				cel2 = new PdfPCell(new Paragraph(venda.getCarrinho().get(i).getNome()));
 				cel3 = new PdfPCell(new Paragraph(""+venda.getCarrinho().get(i).getQuantiPedido()));
 				cel4 = new PdfPCell(new Paragraph("" + venda.getCarrinho().get(i).getPreco()));
+				table.addCell(cel);
 				table.addCell(cel1);
 				table.addCell(cel2);
 				table.addCell(cel3);

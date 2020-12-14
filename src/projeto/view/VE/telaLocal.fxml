@@ -101,7 +101,7 @@
          </font>
       </Button>
       <ComboBox fx:id="escolha" layoutX="757.0" layoutY="96.0" prefHeight="25.0" prefWidth="119.0" />
-      <Button fx:id="pesquisa" layoutX="889.0" layoutY="96.0" mnemonicParsing="false" onAction="#pesquisar" prefHeight="25.0" prefWidth="82.0" style="-fx-background-radius: 10px;" text="Pesquisar">
+      <Button layoutX="889.0" layoutY="96.0" mnemonicParsing="false" onAction="#pesquisar" prefHeight="25.0" prefWidth="82.0" style="-fx-background-radius: 10px;" text="Pesquisar">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -109,7 +109,7 @@
             <Font name="Tahoma Bold" size="11.0" />
          </font>
       </Button>
-      <TextField layoutX="399.0" layoutY="96.0" prefHeight="25.0" prefWidth="341.0" promptText="Pesquisar" />
+      <TextField fx:id="pesquisa" layoutX="399.0" layoutY="96.0" prefHeight="25.0" prefWidth="341.0" promptText="Pesquisar" />
       <TableView fx:id="lista" layoutX="398.0" layoutY="136.0" prefHeight="315.0" prefWidth="573.0">
          <columns>
             <TableColumn fx:id="id" prefWidth="52.0" text="ID" />
@@ -117,5 +117,10 @@
             <TableColumn fx:id="loca" prefWidth="396.0" text="Localização" />
          </columns>
       </TableView>
+      <Label fx:id="mensagem" alignment="CENTER" contentDisplay="CENTER" layoutX="398.0" layoutY="121.0" prefHeight="17.0" prefWidth="573.0" text="Label" visible="false">
+         <font>
+            <Font name="Tahoma Bold" size="11.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

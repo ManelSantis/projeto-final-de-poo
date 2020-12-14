@@ -16,6 +16,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
+import projeto.exception.ExceptionCampoInvalido;
+import projeto.exception.ExceptionCampoVazio;
 import projeto.model.bo.LocalBO;
 import projeto.model.vo.LocalVO;
 import projeto.view.Telas;
@@ -115,18 +118,30 @@ public class ConLocal extends ConMenu implements Initializable {
 
 	}
 
-	public void editar(ActionEvent e) throws Exception {
+	public void editar(ActionEvent e) {
 		// Irá receber o local com a informação alterada, salvar tudo e chamar o
 		// metodo para editar no banco de dados.
-		LocalVO loca = new LocalVO();
-		LocalBO salvar = new LocalBO();
-		loca.setId(editavel.getId());
-		loca.setCompartimento(compartimento.getText());
-		loca.setLocalizacao(localizacao.getText());
-		loca.setResponsavel(Telas.getUsuario());
-		salvar.editar(loca);
-		setEditar(false);
-		Telas.telaLocal();
+		try {
+			verificarCampo(compartimento);
+			verificarCampo(localizacao);
+			LocalVO loca = new LocalVO();
+			LocalBO salvar = new LocalBO();
+			loca.setId(editavel.getId());
+			loca.setCompartimento(compartimento.getText());
+			loca.setLocalizacao(localizacao.getText());
+			loca.setResponsavel(Telas.getUsuario());
+			salvar.editar(loca);
+			setEditar(false);
+			Telas.telaLocal();
+		} catch (ExceptionCampoInvalido e1) {
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText(e1.getMessage());
+			mensagem.setVisible(true);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 	}
 
 	public void excluirlocal(ActionEvent e) throws Exception {
@@ -149,9 +164,10 @@ public class ConLocal extends ConMenu implements Initializable {
 	}
 
 	public void pesquisar(ActionEvent e) throws Exception {
-		if ((escolha.getSelectionModel().getSelectedItem() != null)
-				&& (escolha.getSelectionModel().getSelectedItem().equals("Compartimento"))) {
-			if (!pesquisa.getText().isEmpty()) {
+		if ((pesquisa.getText() != null) && (!pesquisa.getText().isEmpty())) {
+
+			if ((escolha.getSelectionModel().getSelectedItem() != null)
+					&& (escolha.getSelectionModel().getSelectedItem().equals("Compartimento"))) {
 				mensagem.setVisible(false);
 				LocalVO local = new LocalVO();
 				local.setCompartimento(pesquisa.getText());
@@ -161,41 +177,60 @@ public class ConLocal extends ConMenu implements Initializable {
 				compar.setCellValueFactory(new PropertyValueFactory<LocalVO, String>("compartimento"));
 				loca.setCellValueFactory(new PropertyValueFactory<LocalVO, String>("localizacao"));
 				lista.setItems(locais);
-			} else {
-				mensagem.setText("Por favor, digite algo para pesquisar");
-				mensagem.setVisible(true);
-			}
-		}
-		else if ((escolha.getSelectionModel().getSelectedItem() != null)
-				&& (escolha.getSelectionModel().getSelectedItem().equals("Localização"))) {
-			if (!pesquisa.getText().isEmpty()) {
+
+			} else if ((escolha.getSelectionModel().getSelectedItem() != null)
+					&& (escolha.getSelectionModel().getSelectedItem().equals("Localização"))) {
 				mensagem.setVisible(false);
 				LocalVO local = new LocalVO();
-				local.setCompartimento(pesquisa.getText());
+				local.setLocalizacao(pesquisa.getText());
 				LocalBO aux = new LocalBO();
 				ObservableList<LocalVO> locais = FXCollections.observableArrayList(aux.localizacao(local));
 				id.setCellValueFactory(new PropertyValueFactory<LocalVO, Long>("id"));
 				compar.setCellValueFactory(new PropertyValueFactory<LocalVO, String>("compartimento"));
 				loca.setCellValueFactory(new PropertyValueFactory<LocalVO, String>("localizacao"));
 				lista.setItems(locais);
-			}} else {
-				
-				mensagem.setText("Por favor, digite algo para pesquisar");
+			} else {
+				mensagem.setTextFill(Color.web("red"));
+				mensagem.setText("Por favor, selecione um tipo de pesquisa");
 				mensagem.setVisible(true);
-			
+			}
+		} else {
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText("Por favor, digite algo para pesquisar");
+			mensagem.setVisible(true);
 		}
-}
-
-
-
-	public void confirmar(ActionEvent e) throws Exception {
-		LocalVO local = new LocalVO();
-		LocalBO salvar = new LocalBO();
-		local.setLocalizacao(localizacao.getText());
-		local.setCompartimento(compartimento.getText());
-		local.setResponsavel(Telas.getUsuario());
-		salvar.cadastrar(local);
-		Telas.telaLocal();
+	}
+	
+	private void verificarCampo(TextField tf) throws ExceptionCampoVazio {
+		if (tf.getText().isEmpty()) {
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText("Preenxa todos os campos antes de salvar");
+			mensagem.setVisible(true);
+			throw new ExceptionCampoVazio("Complete todos os campos.");
+		} else
+			return;
+	}
+	
+	public void confirmar(ActionEvent e) {
+		try {
+			verificarCampo(compartimento);
+			verificarCampo(localizacao);
+			LocalVO local = new LocalVO();
+			LocalBO salvar = new LocalBO();
+			local.setLocalizacao(localizacao.getText());
+			local.setCompartimento(compartimento.getText());
+			local.setResponsavel(Telas.getUsuario());
+			salvar.cadastrar(local);
+			Telas.telaLocal();
+		} catch (ExceptionCampoInvalido e1) {
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText(e1.getMessage());
+			mensagem.setVisible(true);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	
 	}
 
 	public void cancelar(ActionEvent e) throws Exception {

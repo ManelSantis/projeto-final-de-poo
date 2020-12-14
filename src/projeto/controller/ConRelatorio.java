@@ -1,9 +1,10 @@
 package projeto.controller;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -20,7 +21,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import projeto.model.bo.NotaFiscalBO;
-import projeto.model.bo.VendaBO;
 import projeto.model.vo.VendaVO;
 
 public class ConRelatorio extends ConMenu implements Initializable {
@@ -98,8 +98,8 @@ public class ConRelatorio extends ConMenu implements Initializable {
 						+ value.getDayOfMonth();
 			}
 			//e adiciona tudo dentro da lista
-			VendaBO aux = new VendaBO();
-			ObservableList<VendaVO> ob = FXCollections.observableArrayList(aux.relatorio(com,fi));
+			NotaFiscalBO aux = new NotaFiscalBO();
+			ObservableList<VendaVO> ob = FXCollections.observableArrayList(aux.relatorio(com, fi));
 			data.setCellValueFactory(new PropertyValueFactory<VendaVO, String>("string"));
 			valor.setCellValueFactory(new PropertyValueFactory<VendaVO, Double>("valor"));
 			cliente.setCellValueFactory(new PropertyValueFactory<VendaVO, String>("cli"));
@@ -120,4 +120,15 @@ public class ConRelatorio extends ConMenu implements Initializable {
 		}
 	}
 
+	public void gerarNota (ActionEvent e) throws Exception {
+		VendaVO aux = lista.getSelectionModel().getSelectedItem();
+		if (aux != null) {
+			File pdf = new File("./Notas/"+aux.getString()+" - "+aux.getCodigo()+".pdf");
+			Desktop.getDesktop().open(pdf);
+		} else {
+			mensagem.setTextFill(Color.web("red"));
+			mensagem.setText("Por favor, selecione uma linha para ver a nota fiscal");
+			mensagem.setVisible(true);
+		}
+	}
 }
