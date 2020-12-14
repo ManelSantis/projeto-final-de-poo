@@ -3,16 +3,9 @@ package projeto.controller;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-
-
-
-
-
-
-
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -36,19 +29,21 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import projeto.exception.ExceptionCampoInvalido;
 import projeto.model.bo.EstoqueBO;
+import projeto.model.bo.NotaFiscalBO;
 import projeto.model.bo.ResponsavelBO;
 import projeto.model.bo.VendaBO;
 import projeto.model.vo.EstoqueVO;
 import projeto.model.vo.LocalVO;
+import projeto.model.vo.NotaFiscalVO;
 import projeto.model.vo.ProdutoVO;
 import projeto.model.vo.ResponsavelVO;
 import projeto.model.vo.VendaVO;
 import projeto.view.Telas;
 
 public class ConCarrinho extends ConMenu implements Initializable {
-	private static boolean car; //verificar se está adicionando no carrinho
-	private static boolean ok; //verificar se está confirmando a venda
-	
+	private static boolean car; // verificar se está adicionando no carrinho
+	private static boolean ok; // verificar se está confirmando a venda
+
 	@FXML
 	private TableView<ProdutoVO> lista;
 	@FXML
@@ -64,7 +59,7 @@ public class ConCarrinho extends ConMenu implements Initializable {
 	private TextField pesquisa;
 	@FXML
 	private Label mensagem;
-	
+
 	@FXML
 	private Label valorFinal;
 	@FXML
@@ -75,7 +70,7 @@ public class ConCarrinho extends ConMenu implements Initializable {
 	private Label nomeResp;
 	@FXML
 	private Label cpfResp;
-	
+
 	@FXML
 	private TableColumn<ProdutoVO, Long> id;
 	@FXML
@@ -85,14 +80,14 @@ public class ConCarrinho extends ConMenu implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		preenxer();
 		escolhas();
-		if(ok) { //se for para a tela de confirmar a compra
-			
+		if (ok) { // se for para a tela de confirmar a compra
+
 			nomeCli.setText("Nome: " + ConVender.getCli().getNome());
 			cpfCli.setText("CPF: " + ConVender.getCli().getCpf());
 
 			nomeResp.setText("Nome: " + Telas.getUsuario().getNome());
 			cpfResp.setText("CPF: " + Telas.getUsuario().getCpf());
-			
+
 			valorFinal.setText("Valor final: R$ " + ConVender.getVenda().getValor());
 		}
 	}
@@ -109,7 +104,7 @@ public class ConCarrinho extends ConMenu implements Initializable {
 
 	public void preenxer() {
 		if (lista != null) {
-			if (car) { //para caso ir ver o carrinho
+			if (car) { // para caso ir ver o carrinho
 				VendaBO aux = new VendaBO();
 				ObservableList<ProdutoVO> produtos = FXCollections
 						.observableArrayList(aux.listarItens(ConVender.getVenda()));
@@ -119,7 +114,7 @@ public class ConCarrinho extends ConMenu implements Initializable {
 				id.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("id"));
 				loc.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("descricao"));
 				lista.setItems(produtos);
-			} else if (ok){ //para caso ir completar a venda
+			} else if (ok) { // para caso ir completar a venda
 				VendaBO aux = new VendaBO();
 				ObservableList<ProdutoVO> produtos = FXCollections
 						.observableArrayList(aux.listarItens(ConVender.getVenda()));
@@ -129,7 +124,7 @@ public class ConCarrinho extends ConMenu implements Initializable {
 				id.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("id"));
 				loc.setCellValueFactory(new PropertyValueFactory<ProdutoVO, Long>("descricao"));
 				lista.setItems(produtos);
-			} else { //para caso ir para a tela de adicionar produtos no carrinho novamente
+			} else { // para caso ir para a tela de adicionar produtos no carrinho novamente
 				ResponsavelBO aux = new ResponsavelBO();
 				ObservableList<ProdutoVO> produtos = FXCollections.observableArrayList(aux.estoque());
 				nome.setCellValueFactory(new PropertyValueFactory<ProdutoVO, String>("nome"));
@@ -186,9 +181,9 @@ public class ConCarrinho extends ConMenu implements Initializable {
 	}
 
 	public void voltar(ActionEvent e) throws Exception {
-		setCar(false); //saindo do carrinho
-		setOk(false); //saindo da tela de confirmar venda
-		ConVender.getVenda().zerarValor(); //resetar o valor final da venda
+		setCar(false); // saindo do carrinho
+		setOk(false); // saindo da tela de confirmar venda
+		ConVender.getVenda().zerarValor(); // resetar o valor final da venda
 		Telas.telaVendaCarrinho();
 	}
 
@@ -215,85 +210,107 @@ public class ConCarrinho extends ConMenu implements Initializable {
 
 	public void confirmarVenda(ActionEvent e) throws Exception {
 		VendaBO completar = new VendaBO();
+		NotaFiscalBO salvarNota = new NotaFiscalBO();
+		NotaFiscalVO nota = new NotaFiscalVO();
 		ConVender.getVenda().setCodigo();
 		ConVender.getVenda().setData();
 		completar.confirmarVenda(ConVender.getVenda());
+		nota.setVenda(ConVender.getVenda());
+		salvarNota.cadastrar(nota);
+
 		for (int i = 0; i < ConVender.getVenda().getCarrinho().size(); i++) {
-			//pegando o local do produto
+			// pegando o local do produto
 			LocalVO l = new LocalVO();
 			l.setId(Long.parseLong(ConVender.getVenda().getCarrinho().get(i).getDescricao()));
 			ResponsavelBO re = new ResponsavelBO();
 			EstoqueVO es = new EstoqueVO();
-			//adiconando o local
+			// adiconando o local
 			es.setLocal(l);
-			System.out.println(es.getLocal().getId());
-			//adicionando o produto
+			// adicionando o produto
 			es.setProduto(re.estoqueId(Telas.getUsuario(), ConVender.getVenda().getCarrinho().get(i)));
-			es.setQuantidade(es.getProduto().getQuantidade() 
-					- ConVender.getVenda().getCarrinho().get(i).getQuantiPedido());
+			es.setQuantidade(
+					es.getProduto().getQuantidade() - ConVender.getVenda().getCarrinho().get(i).getQuantiPedido());
 			EstoqueBO salvar = new EstoqueBO();
-			//por fim edita o estoque no final
+			// por fim edita o estoque no final
 			salvar.editar(es);
-			
 		}
-		setCar(false); //saindo do carrinho
-		setOk(false); //saindo da tela de confirmar venda
+		pdf(ConVender.getVenda());
+		setCar(false); // saindo do carrinho
+		setOk(false); // saindo da tela de confirmar venda
 		Telas.telaVenda();
 	}
-	
-	public void pdf(ActionEvent e) throws Exception {
+
+	public void pdf(VendaVO venda) {
 		Document doc = new Document();
 		try {
-			PdfWriter.getInstance(doc,
-					new FileOutputStream("Nota_de_venda.pdf"));
+			SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd");
+			String data = form.format(venda.getData().getTime());
+			PdfWriter.getInstance(doc, new FileOutputStream("./Notas/" + data + " - " + venda.getCodigo() + ".pdf"));
 			doc.open();
-			doc.setPageSize(PageSize.A3);
-			Paragraph p = new Paragraph("Nota de venda");
+			doc.setPageSize(PageSize.A4);
+			Paragraph p = new Paragraph("--------------- Nota de venda ---------------");
 			p.setAlignment(1);
 			doc.add(p);
-			p = new Paragraph(" ");
+			p = new Paragraph("\n--------------- Cliente ---------------");
+			p.setAlignment(1);
 			doc.add(p);
-			// nome do responsavel
-			Paragraph tex = new Paragraph("Nome: " + ConVender.getCli().getNome());
+			// Dados do Cliente
+			Paragraph tex = new Paragraph("\nNome: " + venda.getCliente().getNome());
 			doc.add(tex);
-			// CPF do cliente
-			tex = new Paragraph("CPF : " + ConVender.getCli().getCpf());
+			tex = new Paragraph("\nCPF : " + venda.getCliente().getCpf());
+			doc.add(tex);
+			tex = new Paragraph("\nTelefone : " + venda.getCliente().getTelefone());
+			doc.add(tex);
+			tex = new Paragraph("\nEndereço : " + venda.getCliente().getEndereco());
+			doc.add(tex);
+			// Dados do responsavel
+			p = new Paragraph("\n--------------- Responsavel ---------------");
+			p.setAlignment(1);
+			doc.add(p);
+			tex = new Paragraph("\nNome: " + Telas.getUsuario().getNome());
+			doc.add(tex);
+			tex = new Paragraph("\nCPF : " + Telas.getUsuario().getCpf());
+			doc.add(tex);
+			tex = new Paragraph("\nTelefone : " + Telas.getUsuario().getTelefone());
+			doc.add(tex);
+			tex = new Paragraph("\nEndereço : " + Telas.getUsuario().getEndereco());
 			doc.add(tex);
 			// Data da compra
-			tex = new Paragraph("Data : " +  ConVender.getVenda().getData());
+			tex = new Paragraph("Data : " + data);
 			doc.add(tex);
-			// Nome do Responsavel.
-			tex = new Paragraph("Nome: " + Telas.getUsuario().getNome());
+			tex = new Paragraph("Código : " + venda.getCodigo() + "\n\n");
 			doc.add(tex);
+			p = new Paragraph("\n--------------- Dados da Venda ---------------\n\n\n");
+			p.setAlignment(1);
 			doc.add(p);
 			PdfPTable table = new PdfPTable(4);
-
-			PdfPCell cel1 = new PdfPCell(new Paragraph(" Serial"));
-			PdfPCell cel2 = new PdfPCell(new Paragraph(" Nome Produto"));
-			PdfPCell cel3 = new PdfPCell(new Paragraph(" Descrição"));
-			PdfPCell cel4 = new PdfPCell(new Paragraph(" Quantidade"));
-
+			PdfPCell cel = new PdfPCell(new Paragraph(" Local"));
+			PdfPCell cel1 = new PdfPCell(new Paragraph(" Serie"));
+			PdfPCell cel2 = new PdfPCell(new Paragraph(" Nome "));
+			PdfPCell cel3 = new PdfPCell(new Paragraph(" Quantidade"));
+			PdfPCell cel4 = new PdfPCell(new Paragraph(" Preço Unitaro"));
+			
+			table.addCell(cel);
 			table.addCell(cel1);
 			table.addCell(cel2);
 			table.addCell(cel3);
 			table.addCell(cel4);
-			doc.add(table);
-			for (int i = 0; i < ConVender.getVenda().getCarrinho().size(); i++) {
-				 cel1 = new PdfPCell(new Paragraph(	ConVender.getVenda().getCarrinho().get(i).getId()));
-				 cel2 = new PdfPCell(new Paragraph(	ConVender.getVenda().getCarrinho().get(i).getNome()));
-				 cel3 = new PdfPCell(new Paragraph(	ConVender.getVenda().getCarrinho().get(i).getDescricao()));
-				 cel4 = new PdfPCell(new Paragraph(	ConVender.getVenda().getCarrinho().get(i).getQuantidade()));
-				 table.addCell(cel1);
-				 table.addCell(cel2);
-				 table.addCell(cel3);
-				 table.addCell(cel4);
-				 doc.add(table);
 
+			for (int i = 0; i < ConVender.getVenda().getCarrinho().size(); i++) {
+				cel = new PdfPCell(new Paragraph(venda.getCarrinho().get(i).getDescricao()));
+				cel1 = new PdfPCell(new Paragraph(venda.getCarrinho().get(i).getSerie()));
+				cel2 = new PdfPCell(new Paragraph(venda.getCarrinho().get(i).getNome()));
+				cel3 = new PdfPCell(new Paragraph(""+venda.getCarrinho().get(i).getQuantiPedido()));
+				cel4 = new PdfPCell(new Paragraph("" + venda.getCarrinho().get(i).getPreco()));
+				table.addCell(cel1);
+				table.addCell(cel2);
+				table.addCell(cel3);
+				table.addCell(cel4);
 			}
-			cel1 = new PdfPCell(new Paragraph(" "));
-			cel2 = new PdfPCell(new Paragraph(" "));
-			cel3 = new PdfPCell(new Paragraph("Valoe final: "));
-			cel4 = new PdfPCell(new Paragraph(	(float) ConVender.getVenda().getValor()));
+			doc.add(table);
+			tex = new Paragraph("Valor total: " + venda.getValor() + "\n\n");
+			tex.setAlignment(1);
+			doc.add(tex);
 
 		} catch (FileNotFoundException er) {
 			// TODO Auto-generated catch block
@@ -306,7 +323,7 @@ public class ConCarrinho extends ConMenu implements Initializable {
 		}
 
 	}
-	
+
 	public void confirmar(ActionEvent e) throws Exception {
 		setOk(true);
 		ConVender.getVenda().setValor();
@@ -329,11 +346,9 @@ public class ConCarrinho extends ConMenu implements Initializable {
 				aux.setQuantiPedido(x + 1);
 				salvar.editarItens(ConVender.getVenda(), aux);
 				for (int i = 0; i < ConVender.getVenda().getCarrinho().size(); i++) {
-					if(ConVender.getVenda().getCarrinho().get(i).getId() == aux.getId()) {
-						ConVender.getVenda().getCarrinho().get(i)
-						.setQuantiPedido(aux.getQuantiPedido());
-						System.out.println(ConVender.getVenda().getCarrinho().get(i)
-						.getQuantiPedido());
+					if (ConVender.getVenda().getCarrinho().get(i).getId() == aux.getId()) {
+						ConVender.getVenda().getCarrinho().get(i).setQuantiPedido(aux.getQuantiPedido());
+						System.out.println(ConVender.getVenda().getCarrinho().get(i).getQuantiPedido());
 					}
 				}
 				VendaBO aux2 = new VendaBO();
@@ -369,16 +384,15 @@ public class ConCarrinho extends ConMenu implements Initializable {
 			if (aux.getQuantiPedido() == 0) {
 				salvar.deletarItens(ConVender.getVenda(), aux);
 				for (int i = 0; i < ConVender.getVenda().getCarrinho().size(); i++) {
-					if(ConVender.getVenda().getCarrinho().get(i).getId() == aux.getId()) {
+					if (ConVender.getVenda().getCarrinho().get(i).getId() == aux.getId()) {
 						ConVender.getVenda().getCarrinho().remove(i);
 					}
 				}
 			} else {
 				salvar.editarItens(ConVender.getVenda(), aux);
 				for (int i = 0; i < ConVender.getVenda().getCarrinho().size(); i++) {
-					if(ConVender.getVenda().getCarrinho().get(i).getId() == aux.getId()) {
-						ConVender.getVenda().getCarrinho().get(i)
-						.setQuantiPedido(aux.getQuantiPedido());
+					if (ConVender.getVenda().getCarrinho().get(i).getId() == aux.getId()) {
+						ConVender.getVenda().getCarrinho().get(i).setQuantiPedido(aux.getQuantiPedido());
 					}
 				}
 			}
@@ -408,7 +422,7 @@ public class ConCarrinho extends ConMenu implements Initializable {
 			salvar.deletarItens(ConVender.getVenda(), aux);
 			VendaBO aux2 = new VendaBO();
 			for (int i = 0; i < ConVender.getVenda().getCarrinho().size(); i++) {
-				if(ConVender.getVenda().getCarrinho().get(i).getId() == aux.getId()) {
+				if (ConVender.getVenda().getCarrinho().get(i).getId() == aux.getId()) {
 					ConVender.getVenda().getCarrinho().remove(i);
 				}
 			}

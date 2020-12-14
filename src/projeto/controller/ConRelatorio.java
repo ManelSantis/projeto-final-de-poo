@@ -19,6 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
+import projeto.model.bo.NotaFiscalBO;
 import projeto.model.bo.VendaBO;
 import projeto.model.vo.VendaVO;
 
@@ -33,7 +34,7 @@ public class ConRelatorio extends ConMenu implements Initializable {
 	@FXML
 	private TableColumn<VendaVO, String> cliente;
 	@FXML
-	private TableColumn<VendaVO, Long> id;
+	private TableColumn<VendaVO, String> id;
 	@FXML
 	private TableColumn<VendaVO, String> responsavel;
 
@@ -52,13 +53,13 @@ public class ConRelatorio extends ConMenu implements Initializable {
 
 	public void preenxer() {
 		if (lista != null) {
-			VendaBO aux = new VendaBO();
+			NotaFiscalBO aux = new NotaFiscalBO();
 			ObservableList<VendaVO> ob = FXCollections.observableArrayList(aux.listar());
 			data.setCellValueFactory(new PropertyValueFactory<VendaVO, String>("string"));
 			valor.setCellValueFactory(new PropertyValueFactory<VendaVO, Double>("valor"));
 			cliente.setCellValueFactory(new PropertyValueFactory<VendaVO, String>("cli"));
 			responsavel.setCellValueFactory(new PropertyValueFactory<VendaVO, String>("resp"));
-			id.setCellValueFactory(new PropertyValueFactory<VendaVO, Long>("id"));
+			id.setCellValueFactory(new PropertyValueFactory<VendaVO, String>("codigo"));
 			lista.setItems(ob);
 		}
 	}
@@ -103,7 +104,7 @@ public class ConRelatorio extends ConMenu implements Initializable {
 			valor.setCellValueFactory(new PropertyValueFactory<VendaVO, Double>("valor"));
 			cliente.setCellValueFactory(new PropertyValueFactory<VendaVO, String>("cli"));
 			responsavel.setCellValueFactory(new PropertyValueFactory<VendaVO, String>("resp"));
-			id.setCellValueFactory(new PropertyValueFactory<VendaVO, Long>("id"));
+			id.setCellValueFactory(new PropertyValueFactory<VendaVO, String>("codigo"));
 			lista.setItems(ob);
 			mensagem.setTextFill(Color.web("green"));
 			if(a.equals(b)) {

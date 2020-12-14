@@ -1,8 +1,11 @@
 package projeto.model.bo;
 
+import java.util.ArrayList;
+
 import projeto.model.vo.NotaFiscalVO;
+import projeto.model.vo.VendaVO;
 
 public interface NotaFiscalInterBO {
-	public void imprimir (NotaFiscalVO nota);
-	public void exibir (NotaFiscalVO nota);
+	public void cadastrar (NotaFiscalVO nota);
+	public ArrayList<VendaVO> listar();
 }

@@ -287,6 +287,8 @@ public class ResponsavelBO implements ResponsavelInterBO {
 
 	public boolean login(ResponsavelVO resp) {
 		// Tenta logar
+		System.out.println(resp.getUsuario());
+		System.out.println(resp.getSenha());
 		if(responsavel.logar(resp)) {
 			ResultSet rs = responsavel.findById(resp);
 			try {
