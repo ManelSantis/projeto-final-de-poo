@@ -284,7 +284,6 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return rs;
 	}
 
