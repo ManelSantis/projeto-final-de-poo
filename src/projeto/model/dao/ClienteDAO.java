@@ -33,6 +33,7 @@ public class ClienteDAO extends PessoaDAO<ClienteVO> implements ClienteInterDAO{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 	}
 
 	public void excluir(ClienteVO cliente) {
@@ -51,6 +52,7 @@ public class ClienteDAO extends PessoaDAO<ClienteVO> implements ClienteInterDAO{
 		
 		
 		super.excluir(cliente);//deletar da tabela pessoas também
+		super.closeConnection();
 	}
 
 	public void editar(ClienteVO cliente) {
@@ -72,6 +74,7 @@ public class ClienteDAO extends PessoaDAO<ClienteVO> implements ClienteInterDAO{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 		return rs;
 	}
 	
@@ -89,6 +92,7 @@ public class ClienteDAO extends PessoaDAO<ClienteVO> implements ClienteInterDAO{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 		return rs;
 	}
 
@@ -106,7 +110,7 @@ public class ClienteDAO extends PessoaDAO<ClienteVO> implements ClienteInterDAO{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		super.closeConnection();
 		return rs;
 	}
 	
@@ -124,7 +128,7 @@ public class ClienteDAO extends PessoaDAO<ClienteVO> implements ClienteInterDAO{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		super.closeConnection();
 		return rs;
 	}
 
@@ -141,7 +145,7 @@ public class ClienteDAO extends PessoaDAO<ClienteVO> implements ClienteInterDAO{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		super.closeConnection();
 		return rs;
 	}
 

@@ -1,5 +1,7 @@
 package projeto.model.dao;
 
-public interface PessoaInterDAO<VO> {
+import projeto.model.vo.PessoaVO;
+
+public interface PessoaInterDAO<VO extends PessoaVO> {
 	public boolean cpf(VO vo);
 }

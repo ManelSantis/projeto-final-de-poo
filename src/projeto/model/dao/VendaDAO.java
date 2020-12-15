@@ -25,6 +25,7 @@ public class VendaDAO extends BaseDAO<VendaVO> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 
 	}
 
@@ -42,6 +43,7 @@ public class VendaDAO extends BaseDAO<VendaVO> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 	}
 
 	public void editar(VendaVO vo) {
@@ -72,7 +74,7 @@ public class VendaDAO extends BaseDAO<VendaVO> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		super.closeConnection();
 		return rs;
 	}
 
@@ -90,6 +92,7 @@ public class VendaDAO extends BaseDAO<VendaVO> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 		return rs;
 	
 	}
@@ -109,7 +112,7 @@ public class VendaDAO extends BaseDAO<VendaVO> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		super.closeConnection();
 		return rs;
 	}
 

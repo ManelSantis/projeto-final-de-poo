@@ -41,7 +41,7 @@ public class ProdutoDAO extends BaseDAO<ProdutoVO> implements ProdutoInterDAO{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		super.closeConnection();
 	}
 
 	public void excluir(ProdutoVO prod) {
@@ -59,6 +59,7 @@ public class ProdutoDAO extends BaseDAO<ProdutoVO> implements ProdutoInterDAO{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 	}
 
 	public void editar(ProdutoVO prod) {
@@ -83,6 +84,7 @@ public class ProdutoDAO extends BaseDAO<ProdutoVO> implements ProdutoInterDAO{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 	}
 
 	public ResultSet findById(ProdutoVO prod) {
@@ -108,6 +110,7 @@ public class ProdutoDAO extends BaseDAO<ProdutoVO> implements ProdutoInterDAO{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 		return rs;
 	}
 
@@ -154,7 +157,7 @@ public class ProdutoDAO extends BaseDAO<ProdutoVO> implements ProdutoInterDAO{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		super.closeConnection();
 		return rs;
 	}
 	
@@ -171,7 +174,7 @@ public class ProdutoDAO extends BaseDAO<ProdutoVO> implements ProdutoInterDAO{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		super.closeConnection();
 		return rs;
 	}
 	
@@ -191,6 +194,7 @@ public class ProdutoDAO extends BaseDAO<ProdutoVO> implements ProdutoInterDAO{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 		return false;
 	}
 	

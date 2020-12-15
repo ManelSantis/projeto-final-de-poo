@@ -29,6 +29,7 @@ public class EstoqueDAO extends BaseDAO<EstoqueVO>{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 
 	}
 
@@ -48,6 +49,7 @@ public class EstoqueDAO extends BaseDAO<EstoqueVO>{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 	}
 
 	public void editar(EstoqueVO estoque) {
@@ -71,6 +73,7 @@ public class EstoqueDAO extends BaseDAO<EstoqueVO>{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 	}
 
 	@Override

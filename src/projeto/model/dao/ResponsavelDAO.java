@@ -28,6 +28,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 		return rs;
 	}
 
@@ -48,6 +49,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 		return rs;
 	}
 
@@ -68,6 +70,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 		return rs;
 	}
 
@@ -89,7 +92,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		super.closeConnection();
 		return rs;
 	}
 
@@ -112,6 +115,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			super.closeConnection();
 			if ((!responsavel.getSenha().isEmpty()) && (responsavel.getSenha().equals(aux))) {
 				return true;
 			} else {
@@ -140,6 +144,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 		return aux;
 	}
 
@@ -167,6 +172,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 	}
 
 	public void editar(ResponsavelVO responsavel) {
@@ -186,6 +192,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 	}
 
 	public void excluir(ResponsavelVO responsavel) {
@@ -201,6 +208,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 			e.printStackTrace();
 		}
 		super.excluir(responsavel); // deletar da tabela pessoa também
+		super.closeConnection();
 	}
 
 	public ResultSet findById(ResponsavelVO responsavel) {
@@ -217,7 +225,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		super.closeConnection();
 		return rs;
 	}
 
@@ -235,6 +243,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 		return rs;
 	}
 
@@ -251,6 +260,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 		return rs;
 	}
 
@@ -267,6 +277,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 		return rs;
 	}
 
@@ -284,6 +295,7 @@ public class ResponsavelDAO extends PessoaDAO<ResponsavelVO> implements Responsa
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 		return rs;
 	}
 

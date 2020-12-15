@@ -39,6 +39,7 @@ public class LocalDAO extends BaseDAO<LocalVO> implements LocalInterDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 
 	}
 
@@ -60,6 +61,7 @@ public class LocalDAO extends BaseDAO<LocalVO> implements LocalInterDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 	}
 
 	public void excluir(LocalVO local) {
@@ -78,6 +80,7 @@ public class LocalDAO extends BaseDAO<LocalVO> implements LocalInterDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 	}
 
 	public ResultSet listarPorResponsavel(ResponsavelVO responsavel) {
@@ -100,7 +103,7 @@ public class LocalDAO extends BaseDAO<LocalVO> implements LocalInterDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		super.closeConnection();
 		return rs;
 	}
 
@@ -117,6 +120,7 @@ public class LocalDAO extends BaseDAO<LocalVO> implements LocalInterDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 		return rs;
 	}
 
@@ -134,6 +138,7 @@ public class LocalDAO extends BaseDAO<LocalVO> implements LocalInterDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 		return rs;
 	}
 
@@ -149,6 +154,7 @@ public class LocalDAO extends BaseDAO<LocalVO> implements LocalInterDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 		return rs;
 	}
 

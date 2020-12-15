@@ -29,6 +29,7 @@ public class NotaFiscalDAO extends BaseDAO<VendaVO> implements NotaFiscalInterDA
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 	}
 	
 	@Override
@@ -44,6 +45,7 @@ public class NotaFiscalDAO extends BaseDAO<VendaVO> implements NotaFiscalInterDA
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 		return rs;
 	}
 	
@@ -60,7 +62,7 @@ public class NotaFiscalDAO extends BaseDAO<VendaVO> implements NotaFiscalInterDA
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		super.closeConnection();
 		return rs;
 	}
 

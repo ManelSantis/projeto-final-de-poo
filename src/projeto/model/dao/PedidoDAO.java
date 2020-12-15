@@ -35,6 +35,7 @@ public class PedidoDAO extends BaseDAO<VendaVO>{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 	}
 
 	@Override
@@ -56,7 +57,7 @@ public class PedidoDAO extends BaseDAO<VendaVO>{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		super.closeConnection();
 	}
 
 	@Override
@@ -71,6 +72,7 @@ public class PedidoDAO extends BaseDAO<VendaVO>{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 	}
 
 	@Override

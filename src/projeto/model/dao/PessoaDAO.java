@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 import projeto.model.vo.PessoaVO;
 
-public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> implements PessoaInterDAO{
+public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> implements PessoaInterDAO<VO>{
 
 	@Override
 	public void cadastrar(VO vo) {
@@ -38,6 +38,7 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> implements Pesso
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 	}
 
 	@Override
@@ -59,6 +60,7 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> implements Pesso
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 	}
 
 	@Override
@@ -74,7 +76,7 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> implements Pesso
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		super.closeConnection();
 	}
 
 	@Override
@@ -90,6 +92,7 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> implements Pesso
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 		return rs;
 	}
 
@@ -109,6 +112,7 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> implements Pesso
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 		return aux;
 	}
 	
@@ -120,12 +124,6 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> implements Pesso
 	@Override
 	public ResultSet listar() {
 		return null;
-	}
-
-	@Override
-	public boolean cpf(Object vo) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }

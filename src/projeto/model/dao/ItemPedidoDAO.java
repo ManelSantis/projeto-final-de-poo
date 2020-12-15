@@ -32,7 +32,7 @@ public class ItemPedidoDAO extends BaseDAO<VendaVO> implements ItemPedidoInterDA
 			e.printStackTrace();
 		}
 		if (aux) {
-			
+			super.closeConnection();
 		} else {
 
 			sql = "insert into itempedido (idPedido, idProduto, idlocal, quantidade) " 
@@ -52,7 +52,7 @@ public class ItemPedidoDAO extends BaseDAO<VendaVO> implements ItemPedidoInterDA
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			super.closeConnection();
 		}
 	}
 
@@ -92,6 +92,7 @@ public class ItemPedidoDAO extends BaseDAO<VendaVO> implements ItemPedidoInterDA
 				e.printStackTrace();
 			}
 		}
+		super.closeConnection();
 	}
 
 	public void removerCarrinho(VendaVO venda, ProdutoVO produto) {
@@ -108,6 +109,7 @@ public class ItemPedidoDAO extends BaseDAO<VendaVO> implements ItemPedidoInterDA
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 	}
 
 	public ResultSet listarItens(VendaVO venda) {
@@ -125,6 +127,7 @@ public class ItemPedidoDAO extends BaseDAO<VendaVO> implements ItemPedidoInterDA
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		super.closeConnection();
 		return rs;
 	}
 
