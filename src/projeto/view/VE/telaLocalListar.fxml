@@ -7,11 +7,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ConRelatorio">
+<Pane style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.controller.ConLocal">
    <children>
       <ImageView fitHeight="600.0" fitWidth="1000.0" pickOnBounds="true" smooth="false">
          <image>
-            <Image url="@bar_menu.png" />
+            <Image url="@../../../../../../git/projeto-final-de-pooFX/src/projeto/view/VE/bar_menu.png" />
          </image>
       </ImageView>
       <Label fx:id="usuario" layoutX="100.0" layoutY="143.0" text="Label" visible="false" />
@@ -31,7 +31,7 @@
             <Font name="Tahoma Bold" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="cadastro" alignment="CENTER" layoutY="405.0" onMouseClicked="#pessoa" prefHeight="37.0" prefWidth="227.0" style="-fx-background-color: B5D6DD;" text="Pessoa">
+      <Label fx:id="cadastro" alignment="CENTER" layoutY="405.0" onMouseClicked="#cadastro" prefHeight="37.0" prefWidth="227.0" style="-fx-background-color: B5D6DD;" text="Cadastro">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -71,57 +71,27 @@
             <Font name="Tahoma Bold" size="12.0" />
          </font>
       </Label>
-      <TableView fx:id="lista" layoutX="384.0" layoutY="163.0" prefHeight="290.0" prefWidth="572.0">
+      <Button fx:id="Voltar" layoutX="492.0" layoutY="335.0" mnemonicParsing="false" onAction="#voltar" prefHeight="17.0" prefWidth="105.0" style="-fx-background-radius: 10;" text="Voltar">
+         <font>
+            <Font name="Tahoma" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="Editar" layoutX="640.0" layoutY="335.0" mnemonicParsing="false" onAction="#editar" prefHeight="17.0" prefWidth="105.0" style="-fx-background-radius: 10;" text="Editar">
+         <font>
+            <Font name="Tahoma" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="Excluir" layoutX="797.0" layoutY="335.0" mnemonicParsing="false" onAction="#excluir" prefHeight="17.0" prefWidth="105.0" style="-fx-background-radius: 10;" text="Excluir">
+         <font>
+            <Font name="Tahoma" size="12.0" />
+         </font>
+      </Button>
+      <TableView layoutX="500.0" layoutY="102.0" prefHeight="200.0" prefWidth="324.0">
         <columns>
-            <TableColumn fx:id="id" prefWidth="70.0" text="Nº" />
-          <TableColumn fx:id="data" prefWidth="87.0" text="Data" />
-            <TableColumn fx:id="cliente" prefWidth="131.0" text="Cliente" />
-            <TableColumn fx:id="responsavel" prefWidth="156.0" text="Responsavel" />
-          <TableColumn fx:id="valor" prefWidth="127.0" text="Valor" />
+          <TableColumn prefWidth="92.0" text="Id" />
+          <TableColumn prefWidth="107.0" text="Responsavel" />
+            <TableColumn fx:id="tabela" prefWidth="124.0" text="Localiza��o" />
         </columns>
       </TableView>
-      <Label layoutX="572.0" layoutY="34.0" prefHeight="52.0" prefWidth="196.0" text="Relatório">
-         <font>
-            <Font name="Tahoma Bold" size="41.0" />
-         </font>
-      </Label>
-      <DatePicker fx:id="comeco" layoutX="423.0" layoutY="121.0" prefHeight="25.0" prefWidth="190.0" promptText="Início" />
-      <DatePicker fx:id="fim" layoutX="653.0" layoutY="121.0" prefHeight="25.0" prefWidth="190.0" promptText="Fim" />
-      <Label layoutX="396.0" layoutY="125.0" text="De">
-         <font>
-            <Font name="Tahoma" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="622.0" layoutY="125.0" text="até">
-         <font>
-            <Font name="Tahoma" size="14.0" />
-         </font>
-      </Label>
-      <Button fx:id="pesquisa" layoutX="864.0" layoutY="121.0" mnemonicParsing="false" onAction="#pesquisar" prefHeight="25.0" prefWidth="82.0" style="-fx-background-radius: 10px;" text="Pesquisar">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font name="Tahoma Bold" size="11.0" />
-         </font>
-      </Button>
-      <Label fx:id="mensagem" alignment="CENTER" contentDisplay="CENTER" layoutX="384.0" layoutY="146.0" prefHeight="14.0" prefWidth="572.0" text="Label" visible="false">
-         <font>
-            <Font name="Tahoma Bold" size="11.0" />
-         </font>
-      </Label>
-      <Button fx:id="nota" layoutX="829.0" layoutY="465.0" mnemonicParsing="false" onAction="#gerarNota" prefHeight="25.0" prefWidth="127.0" style="-fx-background-radius: 10px;" text="Nota Fiscal">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font name="Tahoma Bold" size="11.0" />
-         </font>
-      </Button>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="39.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Menu.png" />
-         </image>
-      </ImageView>
    </children>
 </Pane>

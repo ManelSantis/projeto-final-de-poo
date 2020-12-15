@@ -102,5 +102,10 @@
             <Font name="Tahoma Bold" size="12.0" />
          </font>
       </Label>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="39.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Menu.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
