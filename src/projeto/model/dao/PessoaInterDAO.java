@@ -1,5 +1,5 @@
 package projeto.model.dao;
 
-public interface PessoaInterDAO {
-	public boolean cpf(String cpf);
+public interface PessoaInterDAO<VO> {
+	public boolean cpf(VO vo);
 }

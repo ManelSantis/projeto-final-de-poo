@@ -28,9 +28,11 @@ public abstract class PessoaVO {
 
 	public void setCpfAux(String cpf) throws ExceptionCampoInvalido {
 		PessoaDAO<ResponsavelVO> aux = new PessoaDAO<ResponsavelVO>();
-		if (aux.cpf(cpf)) {
+		ResponsavelVO resp = new ResponsavelVO();
+		resp.setCpf(cpf);
+		if (aux.cpf(resp)) {
 			throw new ExceptionCampoInvalido("CPF já existe no banco de dados.");
-		}
+		} else return;
 	}
 
 	public void setCpf(String cpf) throws ExceptionCampoInvalido {

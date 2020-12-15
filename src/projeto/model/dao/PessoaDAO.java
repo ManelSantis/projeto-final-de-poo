@@ -92,23 +92,24 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> implements Pesso
 		}
 		return rs;
 	}
-	
-	public boolean cpf(String cpf) {
-		String sql = "select * from pessoa where cpf = ?";
+
+	public boolean cpf(VO vo) {
+		String sql = "select * from pessoa where cpf = ?;";
 		PreparedStatement ptst;
 		ResultSet rs = null;
+		boolean aux = false;
 		try {
 			ptst = getConnection().prepareStatement(sql);
-			ptst.setString(1, cpf);
+			ptst.setString(1, vo.getCpf());
 			rs = ptst.executeQuery();
 			while (rs.next()) {
-				return true;
+				aux = true;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
+		return aux;
 	}
 	
 	@Override
@@ -119,6 +120,12 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> implements Pesso
 	@Override
 	public ResultSet listar() {
 		return null;
+	}
+
+	@Override
+	public boolean cpf(Object vo) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

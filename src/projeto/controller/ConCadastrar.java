@@ -197,7 +197,7 @@ public class ConCadastrar extends ConMenu implements Initializable {
 				verificarCampo(senha);
 				respEditavel.setNome(nome.getText());
 				if(!getCpfEditarInicial().equals(cpf.getText())) { //verifica se o cpf foi alterado
-					respEditavel.setCpfAux(getCpfEditarInicial()); //para verificar se está no bd
+					respEditavel.setCpfAux(cpf.getText()); //para verificar se está no bd
 				}
 				respEditavel.setCpf(cpf.getText());
 				respEditavel.setEndereco(estado.getText(), cidade.getText(), bairro.getText(), rua.getText(),
@@ -236,7 +236,7 @@ public class ConCadastrar extends ConMenu implements Initializable {
 				verificarCampo(numero);
 				cliEditavel.setNome(nome.getText());
 				if(!getCpfEditarInicial().equals(cpf.getText())) { //verifica se o cpf foi alterado
-					cliEditavel.setCpfAux(getCpfEditarInicial()); //para verificar se está no bd
+					cliEditavel.setCpfAux(cpf.getText()); //para verificar se está no bd
 				}
 				cliEditavel.setCpf(cpf.getText());
 				cliEditavel.setEndereco(estado.getText(), cidade.getText(), bairro.getText(), rua.getText(),
