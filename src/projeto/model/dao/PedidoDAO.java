@@ -60,9 +60,17 @@ public class PedidoDAO extends BaseDAO<VendaVO>{
 	}
 
 	@Override
-	public void excluir(VendaVO vo) {
-		// em venda tudo já é deletado
-		
+	public void excluir(VendaVO venda) {
+		String sql = "delete from pedido where idpedido = ?;";
+		PreparedStatement ptst;
+		try {
+			ptst = getConnection().prepareStatement(sql);
+			ptst.setLong(1, venda.getId());
+			int linhas = ptst.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

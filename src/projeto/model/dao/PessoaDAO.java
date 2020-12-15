@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 import projeto.model.vo.PessoaVO;
 
-public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
+public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> implements PessoaInterDAO{
 
 	@Override
 	public void cadastrar(VO vo) {
@@ -111,7 +111,6 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
 		return false;
 	}
 	
-
 	@Override
 	public ResultSet findByName(VO vo) {
 		return null;

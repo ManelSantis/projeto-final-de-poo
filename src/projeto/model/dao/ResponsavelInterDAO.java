@@ -15,5 +15,6 @@ public interface ResponsavelInterDAO {
 	public ResultSet idEstoque(ResponsavelVO responsavel, ProdutoVO produto);
 	public boolean logar(ResponsavelVO responsavel);
 	public ResultSet findByName(ResponsavelVO responsavel);
+	public ResultSet findByIdPessoa(ResponsavelVO responsavel);
 	public ResultSet findByCpf(String cpf);
 }

@@ -272,6 +272,15 @@ public class ConCadastrar extends ConMenu implements Initializable {
 			aux.excluir(respEditavel);
 			setDeletarResp(false);
 			setDeletarCli(false);
+			if(respEditavel.getUsuario().equals(Telas.getUsuario().getUsuario())) {
+				try {
+					ConMenu.sairExcluir();
+					return;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 
 			try {
 				Telas.telaResponsavelInicio();

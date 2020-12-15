@@ -14,6 +14,14 @@ public class ProdutoBO implements ProdutoInterBO{
 		prod.cadastrar(produto);
 	}
 	
+	public void excluir(ProdutoVO produto) {
+		prod.excluir(produto);
+	}
+
+	public void editar (ProdutoVO produto) {
+		prod.editar(produto);
+	}
+	
 	public ArrayList<ProdutoVO> listar() {
 		ResultSet rs = prod.listar();
 		ArrayList<ProdutoVO> produtos = new ArrayList<ProdutoVO>();
@@ -112,12 +120,6 @@ public class ProdutoBO implements ProdutoInterBO{
 	}
 	
 	
-	public void excluir(ProdutoVO produto) {
-		prod.excluir(produto);
-	}
-
-	public void editar (ProdutoVO produto) {
-		prod.editar(produto);
-	}
+	
 	
 }

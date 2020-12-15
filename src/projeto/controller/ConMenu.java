@@ -30,4 +30,10 @@ public class ConMenu {
 		BaseDAO.closeConnection();
 		Telas.telaLogin();
 	}
+	
+	public static void sairExcluir () throws Exception{
+		//usado apenas se um usuário logado deletar a propria conta
+		BaseDAO.closeConnection();
+		Telas.telaLogin();
+	}
 }

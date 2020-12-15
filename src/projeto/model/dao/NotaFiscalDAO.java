@@ -8,7 +8,7 @@ import java.util.Calendar;
 
 import projeto.model.vo.VendaVO;
 
-public class NotaFiscalDAO extends BaseDAO<VendaVO>{
+public class NotaFiscalDAO extends BaseDAO<VendaVO> implements NotaFiscalInterDAO{
 
 	@Override
 	public void cadastrar(VendaVO venda) {

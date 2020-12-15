@@ -25,7 +25,7 @@ public abstract class PessoaVO {
 	public String getCpf() {
 		return cpf;
 	}
-	
+
 	public void setCpfAux(String cpf) throws ExceptionCampoInvalido {
 		PessoaDAO<ResponsavelVO> aux = new PessoaDAO<ResponsavelVO>();
 		if (aux.cpf(cpf)) {
@@ -37,27 +37,28 @@ public abstract class PessoaVO {
 		// Validando
 		if ((cpf != null) && (!cpf.isEmpty())) {
 			if (cpf.length() == 11) {
-				if(cpf.substring(0,10).matches("[0-9]*")) {
+				if (cpf.substring(0, 10).matches("[0-9]*")) {
 					if ((!cpf.equals("00000000000")) && (!cpf.equals("11111111111")) && (!cpf.equals("22222222222"))
-						&& (!cpf.equals("33333333333")) && (!cpf.equals("44444444444")) && (!cpf.equals("55555555555"))
-						&& (!cpf.equals("66666666666")) && (!cpf.equals("77777777777")) && (!cpf.equals("88888888888"))
-						&& (!cpf.equals("99999999999"))) {
+							&& (!cpf.equals("33333333333")) && (!cpf.equals("44444444444"))
+							&& (!cpf.equals("55555555555")) && (!cpf.equals("66666666666"))
+							&& (!cpf.equals("77777777777")) && (!cpf.equals("88888888888"))
+							&& (!cpf.equals("99999999999"))) {
 						this.cpf = cpf;
 					} else {
-						//Digitar números repetidos
+						// Digitar números repetidos
 						throw new ExceptionCampoInvalido("CPF não ser apenas números iguais");
 					}
 				} else {
-					//Digitou uma letra
-					throw new ExceptionCampoInvalido("CPF só pode ter números"); 
+					// Digitou uma letra
+					throw new ExceptionCampoInvalido("CPF só pode ter números");
 				}
 			} else {
-				//Tamanho inválido
-				throw new ExceptionCampoInvalido("CPF tem que ter pelo menos 11 caracteres"); 
+				// Tamanho inválido
+				throw new ExceptionCampoInvalido("CPF tem que ter pelo menos 11 caracteres");
 			}
 		} else {
 			// Se a variavel vier vazia
-			throw new ExceptionCampoInvalido("CPF inválido"); 
+			throw new ExceptionCampoInvalido("CPF inválido");
 		}
 	}
 
@@ -94,7 +95,15 @@ public abstract class PessoaVO {
 	public void setTelefone(String telefone) throws ExceptionCampoInvalido {
 		// Ainda vendo como fazer uma validação melhor
 		if ((telefone != null) && (!telefone.isEmpty())) {
-			this.telefone = telefone;
+			if (telefone.length() == 11) {
+				if (telefone.substring(0, 10).matches("[0-9]*")) {
+					this.telefone = telefone;
+				} else {
+					throw new ExceptionCampoInvalido("Digitar apenas números em telefone");
+				}
+			} else {
+				throw new ExceptionCampoInvalido("Telefone tem que ter 11 digitos");
+			}
 		} else {
 			throw new ExceptionCampoInvalido("Telefone inválido");
 		}

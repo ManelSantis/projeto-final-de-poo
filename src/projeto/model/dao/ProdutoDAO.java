@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 import projeto.model.vo.ProdutoVO;
 
-public class ProdutoDAO extends BaseDAO<ProdutoVO> {
+public class ProdutoDAO extends BaseDAO<ProdutoVO> implements ProdutoInterDAO{
 	
 	public void cadastrar(ProdutoVO prod) {
 		String sql = "insert into produto (nome, serie, peso, preco, descricao) "

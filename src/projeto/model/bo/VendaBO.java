@@ -1,11 +1,7 @@
 package projeto.model.bo;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -109,60 +105,13 @@ public class VendaBO implements VendaInterBO{
 		
 		return vendas;
 	}
-	
-	public ArrayList<VendaVO> relatorio(Calendar inicio, Calendar fim) {
-		// Irá pesquisar no banco de dados em VendasDAO as vendas que possuirem a data 
-		// entre o periodo posto, para então adiciona-las em uma ArrayList 
-		// e enviadas para esse método para serem exibidas
-		ResultSet rs = vend.periodo(inicio, fim);
-		ArrayList<VendaVO> vendas = new ArrayList<VendaVO>();
-		
-		try {
-			while (rs.next()) {
-				VendaVO aux = new VendaVO();
-				
-				ResponsavelVO aux1 = new ResponsavelVO();
-				ResponsavelBO aux2 = new ResponsavelBO();
-				aux1.setId(rs.getLong("idresponsavel"));
-				aux1 = aux2.findById(aux1);
-				
-				ClienteVO aux3 = new ClienteVO();
-				ClienteBO aux4 = new ClienteBO();
-				aux3.setId(rs.getLong("idcliente"));
-				aux3 = aux4.findById(aux3);
-				
-				aux.setCliente(aux3);
-				aux.setResponsavel(aux1);
-				java.util.Date data = rs.getDate("data");
-				System.out.println(data);
-				Calendar aux5 = Calendar.getInstance();
-				aux5.setTime(data);
-				aux.setData(aux5);
 
-				aux.setId(rs.getLong("idpedido"));
-				aux.setValor(rs.getDouble("valor"));
-		
-				vendas.add(aux);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
-		return vendas;
-	}
-	
-	public void alterarVenda (VendaVO venda) {
-		// Irá receber uma venda parametrizada, e então procurará ela
-		// no banco de dados, podendo então alterar os dados dessa,
-		// para então poder ser confirmada novamente utilizando 
-		// métodos de VendaDAO
-	}
-	
 	public void cancelarVenda(VendaVO venda) {
 		// Irá receber uma venda parametrizada, para poder
 		// então cancelar ela, e removê-la do banco de dados
-		// a partir de um metodo de VendaDAO
+		// a partir de um metodo de PedidoDAO
+		pedido.excluir(venda);
+		
 	}
 
 }

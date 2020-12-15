@@ -448,6 +448,8 @@ public class ConCarrinho extends ConMenu implements Initializable {
 	public void cancelarVenda(ActionEvent e) throws Exception {
 		setCar(false);
 		setOk(false);
+		VendaBO deletar = new VendaBO();
+		deletar.cancelarVenda(ConVender.getVenda());
 		Telas.telaVenda();
 	}
 
