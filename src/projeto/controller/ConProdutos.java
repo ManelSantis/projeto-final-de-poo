@@ -35,6 +35,7 @@ public class ConProdutos extends ConMenu implements Initializable {
 	private static boolean estocar;
 	private static boolean editar;
 	private static boolean deletar;
+	private static String serieEditar; //ajudar na verificação do bd
 
 	@FXML
 	private TableView<ProdutoVO> lista;
@@ -179,6 +180,7 @@ public class ConProdutos extends ConMenu implements Initializable {
 			ProdutoVO prod = new ProdutoVO();
 			ProdutoBO salvar = new ProdutoBO();
 			prod.setNome(nome.getText());
+			prod.setSerieAux(serie.getText());
 			prod.setSerie(serie.getText());
 			prod.setPreco(Double.parseDouble(preco.getText()));
 			prod.setPeso(Double.parseDouble(peso.getText()));
@@ -208,6 +210,7 @@ public class ConProdutos extends ConMenu implements Initializable {
 		if (prod != null) {
 			ProdutoBO aux = new ProdutoBO();
 			prod = aux.findById(prod);
+			setSerieEditar(prod.getSerie());
 			setEditavel(prod);
 			setEditar(true);
 			Telas.editarProduto();
@@ -228,6 +231,9 @@ public class ConProdutos extends ConMenu implements Initializable {
 			ProdutoVO prod = new ProdutoVO();
 			ProdutoBO salvar = new ProdutoBO();
 			prod.setNome(nome.getText());
+			if(!getSerieEditar().equals(serie.getText())) {
+				prod.setSerieAux(serie.getText());
+			}
 			prod.setSerie(serie.getText());
 			prod.setPreco(Double.parseDouble(preco.getText()));
 			prod.setPeso(Double.parseDouble(peso.getText()));
@@ -419,5 +425,13 @@ public class ConProdutos extends ConMenu implements Initializable {
 
 	public static void setEstocar(boolean estocar) {
 		ConProdutos.estocar = estocar;
+	}
+
+	public static String getSerieEditar() {
+		return serieEditar;
+	}
+
+	public static void setSerieEditar(String serieEditar) {
+		ConProdutos.serieEditar = serieEditar;
 	}
 }

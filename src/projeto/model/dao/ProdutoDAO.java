@@ -175,4 +175,23 @@ public class ProdutoDAO extends BaseDAO<ProdutoVO> {
 		return rs;
 	}
 	
+	public boolean serie (ProdutoVO prod) {
+		String sql = "select * from produto where serie = ?";
+		PreparedStatement ptst;
+		ResultSet rs = null;
+		
+		try {
+			ptst = getConnection().prepareStatement(sql);
+			ptst.setString(1, prod.getSerie());
+			rs = ptst.executeQuery();
+			while (rs.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 }

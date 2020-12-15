@@ -24,7 +24,8 @@ import projeto.model.bo.NotaFiscalBO;
 import projeto.model.vo.VendaVO;
 
 public class ConRelatorio extends ConMenu implements Initializable {
-
+	private static String dataInicio;
+	private static String dataFim;
 	@FXML
 	private TableView<VendaVO> lista;
 	@FXML
@@ -69,13 +70,12 @@ public class ConRelatorio extends ConMenu implements Initializable {
 			//primeiro estará pegando o valor que vem do DatePicker e o transformando em date
 			SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd"); //aqui é para saber o formato da data
 			LocalDate value = comeco.getValue(); //pega o que tem dentro do DatePicker
-			String a, b; //para mostrar quando terminar o relatorio
 			Date data1 = (Date) form.parse(value.getYear() + "-" 
 					+ value.getMonthValue() + "-" 
 					+ value.getDayOfMonth()); //Coloca dia mes e ano dentro da variavel do tipo date
-			a = value.getYear() + "-" 
+			setDataInicio(value.getYear() + "-" 
 					+ value.getMonthValue() + "-" 
-					+ value.getDayOfMonth();
+					+ value.getDayOfMonth());
 			Calendar com = Calendar.getInstance();
 			com.setTime(data1); //e adiciona dentro da variavel calendar
 			Calendar fi = Calendar.getInstance();
@@ -86,16 +86,16 @@ public class ConRelatorio extends ConMenu implements Initializable {
 						+ value.getMonthValue() + "-" 
 						+ value.getDayOfMonth());
 				fi.setTime(data1);
-				b = value.getYear() + "-" 
+			setDataFim(value.getYear() + "-" 
 						+ value.getMonthValue() + "-" 
-						+ value.getDayOfMonth();
+						+ value.getDayOfMonth());
 			} else {
 				//caso não tenha sido selecionado nada
 				//na data final, então ela recebe o valor da data inicial
 				fi.setTime(data1);
-				b = value.getYear() + "-" 
+				setDataFim(value.getYear() + "-" 
 						+ value.getMonthValue() + "-" 
-						+ value.getDayOfMonth();
+						+ value.getDayOfMonth());
 			}
 			//e adiciona tudo dentro da lista
 			NotaFiscalBO aux = new NotaFiscalBO();
@@ -107,10 +107,10 @@ public class ConRelatorio extends ConMenu implements Initializable {
 			id.setCellValueFactory(new PropertyValueFactory<VendaVO, String>("codigo"));
 			lista.setItems(ob);
 			mensagem.setTextFill(Color.web("green"));
-			if(a.equals(b)) {
-				mensagem.setText("Mostrando relatório de compras feitas em " + a);
+			if(getDataInicio().equals(getDataFim())) {
+				mensagem.setText("Mostrando relatório de compras feitas em " + getDataInicio());
 			} else {
-				mensagem.setText("Mostrando relatório de vendas feitas de " + a + " até " + b);
+				mensagem.setText("Mostrando relatório de vendas feitas de " + getDataInicio() + " até " + getDataFim());
 			}
 			mensagem.setVisible(true);
 		} else {
@@ -130,5 +130,21 @@ public class ConRelatorio extends ConMenu implements Initializable {
 			mensagem.setText("Por favor, selecione uma linha para ver a nota fiscal");
 			mensagem.setVisible(true);
 		}
+	}
+
+	public static String getDataInicio() {
+		return dataInicio;
+	}
+
+	public static void setDataInicio(String dataInicio) {
+		ConRelatorio.dataInicio = dataInicio;
+	}
+
+	public static String getDataFim() {
+		return dataFim;
+	}
+
+	public static void setDataFim(String dataFim) {
+		ConRelatorio.dataFim = dataFim;
 	}
 }

@@ -1,6 +1,7 @@
 package projeto.model.vo;
 
 import projeto.exception.ExceptionCampoInvalido;
+import projeto.model.dao.PessoaDAO;
 
 public abstract class PessoaVO {
 	private String nome;
@@ -23,6 +24,13 @@ public abstract class PessoaVO {
 
 	public String getCpf() {
 		return cpf;
+	}
+	
+	public void setCpfAux(String cpf) throws ExceptionCampoInvalido {
+		PessoaDAO<ResponsavelVO> aux = new PessoaDAO<ResponsavelVO>();
+		if (aux.cpf(cpf)) {
+			throw new ExceptionCampoInvalido("CPF já existe no banco de dados.");
+		}
 	}
 
 	public void setCpf(String cpf) throws ExceptionCampoInvalido {

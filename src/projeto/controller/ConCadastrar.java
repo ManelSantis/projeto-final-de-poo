@@ -28,7 +28,8 @@ public class ConCadastrar extends ConMenu implements Initializable {
 	private static boolean editarCli; // se for true, irá editar cliente
 	private static boolean deletarCli;
 	private static String userEditarInicial; //usado para ajudar na verificação do novo usuario
-
+	private static String cpfEditarInicial; //usado para ajudar na verificação do novo cpf
+	
 	@FXML
 	private PasswordField senha;
 	@FXML
@@ -100,7 +101,8 @@ public class ConCadastrar extends ConMenu implements Initializable {
 			ResponsavelVO respon = new ResponsavelVO();
 			ResponsavelBO salvar = new ResponsavelBO();
 			respon.setNome(nome.getText());
-			respon.setCpf(cpf.getText());
+			respon.setCpfAux(cpf.getText()); //primeiro verifica se está no bd
+			respon.setCpf(cpf.getText()); //para depois salvar
 			respon.setEndereco(estado.getText(), cidade.getText(), bairro.getText(), rua.getText(), numero.getText());
 			respon.setTelefone(telefone.getText());
 			respon.setUsuarioAux(usuario.getText());//primeiro verifica se está no bd
@@ -134,7 +136,8 @@ public class ConCadastrar extends ConMenu implements Initializable {
 			ClienteVO cli = new ClienteVO();
 			ClienteBO salvar = new ClienteBO();
 			cli.setNome(nome.getText());
-			cli.setCpf(cpf.getText());
+			cli.setCpfAux(cpf.getText()); //primeiro verifica se está no bd
+			cli.setCpf(cpf.getText()); //para depois salvar
 			cli.setEndereco(estado.getText(), cidade.getText(), bairro.getText(), rua.getText(), numero.getText());
 			cli.setTelefone(telefone.getText());
 			salvar.cadastrar(cli);
@@ -151,6 +154,7 @@ public class ConCadastrar extends ConMenu implements Initializable {
 		// adiciona todos os campos com os dados de responsavel que serão editados
 		nome.setText(respEditavel.getNome());
 		cpf.setText(respEditavel.getCpf());
+		setCpfEditarInicial(respEditavel.getCpf());
 		telefone.setText(respEditavel.getTelefone());
 		String[] enderecoCompleto = respEditavel.getEndereco().split(",");
 		bairro.setText(enderecoCompleto[0]);
@@ -167,6 +171,7 @@ public class ConCadastrar extends ConMenu implements Initializable {
 		// adiciona todos os campos com os dados de cliente que vão ser editados
 		nome.setText(cliEditavel.getNome());
 		cpf.setText(cliEditavel.getCpf());
+		setCpfEditarInicial(cliEditavel.getCpf());
 		telefone.setText(cliEditavel.getTelefone());
 		String[] enderecoCompleto = cliEditavel.getEndereco().split(",");
 		bairro.setText(enderecoCompleto[0]);
@@ -191,6 +196,9 @@ public class ConCadastrar extends ConMenu implements Initializable {
 				verificarCampo(usuario);
 				verificarCampo(senha);
 				respEditavel.setNome(nome.getText());
+				if(!getCpfEditarInicial().equals(cpf.getText())) { //verifica se o cpf foi alterado
+					respEditavel.setCpfAux(getCpfEditarInicial()); //para verificar se está no bd
+				}
 				respEditavel.setCpf(cpf.getText());
 				respEditavel.setEndereco(estado.getText(), cidade.getText(), bairro.getText(), rua.getText(),
 				numero.getText());
@@ -227,6 +235,9 @@ public class ConCadastrar extends ConMenu implements Initializable {
 				verificarCampo(rua);
 				verificarCampo(numero);
 				cliEditavel.setNome(nome.getText());
+				if(!getCpfEditarInicial().equals(cpf.getText())) { //verifica se o cpf foi alterado
+					cliEditavel.setCpfAux(getCpfEditarInicial()); //para verificar se está no bd
+				}
 				cliEditavel.setCpf(cpf.getText());
 				cliEditavel.setEndereco(estado.getText(), cidade.getText(), bairro.getText(), rua.getText(),
 						numero.getText());
@@ -359,5 +370,13 @@ public class ConCadastrar extends ConMenu implements Initializable {
 
 	public static void setUserEditarInicial(String userEditarInicial) {
 		ConCadastrar.userEditarInicial = userEditarInicial;
+	}
+
+	public static String getCpfEditarInicial() {
+		return cpfEditarInicial;
+	}
+
+	public static void setCpfEditarInicial(String cpfEditarInicial) {
+		ConCadastrar.cpfEditarInicial = cpfEditarInicial;
 	}
 }

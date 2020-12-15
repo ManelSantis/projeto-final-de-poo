@@ -1,6 +1,7 @@
 package projeto.model.vo;
 
 import projeto.exception.ExceptionCampoInvalido;
+import projeto.model.dao.ProdutoDAO;
 
 public class ProdutoVO {
 	private String nome;
@@ -56,6 +57,15 @@ public class ProdutoVO {
 		return serie;
 	}
 
+	public void setSerieAux(String serie) throws ExceptionCampoInvalido {
+		ProdutoDAO aux = new ProdutoDAO();
+		ProdutoVO x = new ProdutoVO();
+		x.setSerie(serie);
+		if (aux.serie(x)){
+			throw new ExceptionCampoInvalido("Serie já existe no banco de dados");
+		}
+	}
+	
 	public void setSerie(String serie) throws ExceptionCampoInvalido {
 		if (serie != null) {
 			this.serie = serie;
